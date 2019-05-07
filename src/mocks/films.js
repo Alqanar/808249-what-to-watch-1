@@ -1,25 +1,4 @@
-export const featuredFilm = {
-  name: `The Grand Budapest Hotel`,
-  coverImgLink: `img/bg-the-grand-budapest-hotel.jpg`,
-  posterImgLink: `img/the-grand-budapest-hotel-poster.jpg`,
-  genre: `Drama`,
-  year: `2014`
-};
-
-export const GENRES = [
-  `All genres`,
-  `Comedies`,
-  `Crime`,
-  `Documentary`,
-  `Dramas`,
-  `Horror`,
-  `Kids & Family`,
-  `Romance`,
-  `Sci-Fi`,
-  `Thrillers`
-];
-
-export const moviesList = [
+export const films = [
   {
     name: `Fantastic Beasts: The Crimes of Grindelwald`,
     imageLink: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`

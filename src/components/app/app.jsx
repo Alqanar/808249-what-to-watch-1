@@ -1,11 +1,13 @@
 import React from "react";
 
-import MainPage from '../main-page/main-page.jsx';
+import MainPage from "../main-page/main-page.jsx";
 import {
   featuredFilm,
   GENRES,
-  moviesList
-} from './mock-data.js';
+} from "../../mocks/mock-data.js";
+import {
+  films
+} from "../../mocks/films.js";
 
 const App = () => {
 
@@ -13,7 +15,7 @@ const App = () => {
     <MainPage
       featuredFilm={featuredFilm}
       genres={GENRES}
-      moviesList={moviesList}
+      moviesList={films}
     />
   );
 };
