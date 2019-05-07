@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const FilmCard = (props) => {
-  const {movie: {name, link}, onClick} = props;
+  const {movie: {name, link}, onClick, onMouseEnter} = props;
 
   return (
-    <article className="small-movie-card catalog__movies-card">
+    <article onMouseEnter={onMouseEnter} className="small-movie-card catalog__movies-card">
       <button className="small-movie-card__play-btn" type="button">Play</button>
       <div className="small-movie-card__image">
         <img src={link} alt={name} width="280" height="175" />
@@ -19,7 +19,9 @@ const FilmCard = (props) => {
 
 FilmCard.propTypes = {
   movie: PropTypes.object.isRequired,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  isActive: PropTypes.bool.isRequired
 };
 
 export default FilmCard;

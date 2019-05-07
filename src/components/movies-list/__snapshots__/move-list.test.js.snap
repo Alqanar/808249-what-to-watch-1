@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Movie list correctly renders 1`] = `
+<div
+  className="catalog__movies-list"
+>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+  >
+    <button
+      className="small-movie-card__play-btn"
+      type="button"
+    >
+      Play
+    </button>
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="The Aftermath"
+        height="175"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        The Aftermath
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+  >
+    <button
+      className="small-movie-card__play-btn"
+      type="button"
+    >
+      Play
+    </button>
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="The Professor and the Madman"
+        height="175"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        The Professor and the Madman
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+  >
+    <button
+      className="small-movie-card__play-btn"
+      type="button"
+    >
+      Play
+    </button>
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="Five Feet Apart"
+        height="175"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        Five Feet Apart
+      </a>
+    </h3>
+  </article>
+</div>
+`;

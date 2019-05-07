@@ -11,6 +11,8 @@ it(`Film card correctly renders`, () => {
   const tree = renderer
     .create(<FilmCard
       movie={film}
+      key={0}
+      isActive={false}
     />)
     .toJSON();
 
