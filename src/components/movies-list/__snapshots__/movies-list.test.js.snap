@@ -21,6 +21,7 @@ exports[`Movie list correctly renders 1`] = `
       <img
         alt="The Aftermath"
         height="175"
+        src="https://st.kp.yandex.net/images/film_iphone/iphone360_1000125.jpg"
         width="280"
       />
     </div>
@@ -52,6 +53,7 @@ exports[`Movie list correctly renders 1`] = `
       <img
         alt="The Professor and the Madman"
         height="175"
+        src="https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg"
         width="280"
       />
     </div>
@@ -83,6 +85,7 @@ exports[`Movie list correctly renders 1`] = `
       <img
         alt="Five Feet Apart"
         height="175"
+        src="https://st.kp.yandex.net/images/film_iphone/iphone360_1151373.jpg"
         width="280"
       />
     </div>

@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import FilmCard from "./film-card.jsx";
 
 const film = {
+  id: `0`,
   name: `Avengers: Endgame`,
   link: `https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`
 };

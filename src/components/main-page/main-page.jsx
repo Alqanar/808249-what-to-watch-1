@@ -2,6 +2,7 @@ import React, {Fragment} from "react";
 import PropTypes from 'prop-types';
 
 import Logo from '../logo/logo.jsx';
+import MoviesList from "../movies-list/movies-list.jsx";
 
 
 const createSprite = () => {
@@ -199,27 +200,27 @@ const createGenresList = (genres) => {
   );
 };
 
-const createItemMoviesList = (name, link, key, onClick) => {
-  return (
-    <article className="small-movie-card catalog__movies-card" key={key}>
-      <button className="small-movie-card__play-btn" type="button">Play</button>
-      <div className="small-movie-card__image">
-        <img src={link} alt={name} width="280" height="175" />
-      </div>
-      <h3 className="small-movie-card__title">
-        <a onClick={onClick} className="small-movie-card__link" href="movie-page.html">{name}</a>
-      </h3>
-    </article>
-  );
-};
+// const createItemMoviesList = (name, link, key, onClick) => {
+//   return (
+//     <article className="small-movie-card catalog__movies-card" key={key}>
+//       <button className="small-movie-card__play-btn" type="button">Play</button>
+//       <div className="small-movie-card__image">
+//         <img src={link} alt={name} width="280" height="175" />
+//       </div>
+//       <h3 className="small-movie-card__title">
+//         <a onClick={onClick} className="small-movie-card__link" href="movie-page.html">{name}</a>
+//       </h3>
+//     </article>
+//   );
+// };
 
-const createMoviesList = (moviesList, onClick) => {
-  return (
-    <div className="catalog__movies-list">
-      {moviesList.map(({name, imageLink}, i) => createItemMoviesList(name, imageLink, i, onClick))}
-    </div>
-  );
-};
+// const createMoviesList = (moviesList, onClick) => {
+//   return (
+//     <div className="catalog__movies-list">
+//       {moviesList.map(({name, imageLink}, i) => createItemMoviesList(name, imageLink, i, onClick))}
+//     </div>
+//   );
+// };
 
 const createButtonShowMore = () => {
   return (
@@ -254,7 +255,10 @@ const MainPage = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           {createGenresList(genres)}
-          {createMoviesList(moviesList, onClick)}
+          <MoviesList
+            films={moviesList}
+            onClick={onClick}
+          />
           {createButtonShowMore()}
         </section>
         {createFooter()}

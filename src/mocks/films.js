@@ -2,96 +2,96 @@ export const films = [
   {
     id: `0`,
     name: `Fantastic Beasts: The Crimes of Grindelwald`,
-    imageLink: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`
+    link: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`
   },
   {
     id: `1`,
     name: `Bohemian Rhapsody`,
-    imageLink: `img/bohemian-rhapsody.jpg`
+    link: `img/bohemian-rhapsody.jpg`
   },
   {
     id: `2`,
     name: `Macbeth`,
-    imageLink: `img/macbeth.jpg`
+    link: `img/macbeth.jpg`
   },
   {
     id: `3`,
     name: `Aviator`,
-    imageLink: `img/aviator.jpg`
+    link: `img/aviator.jpg`
   },
   {
     id: `4`,
     name: `We need to talk about Kevin`,
-    imageLink: `img/we-need-to-talk-about-kevin.jpg`
+    link: `img/we-need-to-talk-about-kevin.jpg`
   },
   {
     id: `5`,
     name: `What We Do in the Shadows`,
-    imageLink: `img/what-we-do-in-the-shadows.jpg`
+    link: `img/what-we-do-in-the-shadows.jpg`
   },
   {
     id: `6`,
     name: `Revenant`,
-    imageLink: `img/revenant.jpg`
+    link: `img/revenant.jpg`
   },
   {
     id: `7`,
     name: `Johnny English`,
-    imageLink: `img/johnny-english.jpg`
+    link: `img/johnny-english.jpg`
   },
   {
     id: `8`,
     name: `Shutter Island`,
-    imageLink: `img/shutter-island.jpg`
+    link: `img/shutter-island.jpg`
   },
   {
     id: `9`,
     name: `Pulp Fiction`,
-    imageLink: `img/pulp-fiction.jpg`
+    link: `img/pulp-fiction.jpg`
   },
   {
     id: `10`,
     name: `No Country for Old Men`,
-    imageLink: `img/no-country-for-old-men.jpg`
+    link: `img/no-country-for-old-men.jpg`
   },
   {
     id: `11`,
     name: `Snatch`,
-    imageLink: `img/snatch.jpg`
+    link: `img/snatch.jpg`
   },
   {
     id: `12`,
     name: `Moonrise Kingdom`,
-    imageLink: `img/moonrise-kingdom.jpg`
+    link: `img/moonrise-kingdom.jpg`
   },
   {
     id: `13`,
     name: `Seven Years in Tibet`,
-    imageLink: `img/seven-years-in-tibet.jpg`
+    link: `img/seven-years-in-tibet.jpg`
   },
   {
     id: `14`,
     name: `Midnight Special`,
-    imageLink: `img/midnight-special.jpg`
+    link: `img/midnight-special.jpg`
   },
   {
     id: `15`,
     name: `Dardjeeling Limited`,
-    imageLink: `img/dardjeeling-limited.jpg`
+    link: `img/dardjeeling-limited.jpg`
   },
   {
     id: `16`,
     name: `Orlando`,
-    imageLink: `img/orlando.jpg`
+    link: `img/orlando.jpg`
   },
   {
     id: `17`,
     name: `Mindhunter`,
-    imageLink: `img/mindhunter.jpg`
+    link: `img/mindhunter.jpg`
   },
   {
     id: `18`,
     name: `Midnight Special`,
-    imageLink: `img/midnight-special.jpg`
+    link: `img/midnight-special.jpg`
   }
 ];

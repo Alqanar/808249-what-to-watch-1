@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import FilmCard from "../film-card/film-card.jsx";
 
 
-class MovieList extends PureComponent {
+class MoviesList extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -40,9 +40,9 @@ class MovieList extends PureComponent {
   }
 }
 
-MovieList.propTypes = {
+MoviesList.propTypes = {
   films: PropTypes.array.isRequired,
   onClick: PropTypes.func
 };
 
-export default MovieList;
+export default MoviesList;
