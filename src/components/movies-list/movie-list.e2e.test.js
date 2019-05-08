@@ -23,7 +23,7 @@ it(`Hovering on the card will change active state`, () => {
 
   const filmCard = movieList.find(`.catalog__movies-card`);
 
-  filmCard.simulate(`mouseEnter`, {preventDefault() {}});
+  filmCard.simulate(`mouseEnter`);
 
   expect(movieList.state(`activeCardId`)).toEqual(`0`);
 });

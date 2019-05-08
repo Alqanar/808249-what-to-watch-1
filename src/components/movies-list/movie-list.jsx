@@ -25,7 +25,7 @@ class MovieList extends PureComponent {
           movie={film}
           key={film.id}
           onClick={onClick}
-          onMouseEnter={this._handleCardHover.bind(null, film.id)}
+          onMouseEnter={this._handleCardHover}
           isActive={film.id === activeCardId}
         />
         )}
