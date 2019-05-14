@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PureComponent} from "react";
 
 import MainPage from "../main-page/main-page.jsx";
 import {
@@ -10,16 +10,28 @@ import {
   films
 } from "../../mocks/films.js";
 
-const App = () => {
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  return (
-    <MainPage
-      avatarLink={avatarLink}
-      featuredFilm={featuredFilm}
-      genres={GENRES}
-      moviesList={films}
-    />
-  );
-};
+    this._handleCardClick = this._handleCardClick.bind(this);
+  }
+
+  render() {
+    return (
+      <MainPage
+        avatarLink={avatarLink}
+        featuredFilm={featuredFilm}
+        genres={GENRES}
+        onClick={this._handleCardClick}
+        moviesList={films}
+      />
+    );
+  }
+
+  _handleCardClick(movieCard) {
+    return movieCard;
+  }
+}
 
 export default App;
