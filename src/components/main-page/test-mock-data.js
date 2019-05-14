@@ -1,7 +1,7 @@
 export const featuredFilmMock = {
   name: `Avengers: Endgame`,
-  coverImgLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`,
-  posterImgLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`,
+  coverLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`,
+  posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`,
   genre: `Sci-Fi`,
   year: `2019`
 };
@@ -21,15 +21,18 @@ export const genresMock = [
 
 export const moviesListMock = [
   {
+    id: `0`,
     name: `The Aftermath`,
-    imageLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_1000125.jpg`
+    link: `https://st.kp.yandex.net/images/film_iphone/iphone360_1000125.jpg`
   },
   {
+    id: `1`,
     name: `The Professor and the Madman`,
-    imageLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg`
+    link: `https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg`
   },
   {
+    id: `2`,
     name: `Five Feet Apart`,
-    imageLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_1151373.jpg`
+    link: `https://st.kp.yandex.net/images/film_iphone/iphone360_1151373.jpg`
   }
 ];

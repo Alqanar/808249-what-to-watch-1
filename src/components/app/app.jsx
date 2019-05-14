@@ -1,21 +1,37 @@
-import React from "react";
+import React, {PureComponent} from "react";
 
-import MainPage from '../main-page/main-page.jsx';
+import MainPage from "../main-page/main-page.jsx";
 import {
   featuredFilm,
   GENRES,
-  moviesList
-} from './mock-data.js';
+  avatarLink
+} from "../../mocks/mock-data.js";
+import {
+  films
+} from "../../mocks/films.js";
 
-const App = () => {
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  return (
-    <MainPage
-      featuredFilm={featuredFilm}
-      genres={GENRES}
-      moviesList={moviesList}
-    />
-  );
-};
+    this._handleCardClick = this._handleCardClick.bind(this);
+  }
+
+  render() {
+    return (
+      <MainPage
+        avatarLink={avatarLink}
+        featuredFilm={featuredFilm}
+        genres={GENRES}
+        onClick={this._handleCardClick}
+        moviesList={films}
+      />
+    );
+  }
+
+  _handleCardClick(movieCard) {
+    return movieCard;
+  }
+}
 
 export default App;

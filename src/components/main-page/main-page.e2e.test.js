@@ -14,6 +14,7 @@ import {
 it(`Clicking on the card header will trigger a callback`, () => {
   const clickHandler = jest.fn();
   const mainPage = shallow(<MainPage
+    avatarLink='img/avatar.jpg'
     featuredFilm={featuredFilmMock}
     genres={genresMock}
     moviesList={moviesListMock}

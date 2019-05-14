@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Film card correctly renders 1`] = `
+<article
+  className="small-movie-card catalog__movies-card"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+>
+  <button
+    className="small-movie-card__play-btn"
+    type="button"
+  >
+    Play
+  </button>
+  <div
+    className="small-movie-card__image"
+  >
+    <img
+      alt="Avengers: Endgame"
+      height="175"
+      src="https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg"
+      width="280"
+    />
+  </div>
+  <h3
+    className="small-movie-card__title"
+  >
+    <a
+      className="small-movie-card__link"
+      href="movie-page.html"
+    >
+      Avengers: Endgame
+    </a>
+  </h3>
+</article>
+`;
