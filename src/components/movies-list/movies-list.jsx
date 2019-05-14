@@ -18,17 +18,19 @@ class MoviesList extends PureComponent {
   render() {
     const {films, onClick} = this.props;
     const {activeCardId} = this.state;
+    const fillmsList = films.map((film) => (
+      <FilmCard
+        movie={film}
+        key={film.id}
+        onClick={onClick}
+        onMouseEnter={this._handleCardHover}
+        isActive={film.id === activeCardId}
+      />
+    ));
 
     return (
       <div className="catalog__movies-list">
-        {films.map((film) => <FilmCard
-          movie={film}
-          key={film.id}
-          onClick={onClick}
-          onMouseEnter={this._handleCardHover}
-          isActive={film.id === activeCardId}
-        />
-        )}
+        {fillmsList}
       </div>
     );
   }

@@ -1,7 +1,7 @@
 export const featuredFilm = {
   name: `The Grand Budapest Hotel`,
-  coverImgLink: `img/bg-the-grand-budapest-hotel.jpg`,
-  posterImgLink: `img/the-grand-budapest-hotel-poster.jpg`,
+  coverLink: `img/bg-the-grand-budapest-hotel.jpg`,
+  posterLink: `img/the-grand-budapest-hotel-poster.jpg`,
   genre: `Drama`,
   year: `2014`
 };
@@ -18,3 +18,5 @@ export const GENRES = [
   `Sci-Fi`,
   `Thrillers`
 ];
+
+export const avatarLink = `img/avatar.jpg`;

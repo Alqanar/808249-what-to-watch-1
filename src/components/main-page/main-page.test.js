@@ -11,6 +11,7 @@ import {
 it(`Main page correctly renders`, () => {
   const tree = renderer
     .create(<MainPage
+      avatarLink='img/avatar.jpg'
       featuredFilm={featuredFilmMock}
       genres={genresMock}
       moviesList={moviesListMock}
