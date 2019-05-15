@@ -8,6 +8,7 @@ import {
   moviesListMock
 } from "./test-mock-data.js";
 
+
 it(`Main page correctly renders`, () => {
   const tree = renderer
     .create(<MainPage
