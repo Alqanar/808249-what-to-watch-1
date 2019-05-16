@@ -23,16 +23,19 @@ export const moviesListMock = [
   {
     id: `0`,
     name: `The Aftermath`,
-    link: `https://st.kp.yandex.net/images/film_iphone/iphone360_1000125.jpg`
+    posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_1000125.jpg`,
+    trailer: `https://youtu.be/FPv3e2FZOgo`
   },
   {
     id: `1`,
     name: `The Professor and the Madman`,
-    link: `https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg`
+    posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg`,
+    trailer: `https://youtu.be/ESYU-bkmxuI`
   },
   {
     id: `2`,
     name: `Five Feet Apart`,
-    link: `https://st.kp.yandex.net/images/film_iphone/iphone360_1151373.jpg`
+    posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_1151373.jpg`,
+    trailer: `https://youtu.be/XtgCqMZofqM`
   }
 ];
