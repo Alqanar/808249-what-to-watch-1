@@ -42,7 +42,7 @@ const createMovieData = (name, genre, year) => {
   );
 };
 
-const MovieCardInfo = (props) => {
+const FeaturedFilmCard = (props) => {
   const {featuredFilm: {name, posterLink, genre, year}} = props;
 
   return (
@@ -53,7 +53,7 @@ const MovieCardInfo = (props) => {
   );
 };
 
-MovieCardInfo.propTypes = {
+FeaturedFilmCard.propTypes = {
   featuredFilm: PropTypes.shape({
     name: PropTypes.string.isRequired,
     posterLink: PropTypes.string.isRequired,
@@ -62,4 +62,4 @@ MovieCardInfo.propTypes = {
   })
 };
 
-export default MovieCardInfo;
+export default FeaturedFilmCard;

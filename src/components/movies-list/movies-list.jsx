@@ -7,7 +7,7 @@ import FilmCard from "../film-card/film-card.jsx";
 const MoviesList = (props) => {
   const {films, onClick} = props;
 
-  const fillmsList = films.map((film) => (
+  const filmsList = films.map((film) => (
     <FilmCard
       movie={film}
       key={film.id}
@@ -17,7 +17,7 @@ const MoviesList = (props) => {
 
   return (
     <div className="catalog__movies-list">
-      {fillmsList}
+      {filmsList}
     </div>
   );
 };

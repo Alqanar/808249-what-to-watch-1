@@ -14,7 +14,7 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._handleCardClick = this._handleCardClick.bind(this);
+    this._getMovieCard = this._getMovieCard.bind(this);
   }
 
   render() {
@@ -23,13 +23,13 @@ class App extends PureComponent {
         avatarLink={avatarLink}
         featuredFilm={featuredFilm}
         genres={GENRES}
-        onClick={this._handleCardClick}
+        onClick={this._getMovieCard}
         moviesList={films}
       />
     );
   }
 
-  _handleCardClick(movieCard) {
+  _getMovieCard(movieCard) {
     return movieCard;
   }
 }
