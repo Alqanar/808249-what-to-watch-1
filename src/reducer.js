@@ -34,6 +34,7 @@ const reducer = (state = initialState, action) => {
 };
 
 export {
+  initialState,
   ActionCreator,
   reducer
 };
