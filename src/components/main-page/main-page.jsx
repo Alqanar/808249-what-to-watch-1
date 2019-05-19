@@ -2,11 +2,23 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 
 import Sprite from "../sprite/sprite.jsx";
-import MovieCard from "../movie-card/movie-card.jsx";
+import Logo from "../logo/logo.jsx";
+import UserBlock from "../user-block/user-block.jsx";
+import FeaturedFilmCard from "../featured-film-card/featured-film-card.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
 import Footer from "../footer/footer.jsx";
 
+
+const createFeaturedFilmImage = (data) => {
+  const {name, coverLink} = data;
+
+  return (
+    <div className="movie-card__bg">
+      <img src={coverLink} alt={name} />
+    </div>
+  );
+};
 
 const createButtonShowMore = () => {
   return (
@@ -17,15 +29,29 @@ const createButtonShowMore = () => {
 };
 
 const MainPage = (props) => {
-  const {avatarLink, featuredFilm, genres, moviesList, onClick} = props;
+  const {avatarLink, featuredFilm, genres, onClick} = props;
 
   return (
     <Fragment>
       <Sprite />
-      <MovieCard
-        avatarLink={avatarLink}
-        featuredFilm={featuredFilm}
-      />
+      <section className="movie-card">
+        {createFeaturedFilmImage(featuredFilm)}
+
+        <h1 className="visually-hidden">WTW</h1>
+
+        <header className="page-header movie-card__head">
+          <Logo />
+          <UserBlock
+            avatarLink={avatarLink}
+          />
+        </header>
+
+        <div className="movie-card__wrap">
+          <FeaturedFilmCard
+            featuredFilm={featuredFilm}
+          />
+        </div>
+      </section>
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
@@ -33,7 +59,6 @@ const MainPage = (props) => {
             genres={genres}
           />
           <MoviesList
-            films={moviesList}
             onClick={onClick}
           />
           {createButtonShowMore()}
@@ -54,7 +79,6 @@ MainPage.propTypes = {
     year: PropTypes.string.isRequired
   }),
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
-  moviesList: PropTypes.array,
   onClick: PropTypes.func
 };
 

@@ -7,8 +7,7 @@ Enzyme.configure({adapter: new Adapter()});
 
 import {
   featuredFilmMock,
-  genresMock,
-  moviesListMock
+  genresMock
 } from "./test-mock-data.js";
 
 it(`Clicking on the card header will trigger a callback`, () => {
@@ -17,7 +16,6 @@ it(`Clicking on the card header will trigger a callback`, () => {
     avatarLink='img/avatar.jpg'
     featuredFilm={featuredFilmMock}
     genres={genresMock}
-    moviesList={moviesListMock}
     onClick={clickHandler}
   />);
 

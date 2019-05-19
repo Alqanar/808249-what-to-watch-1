@@ -1,28 +1,50 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+
+import {ActionCreator} from "../../reducer.js";
+import GenreListItem from "../genres-list-item/genres-list-item.jsx";
 
 
-const createItemGenresList = (name, key) => {
-  return (
-    <li className="catalog__genres-item catalog__genres-item--active" key={key}>
-      <a href="#" className="catalog__genres-link">{name}</a>
-    </li>
-  );
-};
+class GenresList extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
 
-const GenresList = (props) => {
-  const {genres} = props;
-  const genresList = genres.map((name, i) => createItemGenresList(name, i));
+  render() {
+    const {genres, activeGenre, onSetGenre} = this.props;
 
-  return (
-    <ul className="catalog__genres-list">
-      {genresList}
-    </ul>
-  );
-};
+    const genresList = genres.map((name, i) =>
+      <GenreListItem
+        name={name}
+        key={i}
+        isActive={activeGenre === name}
+        onGenreClick={onSetGenre}
+      />);
+
+    return (
+      <ul className="catalog__genres-list">
+        {genresList}
+      </ul>
+    );
+  }
+}
 
 GenresList.propTypes = {
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  activeGenre: PropTypes.string.isRequired,
+  onSetGenre: PropTypes.func.isRequired
 };
 
-export default GenresList;
+const mapStateToProps = (state, ownProps) => ({
+  ...ownProps,
+  activeGenre: state.genre
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSetGenre: (clickedGenre) => dispatch(ActionCreator.setGenre(clickedGenre))
+});
+
+export {GenresList};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GenresList);

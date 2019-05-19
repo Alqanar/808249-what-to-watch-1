@@ -6,15 +6,13 @@ import {
   GENRES,
   avatarLink
 } from "../../mocks/mock-data.js";
-import {
-  films
-} from "../../mocks/films.js";
+
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._handleCardClick = this._handleCardClick.bind(this);
+    this._getMovieCard = this._getMovieCard.bind(this);
   }
 
   render() {
@@ -23,13 +21,12 @@ class App extends PureComponent {
         avatarLink={avatarLink}
         featuredFilm={featuredFilm}
         genres={GENRES}
-        onClick={this._handleCardClick}
-        moviesList={films}
+        onClick={this._getMovieCard}
       />
     );
   }
 
-  _handleCardClick(movieCard) {
+  _getMovieCard(movieCard) {
     return movieCard;
   }
 }
