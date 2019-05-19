@@ -4,11 +4,12 @@ import {Provider} from "react-redux";
 import {createStore} from "redux";
 
 import App from "./app.jsx";
+import {films} from "../../mocks/films.js";
 
 const testInitialState = {
   genre: `All genres`,
-  films: [],
-  filteredFilms: []
+  films,
+  filteredFilms: films
 };
 
 it(`App correctly renders`, () => {

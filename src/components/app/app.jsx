@@ -6,9 +6,7 @@ import {
   GENRES,
   avatarLink
 } from "../../mocks/mock-data.js";
-import {
-  films
-} from "../../mocks/films.js";
+
 
 class App extends PureComponent {
   constructor(props) {
@@ -24,7 +22,6 @@ class App extends PureComponent {
         featuredFilm={featuredFilm}
         genres={GENRES}
         onClick={this._getMovieCard}
-        moviesList={films}
       />
     );
   }

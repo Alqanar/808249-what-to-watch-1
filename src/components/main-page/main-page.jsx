@@ -29,7 +29,7 @@ const createButtonShowMore = () => {
 };
 
 const MainPage = (props) => {
-  const {avatarLink, featuredFilm, genres, moviesList, onClick} = props;
+  const {avatarLink, featuredFilm, genres, onClick} = props;
 
   return (
     <Fragment>
@@ -59,7 +59,6 @@ const MainPage = (props) => {
             genres={genres}
           />
           <MoviesList
-            films={moviesList}
             onClick={onClick}
           />
           {createButtonShowMore()}
@@ -80,7 +79,6 @@ MainPage.propTypes = {
     year: PropTypes.string.isRequired
   }),
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
-  moviesList: PropTypes.array,
   onClick: PropTypes.func
 };
 

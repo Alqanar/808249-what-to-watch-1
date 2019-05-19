@@ -4,17 +4,17 @@ import {Provider} from "react-redux";
 import {createStore} from "redux";
 
 import MainPage from "./main-page.jsx";
-
 import {
   featuredFilmMock,
   genresMock,
   moviesListMock
 } from "./test-mock-data.js";
 
+
 const testInitialState = {
   genre: `All genres`,
-  films: [],
-  filteredFilms: []
+  films: moviesListMock,
+  filteredFilms: moviesListMock
 };
 
 it(`Main page correctly renders`, () => {
@@ -25,7 +25,6 @@ it(`Main page correctly renders`, () => {
             avatarLink='img/avatar.jpg'
             featuredFilm={featuredFilmMock}
             genres={genresMock}
-            moviesList={moviesListMock}
           />
         </Provider>
     )
