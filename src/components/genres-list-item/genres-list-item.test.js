@@ -10,6 +10,7 @@ it(`Genres list item correctly renders`, () => {
       name="Dramas"
       onGenreClick={() => {}}
       isActive={false}
+      filmGenre="Drama"
     />)
     .toJSON();
 
