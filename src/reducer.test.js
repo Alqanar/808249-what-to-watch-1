@@ -1,7 +1,12 @@
+import MockAdapter from "axios-mock-adapter";
+import api from "./api.js";
 import {
   ActionCreator,
+  ActionType,
+  Operation,
   reducer,
-} from "./reducer";
+} from "./reducer.js";
+
 
 const films = [
   {
@@ -30,7 +35,7 @@ const films = [
 
 it(`Action creator for set genre returns correct action`, () => {
   expect(ActionCreator.setGenre(`Sci-Fi`)).toEqual({
-    type: `SET_GENRE`,
+    type: ActionType.SET_GENRE,
     payload: `Sci-Fi`,
   });
 });
@@ -51,7 +56,7 @@ describe(`Reducer works correctly`, () => {
       films,
       filteredFilms: films
     }, {
-      type: `SET_GENRE`,
+      type: ActionType.SET_GENRE,
       payload: `Thrillers`,
     })).toEqual({
       genre: `Thrillers`,
@@ -70,12 +75,31 @@ describe(`Reducer works correctly`, () => {
       films,
       filteredFilms: films
     }, {
-      type: `SET_GENRE`,
+      type: ActionType.SET_GENRE,
       payload: `All genres`,
     })).toEqual({
       genre: `All genres`,
       films,
       filteredFilms: films
     });
+  });
+
+  it(`Should make a correct API call to /films`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const filmsLoader = Operation.loadFilms();
+
+    apiMock
+      .onGet(`/films`)
+      .reply(200, [{fake: true}]);
+
+    return filmsLoader(dispatch)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_FILMS,
+          payload: [{fake: true}],
+        });
+      });
   });
 });
