@@ -14,11 +14,12 @@ class GenresList extends PureComponent {
   render() {
     const {genres, activeGenre, onSetGenre} = this.props;
 
-    const genresList = genres.map((name, i) =>
+    const genresList = genres.map(({label, filmGenre}, i) =>
       <GenreListItem
-        name={name}
+        name={label}
         key={i}
-        isActive={activeGenre === name}
+        isActive={activeGenre === label}
+        filmGenre={filmGenre}
         onGenreClick={onSetGenre}
       />);
 
@@ -31,7 +32,10 @@ class GenresList extends PureComponent {
 }
 
 GenresList.propTypes = {
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  genres: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    filmGenre: PropTypes.string.isRequired,
+  })),
   activeGenre: PropTypes.string.isRequired,
   onSetGenre: PropTypes.func.isRequired
 };

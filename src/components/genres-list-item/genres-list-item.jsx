@@ -30,15 +30,16 @@ class GenresListItem extends PureComponent {
   }
 
   _handleGenreItemClick(event) {
-    const {name, onGenreClick} = this.props;
+    const {filmGenre, onGenreClick} = this.props;
 
     event.preventDefault();
-    onGenreClick(name);
+    onGenreClick(filmGenre);
   }
 }
 
 GenresListItem.propTypes = {
   name: PropTypes.string.isRequired,
+  filmGenre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func,
   isActive: PropTypes.bool
 };

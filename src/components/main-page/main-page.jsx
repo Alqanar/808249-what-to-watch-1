@@ -78,7 +78,10 @@ MainPage.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired
   }),
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  genres: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    filmGenre: PropTypes.string.isRequired,
+  })),
   onClick: PropTypes.func
 };
 
