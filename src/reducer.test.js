@@ -53,6 +53,13 @@ const filmFromServer = {
   'video_link': `http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4`
 };
 
+const userData = {
+  'avatar_url': `/wtw/static/avatar/9.jpg`,
+  'email': `example@test.ru`,
+  'id': 1,
+  'name': `example`
+};
+
 
 it(`Action creator for set genre returns correct action`, () => {
   expect(ActionCreator.setGenre(`Sci-Fi`)).toEqual({
@@ -67,7 +74,15 @@ describe(`Reducer works correctly`, () => {
     expect(reducer(undefined, {})).toEqual({
       genre: `All genres`,
       films: [],
-      filteredFilms: []
+      filteredFilms: [],
+      isAuthorizationRequired: false,
+      isAuthPage: false,
+      user: {
+        id: null,
+        email: ``,
+        name: ``,
+        avatarUrl: ``
+      }
     });
   });
 
@@ -105,6 +120,45 @@ describe(`Reducer works correctly`, () => {
     });
   });
 
+  it(`when the status changes, the isAuthorizationRequired state changes`, () => {
+    expect(reducer({
+      isAuthorizationRequired: false
+    }, {
+      type: ActionType.REQUIRED_AUTHORIZATION,
+      payload: true,
+    })).toEqual({
+      isAuthorizationRequired: true
+    });
+  });
+
+  it(`user data coming from the server is recorded in the state`, () => {
+    expect(reducer({
+      user: {
+        id: null,
+        email: ``,
+        name: ``,
+        avatarUrl: ``
+      }
+    }, {
+      type: ActionType.SET_USER,
+      payload: {
+        id: 3,
+        email: `example@test.ru`,
+        name: `example`,
+        avatarUrl: `/wtw/static/avatar/9.jpg`
+      },
+    })).toEqual({
+      isAuthPage: false,
+      isAuthorizationRequired: false,
+      user: {
+        id: 3,
+        email: `example@test.ru`,
+        name: `example`,
+        avatarUrl: `/wtw/static/avatar/9.jpg`
+      }
+    });
+  });
+
   it(`Should make a correct API call to /films`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
@@ -120,6 +174,29 @@ describe(`Reducer works correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_FILMS,
           payload: [transformFilmObject(filmFromServer)],
+        });
+      });
+  });
+
+  it(`Should make a correct API sends to /login`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const requestAuthorization = Operation.requestAuthorization();
+
+    apiMock
+      .onPost(`/login`)
+      .reply(200, userData);
+
+    return requestAuthorization(dispatch, undefined, {api})
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_USER,
+          payload: {
+            id: userData.id,
+            email: userData.email,
+            name: userData.name,
+            avatarUrl: `https://es31-server.appspot.com${userData.avatar_url}`},
         });
       });
   });

@@ -29,7 +29,14 @@ const createButtonShowMore = () => {
 };
 
 const MainPage = (props) => {
-  const {avatarLink, featuredFilm, genres, onClick} = props;
+  const {
+    avatarLink,
+    featuredFilm,
+    genres,
+    onClick,
+    isAuth,
+    moveToAuth
+  } = props;
 
   return (
     <Fragment>
@@ -43,6 +50,8 @@ const MainPage = (props) => {
           <Logo />
           <UserBlock
             avatarLink={avatarLink}
+            isAuth={isAuth}
+            moveToAuth={moveToAuth}
           />
         </header>
 
@@ -82,7 +91,9 @@ MainPage.propTypes = {
     label: PropTypes.string.isRequired,
     filmGenre: PropTypes.string.isRequired,
   })),
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  isAuth: PropTypes.bool.isRequired,
+  moveToAuth: PropTypes.func.isRequired
 };
 
 export default MainPage;

@@ -31,7 +31,7 @@ class MoviesList extends PureComponent {
 
 MoviesList.propTypes = {
   films: PropTypes.array.isRequired,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 const mapStateToProps = (state, ownProps) => ({

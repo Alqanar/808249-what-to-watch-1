@@ -1,6 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`User block correctly renders 1`] = `
+exports[`User block correctly renders if isAuth = false renders sign in link 1`] = `
+<div
+  className="user-block"
+>
+  <a
+    className="user-block__link"
+    href="#"
+    onClick={[Function]}
+  >
+    Sign in
+  </a>
+</div>
+`;
+
+exports[`User block correctly renders if isAuth = true renders avatar block 1`] = `
 <div
   className="user-block"
 >

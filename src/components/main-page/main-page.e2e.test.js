@@ -1,9 +1,11 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
+
 import MainPage from "./main-page.jsx";
 
 Enzyme.configure({adapter: new Adapter()});
+
 
 import {
   featuredFilmMock,
@@ -17,6 +19,8 @@ it(`Clicking on the card header will trigger a callback`, () => {
     featuredFilm={featuredFilmMock}
     genres={genresMock}
     onClick={clickHandler}
+    isAuth={false}
+    moveToAuth={() => {}}
   />);
 
   const cardHeaders = mainPage.find(`.small-movie-card__link`);
