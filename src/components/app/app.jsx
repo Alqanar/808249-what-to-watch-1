@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import MainPage from "../main-page/main-page.jsx";
 import SignInPage from "../sign-in-page/sign-in-page.jsx";
 import withAuthorizationState from "../../hocs/with-authorization-state.jsx";
-import {Operation, ActionCreator} from "../../reducer.js";
+import {Operation, ActionCreator} from "../../reducer/authorization/authorization.js";
 import {
   featuredFilm,
   GENRES
@@ -63,15 +63,15 @@ App.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   signIn: (email, pass) => dispatch(Operation.requestAuthorization(email, pass)),
-  opendAuthPage: () => dispatch(ActionCreator.setAuthorizationPage(true))
+  openedAuthPage: () => dispatch(ActionCreator.setAuthorizationPage(true))
 });
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
-  isAuthorizationRequired: state.isAuthorizationRequired,
-  avatarLink: state.user.avatarUrl,
-  isAuthPage: state.isAuthPage,
-  userId: state.user.id
+  isAuthorizationRequired: state.authorization.isAuthorizationRequired,
+  avatarLink: state.authorization.user.avatarUrl,
+  isAuthPage: state.authorization.isAuthPage,
+  userId: state.authorization.user.id
 });
 
 export {App};

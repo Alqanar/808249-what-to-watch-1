@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import FilmCard from "../film-card/film-card.jsx";
+import {getFilterFilms} from "../../reducer/movie/selectors.js";
 
 
 class MoviesList extends PureComponent {
@@ -36,7 +37,7 @@ MoviesList.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
-  films: state.filteredFilms
+  films: getFilterFilms(state)
 });
 
 export {MoviesList};

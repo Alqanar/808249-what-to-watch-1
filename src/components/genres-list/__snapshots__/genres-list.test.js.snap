@@ -49,7 +49,7 @@ exports[`Genres list correctly renders 1`] = `
     </a>
   </li>
   <li
-    className="catalog__genres-item catalog__genres-item--active"
+    className="catalog__genres-item "
   >
     <a
       className="catalog__genres-link"

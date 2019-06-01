@@ -12,10 +12,13 @@ import {
 
 
 const testInitialState = {
-  genre: `All genres`,
-  films: moviesListMock,
-  filteredFilms: moviesListMock,
-  isAuthorizationRequired: false
+  movie: {
+    genre: `All genres`,
+    films: moviesListMock
+  },
+  authorization: {
+    isAuthorizationRequired: false
+  }
 };
 
 it(`Main page correctly renders`, () => {

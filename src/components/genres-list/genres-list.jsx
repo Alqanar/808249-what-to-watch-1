@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/movie/movie.js";
 import GenreListItem from "../genres-list-item/genres-list-item.jsx";
 
 
@@ -18,7 +18,7 @@ class GenresList extends PureComponent {
       <GenreListItem
         name={label}
         key={i}
-        isActive={activeGenre === label}
+        isActive={activeGenre === filmGenre}
         filmGenre={filmGenre}
         onGenreClick={onSetGenre}
       />);
@@ -42,7 +42,7 @@ GenresList.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
-  activeGenre: state.genre
+  activeGenre: state.movie.genre
 });
 
 const mapDispatchToProps = (dispatch) => ({

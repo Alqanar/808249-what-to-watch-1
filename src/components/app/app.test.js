@@ -28,10 +28,13 @@ const films = [
 ];
 
 const testInitialState = {
-  genre: `All genres`,
-  films,
-  filteredFilms: films,
-  isAuthorizationRequired: false
+  movie: {
+    genre: `All genres`,
+    films
+  },
+  authorization: {
+    isAuthorizationRequired: false
+  }
 };
 
 
