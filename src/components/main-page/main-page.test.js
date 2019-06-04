@@ -12,9 +12,13 @@ import {
 
 
 const testInitialState = {
-  genre: `All genres`,
-  films: moviesListMock,
-  filteredFilms: moviesListMock
+  movie: {
+    genre: `All genres`,
+    films: moviesListMock
+  },
+  authorization: {
+    isAuthorizationRequired: false
+  }
 };
 
 it(`Main page correctly renders`, () => {
@@ -25,6 +29,8 @@ it(`Main page correctly renders`, () => {
             avatarLink='img/avatar.jpg'
             featuredFilm={featuredFilmMock}
             genres={genresMock}
+            isAuth={false}
+            moveToAuth={() => {}}
           />
         </Provider>
     )

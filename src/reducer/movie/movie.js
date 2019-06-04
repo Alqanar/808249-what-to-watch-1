@@ -1,10 +1,9 @@
-import transformFilmObject from "./transformFilmObject.js";
+import transformFilmObject from "../../transformFilmObject.js";
 
 
 const initialState = {
   genre: `All genres`,
-  films: [],
-  filteredFilms: []
+  films: []
 };
 
 const ActionType = {
@@ -12,21 +11,13 @@ const ActionType = {
   SET_FILMS: `SET_FILMS`
 };
 
-const setFilterFilms = (genre, films) => {
-  if (genre === `All genres`) {
-    return [...films];
-  }
-  return films.filter((film) =>
-    film.genre.some((filmGenre) =>
-      filmGenre === genre));
-};
-
-
 const ActionCreator = {
+
   setGenre: (genre) => ({
     type: ActionType.SET_GENRE,
     payload: genre
   }),
+
   setFilms: (films) => ({
     type: ActionType.SET_FILMS,
     payload: films,
@@ -34,7 +25,7 @@ const ActionCreator = {
 };
 
 const Operation = {
-  loadFilms: () => (dispatch, _, {api}) => {
+  loadFilms: () => (dispatch, _, api) => {
     return api.get(`/films`)
       .then((response) => {
         dispatch(ActionCreator.setFilms(response.data.map(transformFilmObject)));
@@ -44,25 +35,25 @@ const Operation = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+
     case ActionType.SET_GENRE:
       return {
         ...state,
-        genre: action.payload,
-        filteredFilms: setFilterFilms(action.payload, state.films)
+        genre: action.payload
       };
+
     case ActionType.SET_FILMS:
       return {
         ...state,
-        films: action.payload,
-        filteredFilms: setFilterFilms(state.genre, action.payload)
+        films: action.payload
       };
+
     default:
       return state;
   }
 };
 
 export {
-  initialState,
   ActionCreator,
   ActionType,
   reducer,

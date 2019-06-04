@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import {createStore} from "redux";
 
-import App from "./app.jsx";
+import {App} from "./app.jsx";
 
 
 const films = [
@@ -28,19 +28,52 @@ const films = [
 ];
 
 const testInitialState = {
-  genre: `All genres`,
-  films,
-  filteredFilms: films
+  movie: {
+    genre: `All genres`,
+    films
+  },
+  authorization: {
+    isAuthorizationRequired: false
+  }
 };
 
-it(`App correctly renders`, () => {
-  const tree = renderer
-    .create(
-        <Provider store={createStore(() => testInitialState)}>
-          <App />
-        </Provider>
-    )
-    .toJSON();
 
-  expect(tree).toMatchSnapshot();
+describe(`App correctly renders`, () => {
+  it(`when isAuthorizationRequired = false renders Main Page`, () => {
+    const tree = renderer
+      .create(
+          <Provider store={createStore(() => testInitialState)}>
+            <App
+              isAuthorizationRequired={false}
+              signIn={() => {}}
+              avatarLink="img/avatar.jpg"
+              openedAuthPage={() => {}}
+              isAuthPage={false}
+              userId={null}
+            />
+          </Provider>
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`when isAuthorizationRequired = true renders Sign In Page`, () => {
+    const tree = renderer
+      .create(
+          <Provider store={createStore(() => testInitialState)}>
+            <App
+              isAuthorizationRequired={true}
+              signIn={() => {}}
+              avatarLink="img/avatar.jpg"
+              openedAuthPage={() => {}}
+              isAuthPage={false}
+              userId={null}
+            />
+          </Provider>
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });

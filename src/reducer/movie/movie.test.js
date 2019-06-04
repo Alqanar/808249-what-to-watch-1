@@ -1,37 +1,14 @@
 import MockAdapter from "axios-mock-adapter";
-import api from "./api.js";
-import transformFilmObject from "./transformFilmObject.js";
+import createAPI from "../../api.js";
+
+import transformFilmObject from "../../transformFilmObject.js";
 import {
   ActionCreator,
   ActionType,
-  Operation,
   reducer,
-} from "./reducer.js";
+  Operation
+} from "./movie.js";
 
-
-const films = [
-  {
-    id: `0`,
-    name: `The Aftermath`,
-    posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_1000125.jpg`,
-    trailer: `https://youtu.be/FPv3e2FZOgo`,
-    genre: [`Dramas`, `Romance`]
-  },
-  {
-    id: `1`,
-    name: `The Professor and the Madman`,
-    posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg`,
-    trailer: `https://youtu.be/ESYU-bkmxuI`,
-    genre: [`Thrillers`, `Dramas`, `Documentary`]
-  },
-  {
-    id: `2`,
-    name: `Five Feet Apart`,
-    posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_1151373.jpg`,
-    trailer: `https://youtu.be/XtgCqMZofqM`,
-    genre: [`Dramas`, `Romance`]
-  }
-];
 
 const filmFromServer = {
   'background_color': `#A39E81`,
@@ -66,55 +43,21 @@ describe(`Reducer works correctly`, () => {
   it(`Without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
       genre: `All genres`,
-      films: [],
-      filteredFilms: []
-    });
-  });
-
-  it(`On set genre films filtering film`, () => {
-    expect(reducer({
-      genre: `All genres`,
-      films,
-      filteredFilms: films
-    }, {
-      type: ActionType.SET_GENRE,
-      payload: `Thrillers`,
-    })).toEqual({
-      genre: `Thrillers`,
-      films,
-      filteredFilms: [{
-        id: `1`,
-        name: `The Professor and the Madman`,
-        posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg`,
-        trailer: `https://youtu.be/ESYU-bkmxuI`,
-        genre: [`Thrillers`, `Dramas`, `Documentary`]
-      }]
-    });
-
-    expect(reducer({
-      genre: `All genres`,
-      films,
-      filteredFilms: films
-    }, {
-      type: ActionType.SET_GENRE,
-      payload: `All genres`,
-    })).toEqual({
-      genre: `All genres`,
-      films,
-      filteredFilms: films
+      films: []
     });
   });
 
   it(`Should make a correct API call to /films`, function () {
-    const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
     const filmsLoader = Operation.loadFilms();
 
     apiMock
       .onGet(`/films`)
       .reply(200, [filmFromServer]);
 
-    return filmsLoader(dispatch, undefined, {api})
+    return filmsLoader(dispatch, undefined, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
