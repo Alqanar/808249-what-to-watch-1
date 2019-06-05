@@ -1,16 +1,18 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import UserBlock from "./user-block.jsx";
+import {BrowserRouter} from "react-router-dom";
 
 
 describe(`User block correctly renders`, () => {
   it(`if isAuth = true renders avatar block`, () => {
     const tree = renderer
-      .create(<UserBlock
-        avatarLink="img/avatar.jpg"
-        isAuth={true}
-        moveToAuth={() => {}}
-      />)
+      .create(<BrowserRouter>
+        <UserBlock
+          avatarLink="img/avatar.jpg"
+          isAuth={true}
+        />
+      </BrowserRouter>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -18,11 +20,12 @@ describe(`User block correctly renders`, () => {
 
   it(`if isAuth = false renders sign in link`, () => {
     const tree = renderer
-      .create(<UserBlock
-        avatarLink=""
-        isAuth={false}
-        moveToAuth={() => {}}
-      />)
+      .create(<BrowserRouter>
+        <UserBlock
+          avatarLink=""
+          isAuth={false}
+        />
+      </BrowserRouter>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

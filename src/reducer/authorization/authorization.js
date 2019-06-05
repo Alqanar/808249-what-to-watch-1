@@ -1,6 +1,6 @@
 const initialState = {
-  isAuthorizationRequired: false,
-  isAuthPage: false,
+  // isAuthorizationRequired: false,
+  // isAuthPage: false,
   user: {
     id: null,
     email: ``,
@@ -10,22 +10,22 @@ const initialState = {
 };
 
 const ActionType = {
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
-  SET_AUTH_PAGE: `SET_AUTH_PAGE`,
+  // REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  // SET_AUTH_PAGE: `SET_AUTH_PAGE`,
   SET_USER: `SET_USER`
 };
 
 const ActionCreator = {
 
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
-  }),
+  // requireAuthorization: (status) => ({
+  //   type: ActionType.REQUIRED_AUTHORIZATION,
+  //   payload: status,
+  // }),
 
-  setAuthorizationPage: (status) => ({
-    type: ActionType.SET_AUTH_PAGE,
-    payload: status,
-  }),
+  // setAuthorizationPage: (status) => ({
+  //   type: ActionType.SET_AUTH_PAGE,
+  //   payload: status,
+  // }),
 
   setUser: (userObject) => ({
     type: ActionType.SET_USER,
@@ -53,17 +53,17 @@ const Operation = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case ActionType.REQUIRED_AUTHORIZATION:
-      return {
-        ...state,
-        isAuthorizationRequired: action.payload,
-      };
+    // case ActionType.REQUIRED_AUTHORIZATION:
+    //   return {
+    //     ...state,
+    //     isAuthorizationRequired: action.payload,
+    //   };
 
-    case ActionType.SET_AUTH_PAGE:
-      return {
-        ...state,
-        isAuthPage: action.payload,
-      };
+    // case ActionType.SET_AUTH_PAGE:
+    //   return {
+    //     ...state,
+    //     isAuthPage: action.payload,
+    //   };
 
     case ActionType.SET_USER:
       return {

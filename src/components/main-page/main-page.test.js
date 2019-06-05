@@ -2,6 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import {createStore} from "redux";
+import {BrowserRouter} from "react-router-dom";
 
 import MainPage from "./main-page.jsx";
 import {
@@ -25,13 +26,15 @@ it(`Main page correctly renders`, () => {
   const tree = renderer
     .create(
         <Provider store={createStore(() => testInitialState)}>
-          <MainPage
-            avatarLink='img/avatar.jpg'
-            featuredFilm={featuredFilmMock}
-            genres={genresMock}
-            isAuth={false}
-            moveToAuth={() => {}}
-          />
+          <BrowserRouter>
+            <MainPage
+              avatarLink='img/avatar.jpg'
+              featuredFilm={featuredFilmMock}
+              genres={genresMock}
+              isAuth={false}
+              moveToAuth={() => {}}
+            />
+          </BrowserRouter>
         </Provider>
     )
     .toJSON();

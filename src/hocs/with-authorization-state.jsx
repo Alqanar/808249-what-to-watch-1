@@ -47,12 +47,14 @@ const withAuthorizationState = (Component) => {
       const {onSignInButtonClick} = this.props;
 
       event.preventDefault();
-      onSignInButtonClick(email, pass);
+      onSignInButtonClick(email, pass)
+        .then(() => this.props.history.push(`/`));
     }
   }
 
   WithAuthorizationState.propTypes = {
-    onSignInButtonClick: PropTypes.func.isRequired
+    onSignInButtonClick: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
   };
 
   return WithAuthorizationState;

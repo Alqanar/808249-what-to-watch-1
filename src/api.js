@@ -1,10 +1,9 @@
 import axios from "axios";
-import {ActionCreator} from "./reducer/authorization/authorization.js";
 
 
 const TIMEOUT = 5000;
 
-const createAPI = (dispatch) => {
+const createAPI = (onLoginFail) => {
   const api = axios.create({
     baseURL: `https://es31-server.appspot.com/wtw`,
     timeout: TIMEOUT,
@@ -13,8 +12,8 @@ const createAPI = (dispatch) => {
 
   const onSuccess = (response) => response;
   const onFail = (err) => {
-    if (err.response.status === 403) {
-      dispatch(ActionCreator.requireAuthorization(true));
+    if (err.status === 403) {
+      onLoginFail();
     }
     return err;
   };

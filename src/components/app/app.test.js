@@ -2,6 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import {createStore} from "redux";
+import {BrowserRouter} from "react-router-dom";
 
 import {App} from "./app.jsx";
 
@@ -32,9 +33,9 @@ const testInitialState = {
     genre: `All genres`,
     films
   },
-  authorization: {
-    isAuthorizationRequired: false
-  }
+  // authorization: {
+  //   isAuthorizationRequired: false
+  // }
 };
 
 
@@ -43,14 +44,16 @@ describe(`App correctly renders`, () => {
     const tree = renderer
       .create(
           <Provider store={createStore(() => testInitialState)}>
-            <App
-              isAuthorizationRequired={false}
-              signIn={() => {}}
-              avatarLink="img/avatar.jpg"
-              openedAuthPage={() => {}}
-              isAuthPage={false}
-              userId={null}
-            />
+            <BrowserRouter>
+              <App
+                // isAuthorizationRequired={false}
+                signIn={() => {}}
+                avatarLink="img/avatar.jpg"
+                openedAuthPage={() => {}}
+                // isAuthPage={false}
+                userId={null}
+              />
+            </BrowserRouter>
           </Provider>
       )
       .toJSON();
@@ -62,14 +65,16 @@ describe(`App correctly renders`, () => {
     const tree = renderer
       .create(
           <Provider store={createStore(() => testInitialState)}>
-            <App
-              isAuthorizationRequired={true}
-              signIn={() => {}}
-              avatarLink="img/avatar.jpg"
-              openedAuthPage={() => {}}
-              isAuthPage={false}
-              userId={null}
-            />
+            <BrowserRouter>
+              <App
+                // isAuthorizationRequired={true}
+                signIn={() => {}}
+                avatarLink="img/avatar.jpg"
+                openedAuthPage={() => {}}
+                // isAuthPage={false}
+                userId={null}
+              />
+            </BrowserRouter>
           </Provider>
       )
       .toJSON();
