@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 
 import FilmCard from "../film-card/film-card.jsx";
 import {getFilterFilms} from "../../reducer/movie/selectors.js";
+import {moviesListMock} from "../main-page/test-mock-data.js";
 
 
 class MoviesList extends PureComponent {
@@ -12,13 +13,14 @@ class MoviesList extends PureComponent {
   }
 
   render() {
-    const {films, onClick} = this.props;
-
-    const filmsList = films.map((film) => (
+    const {films, onClick, isMainPage} = this.props;
+    const list = isMainPage ? films : moviesListMock;
+    const filmsList = list.map((film) => (
       <FilmCard
         movie={film}
         key={film.id}
         onClick={onClick}
+        isMainPage={isMainPage}
       />
     ));
 
@@ -32,7 +34,8 @@ class MoviesList extends PureComponent {
 
 MoviesList.propTypes = {
   films: PropTypes.array.isRequired,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  isMainPage: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => ({

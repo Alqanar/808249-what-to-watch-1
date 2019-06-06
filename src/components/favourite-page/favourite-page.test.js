@@ -1,9 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
+import {createStore} from "redux";
 
-import {MoviesList} from "./movies-list.jsx";
+import FavouritePage from "./favourite-page.jsx";
 
-const films = [
+
+const moviesListMock = [
   {
     id: `0`,
     name: `The Aftermath`,
@@ -24,12 +28,25 @@ const films = [
   }
 ];
 
-it(`Movie list correctly renders`, () => {
+const testInitialState = {
+  movie: {
+    genre: `All genres`,
+    films: moviesListMock
+  }
+};
+
+it(`Favourite page correctly renders`, () => {
   const tree = renderer
-    .create(<MoviesList
-      films={films}
-      isMainPage={true}
-    />)
+    .create(
+        <Provider store={createStore(() => testInitialState)}>
+          <BrowserRouter>
+            <FavouritePage
+              avatarLink='img/avatar.jpg'
+              isAuth={false}
+            />
+          </BrowserRouter>
+        </Provider>
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();

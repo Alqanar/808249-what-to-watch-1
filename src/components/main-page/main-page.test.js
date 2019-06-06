@@ -16,9 +16,6 @@ const testInitialState = {
   movie: {
     genre: `All genres`,
     films: moviesListMock
-  },
-  authorization: {
-    isAuthorizationRequired: false
   }
 };
 
@@ -32,7 +29,6 @@ it(`Main page correctly renders`, () => {
               featuredFilm={featuredFilmMock}
               genres={genresMock}
               isAuth={false}
-              moveToAuth={() => {}}
             />
           </BrowserRouter>
         </Provider>

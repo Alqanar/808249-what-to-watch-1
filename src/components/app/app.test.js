@@ -32,10 +32,7 @@ const testInitialState = {
   movie: {
     genre: `All genres`,
     films
-  },
-  // authorization: {
-  //   isAuthorizationRequired: false
-  // }
+  }
 };
 
 
@@ -46,11 +43,9 @@ describe(`App correctly renders`, () => {
           <Provider store={createStore(() => testInitialState)}>
             <BrowserRouter>
               <App
-                // isAuthorizationRequired={false}
                 signIn={() => {}}
                 avatarLink="img/avatar.jpg"
                 openedAuthPage={() => {}}
-                // isAuthPage={false}
                 userId={null}
               />
             </BrowserRouter>
@@ -67,11 +62,9 @@ describe(`App correctly renders`, () => {
           <Provider store={createStore(() => testInitialState)}>
             <BrowserRouter>
               <App
-                // isAuthorizationRequired={true}
                 signIn={() => {}}
                 avatarLink="img/avatar.jpg"
                 openedAuthPage={() => {}}
-                // isAuthPage={false}
                 userId={null}
               />
             </BrowserRouter>

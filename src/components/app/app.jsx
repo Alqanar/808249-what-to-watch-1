@@ -1,12 +1,13 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, Redirect} from "react-router-dom";
 
 import MainPage from "../main-page/main-page.jsx";
 import SignInPage from "../sign-in-page/sign-in-page.jsx";
 import withAuthorizationState from "../../hocs/with-authorization-state.jsx";
-import {Operation, ActionCreator} from "../../reducer/authorization/authorization.js";
+import FavouritePage from "../favourite-page/favourite-page.jsx";
+import {Operation} from "../../reducer/authorization/authorization.js";
 import {
   featuredFilm,
   GENRES
@@ -22,6 +23,7 @@ class App extends PureComponent {
     this._getMovieCard = this._getMovieCard.bind(this);
     this._renderMainPage = this._renderMainPage.bind(this);
     this._renderSignInPage = this._renderSignInPage.bind(this);
+    this._renderFavouritePage = this._renderFavouritePage.bind(this);
   }
 
   render() {
@@ -29,6 +31,7 @@ class App extends PureComponent {
       <Switch>
         <Route path="/" exact render={this._renderMainPage} />
         <Route path="/login" render={this._renderSignInPage} />
+        <Route path="/favorites" render={this._renderFavouritePage} />
       </Switch>
     );
   }
@@ -37,10 +40,28 @@ class App extends PureComponent {
     return movieCard;
   }
 
+  _renderFavouritePage() {
+    const {
+      avatarLink,
+      userId
+    } = this.props;
+
+    const isAutharisation = Boolean(userId);
+
+    return isAutharisation ? (
+      <FavouritePage
+        avatarLink={avatarLink}
+        isAuth={isAutharisation}
+        onClick={this._getMovieCard}
+      />
+    ) : (
+      <Redirect to="/login" />
+    );
+  }
+
   _renderMainPage() {
     const {
       avatarLink,
-      openedAuthPage,
       userId
     } = this.props;
 
@@ -51,7 +72,6 @@ class App extends PureComponent {
         genres={GENRES}
         onClick={this._getMovieCard}
         isAuth={Boolean(userId)}
-        moveToAuth={openedAuthPage}
       />
     );
   }
@@ -69,24 +89,18 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  // isAuthorizationRequired: PropTypes.bool.isRequired,
   signIn: PropTypes.func.isRequired,
   avatarLink: PropTypes.string.isRequired,
-  openedAuthPage: PropTypes.func.isRequired,
-  // isAuthPage: PropTypes.bool.isRequired,
   userId: PropTypes.number
 };
 
 const mapDispatchToProps = (dispatch) => ({
   signIn: (email, pass) => dispatch(Operation.requestAuthorization(email, pass)),
-  openedAuthPage: () => dispatch(ActionCreator.setAuthorizationPage(true))
 });
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
-  // isAuthorizationRequired: state.authorization.isAuthorizationRequired,
   avatarLink: state.authorization.user.avatarUrl,
-  // isAuthPage: state.authorization.isAuthPage,
   userId: state.authorization.user.id
 });
 

@@ -18,20 +18,32 @@ class FilmCard extends PureComponent {
   }
 
   render() {
-    const {movie, movie: {name}} = this.props;
+    const {movie, movie: {name, posterLink}, isMainPage} = this.props;
 
     return (
       <article
         onClick={this._handleCardClick}
-        onMouseEnter={this._handleCardMouseEnter}
-        onMouseLeave={this._handleCardMouseLeave}
+        onMouseEnter={isMainPage ? this._handleCardMouseEnter : undefined}
+        onMouseLeave={isMainPage ? this._handleCardMouseLeave : undefined}
         className="small-movie-card catalog__movies-card"
       >
+        {isMainPage ? `` : (
+          <button className="small-movie-card__play-btn" type="button">Play</button>
+        )}
         <div className="small-movie-card__image">
-          <VideoPlayer
-            ref={this._videoRef}
-            film={movie}
-          />
+          {isMainPage ? (
+            <VideoPlayer
+              ref={this._videoRef}
+              film={movie}
+            />
+          ) : (
+            <img
+              src={posterLink}
+              alt={name}
+              width="280"
+              height="175"
+            />
+          )}
         </div>
         <h3 className="small-movie-card__title">
           <a className="small-movie-card__link" href="movie-page.html">{name}</a>
@@ -70,9 +82,11 @@ class FilmCard extends PureComponent {
 
 FilmCard.propTypes = {
   movie: PropTypes.shape({
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    posterLink: PropTypes.string
   }).isRequired,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  isMainPage: PropTypes.bool.isRequired
 };
 
 export default FilmCard;

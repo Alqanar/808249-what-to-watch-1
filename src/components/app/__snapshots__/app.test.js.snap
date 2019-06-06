@@ -383,6 +383,7 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
+          
           <div
             className="small-movie-card__image"
           >
@@ -412,6 +413,7 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
+          
           <div
             className="small-movie-card__image"
           >
@@ -441,6 +443,7 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
+          
           <div
             className="small-movie-card__image"
           >
@@ -897,6 +900,7 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
+          
           <div
             className="small-movie-card__image"
           >
@@ -926,6 +930,7 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
+          
           <div
             className="small-movie-card__image"
           >
@@ -955,6 +960,7 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
+          
           <div
             className="small-movie-card__image"
           >
