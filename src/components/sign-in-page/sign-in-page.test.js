@@ -14,6 +14,8 @@ it(`Sign In page correctly renders`, () => {
         onEmailInputChange={() => {}}
         onPassInputChange={() => {}}
         onSignInButtonClick={() => {}}
+        isErrorEmail={false}
+        isErrorPass={false}
       />
     </BrowserRouter>)
     .toJSON();

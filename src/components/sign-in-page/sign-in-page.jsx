@@ -12,7 +12,9 @@ const SignInPage = (props) => {
     pass,
     onEmailInputChange,
     onPassInputChange,
-    onSignInButtonClick
+    onSignInButtonClick,
+    isErrorEmail,
+    isErrorPass
   } = props;
 
   return (
@@ -28,7 +30,7 @@ const SignInPage = (props) => {
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form">
             <div className="sign-in__fields">
-              <div className="sign-in__field">
+              <div className={`sign-in__field ${isErrorEmail ? `sign-in__field--error` : ``}`}>
                 <input
                   onChange={onEmailInputChange}
                   className="sign-in__input"
@@ -37,11 +39,10 @@ const SignInPage = (props) => {
                   name="user-email"
                   id="user-email"
                   value={email}
-                  required
                 />
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
-              <div className="sign-in__field">
+              <div className={`sign-in__field ${isErrorPass ? `sign-in__field--error` : ``}`}>
                 <input
                   onChange={onPassInputChange}
                   className="sign-in__input"
@@ -50,7 +51,6 @@ const SignInPage = (props) => {
                   name="user-password"
                   id="user-password"
                   value={pass}
-                  required
                 />
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>
@@ -79,7 +79,9 @@ SignInPage.propTypes = {
   pass: PropTypes.string.isRequired,
   onEmailInputChange: PropTypes.func.isRequired,
   onPassInputChange: PropTypes.func.isRequired,
-  onSignInButtonClick: PropTypes.func.isRequired
+  onSignInButtonClick: PropTypes.func.isRequired,
+  isErrorEmail: PropTypes.bool.isRequired,
+  isErrorPass: PropTypes.bool.isRequired
 };
 
 export default SignInPage;

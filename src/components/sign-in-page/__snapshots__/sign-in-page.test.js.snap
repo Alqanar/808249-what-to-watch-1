@@ -163,7 +163,7 @@ Array [
           className="sign-in__fields"
         >
           <div
-            className="sign-in__field"
+            className="sign-in__field "
           >
             <input
               className="sign-in__input"
@@ -171,7 +171,6 @@ Array [
               name="user-email"
               onChange={[Function]}
               placeholder="Email address"
-              required={true}
               type="email"
               value=""
             />
@@ -183,7 +182,7 @@ Array [
             </label>
           </div>
           <div
-            className="sign-in__field"
+            className="sign-in__field "
           >
             <input
               className="sign-in__input"
@@ -191,7 +190,6 @@ Array [
               name="user-password"
               onChange={[Function]}
               placeholder="Password"
-              required={true}
               type="password"
               value=""
             />

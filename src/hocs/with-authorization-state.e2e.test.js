@@ -37,7 +37,7 @@ const history = {
 };
 
 describe(`withAuthorizationState works correctly`, () => {
-  it(`when click on the button callback is works`, () => {
+  it(`if the email or(and) pass is not filled when click on the button callback not works`, () => {
     const handleButtonClick = jest.fn().mockReturnValue(Promise.resolve());
     const wrapper = mount(<MockComponentWrapped
       onSignInButtonClick={handleButtonClick}
@@ -48,7 +48,7 @@ describe(`withAuthorizationState works correctly`, () => {
 
     buttonSignIn.simulate(`click`, {preventDefault() {}});
 
-    expect(handleButtonClick).toHaveBeenCalledTimes(1);
+    expect(handleButtonClick).toHaveBeenCalledTimes(0);
   });
 
   it(`when input email change state change too`, () => {
