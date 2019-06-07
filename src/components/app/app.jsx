@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {Switch, Route, Redirect} from "react-router-dom";
+import {Switch, Route} from "react-router-dom";
 
 import MainPage from "../main-page/main-page.jsx";
 import SignInPage from "../sign-in-page/sign-in-page.jsx";
@@ -9,12 +9,14 @@ import withAuthorizationState from "../../hocs/with-authorization-state.jsx";
 import FavouritePage from "../favourite-page/favourite-page.jsx";
 import {Operation} from "../../reducer/authorization/authorization.js";
 import {getGenresList} from "../../reducer/movie/selectors.js";
+import composedWithPrivateRoute from "../../hocs/with-private-route.jsx";
 import {
   featuredFilm
 } from "../../mocks/mock-data.js";
 
 
 const SignInPageWrapped = withAuthorizationState(SignInPage);
+const FavouritePageWrapped = composedWithPrivateRoute(FavouritePage);
 
 class App extends PureComponent {
   constructor(props) {
@@ -46,16 +48,12 @@ class App extends PureComponent {
       userId
     } = this.props;
 
-    const isAutharisation = Boolean(userId);
-
-    return isAutharisation ? (
-      <FavouritePage
+    return (
+      <FavouritePageWrapped
         avatarLink={avatarLink}
-        isAuth={isAutharisation}
+        isAuth={Boolean(userId)}
         onClick={this._getMovieCard}
       />
-    ) : (
-      <Redirect to="/login" />
     );
   }
 
