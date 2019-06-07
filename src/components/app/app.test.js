@@ -35,6 +35,19 @@ const testInitialState = {
   }
 };
 
+const genres = [
+  `All genres`,
+  `Comedies`,
+  `Crime`,
+  `Documentary`,
+  `Dramas`,
+  `Horror`,
+  `Kids & Family`,
+  `Romance`,
+  `Sci-Fi`,
+  `Thrillers`
+];
+
 
 describe(`App correctly renders`, () => {
   it(`when isAuthorizationRequired = false renders Main Page`, () => {
@@ -45,8 +58,8 @@ describe(`App correctly renders`, () => {
               <App
                 signIn={() => {}}
                 avatarLink="img/avatar.jpg"
-                openedAuthPage={() => {}}
                 userId={null}
+                genresList={genres}
               />
             </BrowserRouter>
           </Provider>
@@ -64,8 +77,8 @@ describe(`App correctly renders`, () => {
               <App
                 signIn={() => {}}
                 avatarLink="img/avatar.jpg"
-                openedAuthPage={() => {}}
                 userId={null}
+                genresList={genres}
               />
             </BrowserRouter>
           </Provider>

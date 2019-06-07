@@ -8,9 +8,9 @@ import SignInPage from "../sign-in-page/sign-in-page.jsx";
 import withAuthorizationState from "../../hocs/with-authorization-state.jsx";
 import FavouritePage from "../favourite-page/favourite-page.jsx";
 import {Operation} from "../../reducer/authorization/authorization.js";
+import {getGenresList} from "../../reducer/movie/selectors.js";
 import {
-  featuredFilm,
-  GENRES
+  featuredFilm
 } from "../../mocks/mock-data.js";
 
 
@@ -62,14 +62,15 @@ class App extends PureComponent {
   _renderMainPage() {
     const {
       avatarLink,
-      userId
+      userId,
+      genresList
     } = this.props;
 
     return (
       <MainPage
         avatarLink={avatarLink}
         featuredFilm={featuredFilm}
-        genres={GENRES}
+        genres={genresList}
         onClick={this._getMovieCard}
         isAuth={Boolean(userId)}
       />
@@ -91,7 +92,8 @@ class App extends PureComponent {
 App.propTypes = {
   signIn: PropTypes.func.isRequired,
   avatarLink: PropTypes.string.isRequired,
-  userId: PropTypes.number
+  userId: PropTypes.number,
+  genresList: PropTypes.array.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -101,7 +103,8 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
   avatarLink: state.authorization.user.avatarUrl,
-  userId: state.authorization.user.id
+  userId: state.authorization.user.id,
+  genresList: getGenresList(state)
 });
 
 export {App};

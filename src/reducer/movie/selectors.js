@@ -23,3 +23,13 @@ export const getFilterFilms = createSelector(
           filmGenre === selectedGenre));
     }
 );
+
+export const getGenresList = createSelector(
+    getFilms,
+
+    (filmsList) => {
+      return [`All genres`, ...new Set(filmsList.reduce(function (acc, film) {
+        return [...acc, ...film.genre];
+      }, []))];
+    }
+);
