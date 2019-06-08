@@ -32,25 +32,31 @@ MockComponent.propTypes = {
 
 const MockComponentWrapped = withAuthorizationState(MockComponent);
 
+const history = {
+  push: jest.fn()
+};
+
 describe(`withAuthorizationState works correctly`, () => {
-  it(`when click on the button callback is works`, () => {
-    const handleButtonClick = jest.fn();
+  it(`if the email or(and) pass is not filled when click on the button callback not works`, () => {
+    const handleButtonClick = jest.fn().mockReturnValue(Promise.resolve());
     const wrapper = mount(<MockComponentWrapped
       onSignInButtonClick={handleButtonClick}
+      history={history}
     />);
 
     const buttonSignIn = wrapper.find(`.button-signin`);
 
     buttonSignIn.simulate(`click`, {preventDefault() {}});
 
-    expect(handleButtonClick).toHaveBeenCalledTimes(1);
+    expect(handleButtonClick).toHaveBeenCalledTimes(0);
   });
 
   it(`when input email change state change too`, () => {
-    const handleButtonClick = jest.fn();
+    const handleButtonClick = jest.fn().mockReturnValue(Promise.resolve());
     const eventEmail = {target: {value: `spam@test.ru`}};
     const wrapper = mount(<MockComponentWrapped
       onSignInButtonClick={handleButtonClick}
+      history={history}
     />);
 
     const emailInput = wrapper.find(`.email-input`);
@@ -60,10 +66,11 @@ describe(`withAuthorizationState works correctly`, () => {
   });
 
   it(`when input password change state change too`, () => {
-    const handleButtonClick = jest.fn();
+    const handleButtonClick = jest.fn().mockReturnValue(Promise.resolve());
     const eventPass = {target: {value: `1234`}};
     const wrapper = mount(<MockComponentWrapped
       onSignInButtonClick={handleButtonClick}
+      history={history}
     />);
 
     const passInput = wrapper.find(`.pass-input`);
@@ -73,11 +80,12 @@ describe(`withAuthorizationState works correctly`, () => {
   });
 
   it(`clicking on the button will transfer the email and pass`, () => {
-    const handleButtonClick = jest.fn();
+    const handleButtonClick = jest.fn().mockReturnValue(Promise.resolve());
     const eventEmail = {target: {value: `spam@test.ru`}};
     const eventPass = {target: {value: `1234`}};
     const wrapper = mount(<MockComponentWrapped
       onSignInButtonClick={handleButtonClick}
+      history={history}
     />);
 
     const emailInput = wrapper.find(`.email-input`);

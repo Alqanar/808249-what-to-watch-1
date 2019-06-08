@@ -8,7 +8,6 @@ import GenresListItem from "./genres-list-item.jsx";
 Enzyme.configure({adapter: new Adapter()});
 
 const name = `Sci-Fi`;
-const filmGenre = `Fantasy`;
 
 it(`Clicking on the genre will trigger a callback`, () => {
   const handleGenreClick = jest.fn();
@@ -16,7 +15,6 @@ it(`Clicking on the genre will trigger a callback`, () => {
     name={name}
     onGenreClick={handleGenreClick}
     isActive={false}
-    filmGenre={filmGenre}
   />);
 
   const genre = genresListItem.find(`.catalog__genres-link`);
@@ -34,12 +32,11 @@ it(`Clicking on the genre will transfer the active name of the genre`, () => {
     name={name}
     onGenreClick={handleGenreClick}
     isActive={false}
-    filmGenre={filmGenre}
   />);
 
   const genre = genresListItem.find(`.catalog__genres-link`);
 
   genre.simulate(`click`, {preventDefault() {}});
 
-  expect(handleGenreClick).toHaveBeenCalledWith(filmGenre);
+  expect(handleGenreClick).toHaveBeenCalledWith(name);
 });

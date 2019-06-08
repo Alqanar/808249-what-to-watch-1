@@ -10,13 +10,28 @@ const film = {
   trailer: `https://youtu.be/TcMBFSGVi1c`
 };
 
-it(`Film card correctly renders`, () => {
-  const tree = renderer
-    .create(<FilmCard
-      movie={film}
-      key={0}
-    />)
-    .toJSON();
+describe(`Film card correctly renders`, () => {
+  it(`when isMainPage true`, () => {
+    const tree = renderer
+      .create(<FilmCard
+        movie={film}
+        key={0}
+        isMainPage={true}
+      />)
+      .toJSON();
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`when isMainPage false`, () => {
+    const tree = renderer
+      .create(<FilmCard
+        movie={film}
+        key={0}
+        isMainPage={false}
+      />)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });

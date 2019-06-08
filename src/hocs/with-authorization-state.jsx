@@ -13,12 +13,14 @@ const withAuthorizationState = (Component) => {
 
       this.state = {
         email: ``,
-        pass: ``
+        pass: ``,
+        isErrorEmail: false,
+        isErrorPass: false
       };
     }
 
     render() {
-      const {email, pass} = this.state;
+      const {email, pass, isErrorEmail, isErrorPass} = this.state;
 
       return <Component
         {...this.props}
@@ -27,18 +29,22 @@ const withAuthorizationState = (Component) => {
         onEmailInputChange={this._handleEmailInputChange}
         onPassInputChange={this._handlePassInputChange}
         onSignInButtonClick={this._handleSignInButtonClick}
+        isErrorEmail={isErrorEmail}
+        isErrorPass={isErrorPass}
       />;
     }
 
     _handleEmailInputChange(event) {
       this.setState({
-        email: event.target.value
+        email: event.target.value,
+        isErrorEmail: false
       });
     }
 
     _handlePassInputChange(event) {
       this.setState({
-        pass: event.target.value
+        pass: event.target.value,
+        isErrorPass: false
       });
     }
 
@@ -47,12 +53,25 @@ const withAuthorizationState = (Component) => {
       const {onSignInButtonClick} = this.props;
 
       event.preventDefault();
-      onSignInButtonClick(email, pass);
+      this.setState({
+        isErrorEmail: false,
+        isErrorPass: false
+      });
+      if (email && pass) {
+        onSignInButtonClick(email, pass)
+          .then(() => this.props.history.push(`/`));
+      } else {
+        this.setState({
+          isErrorEmail: Boolean(!email),
+          isErrorPass: Boolean(!pass)
+        });
+      }
     }
   }
 
   WithAuthorizationState.propTypes = {
-    onSignInButtonClick: PropTypes.func.isRequired
+    onSignInButtonClick: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
   };
 
   return WithAuthorizationState;

@@ -20,7 +20,6 @@ it(`Clicking on the card header will trigger a callback`, () => {
     genres={genresMock}
     onClick={clickHandler}
     isAuth={false}
-    moveToAuth={() => {}}
   />);
 
   const cardHeaders = mainPage.find(`.small-movie-card__link`);

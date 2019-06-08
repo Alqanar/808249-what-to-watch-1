@@ -6,7 +6,7 @@ exports[`User block correctly renders if isAuth = false renders sign in link 1`]
 >
   <a
     className="user-block__link"
-    href="#"
+    href="/login"
     onClick={[Function]}
   >
     Sign in

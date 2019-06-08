@@ -18,19 +18,6 @@ const userData = {
 
 
 describe(`Action creator for`, () => {
-  it(`require Authorization returns correct action`, () => {
-    expect(ActionCreator.requireAuthorization(true)).toEqual({
-      type: ActionType.REQUIRED_AUTHORIZATION,
-      payload: true,
-    });
-  });
-
-  it(`set Authorization Page returns correct action`, () => {
-    expect(ActionCreator.setAuthorizationPage(true)).toEqual({
-      type: ActionType.SET_AUTH_PAGE,
-      payload: true,
-    });
-  });
 
   it(`set user returns correct action`, () => {
     expect(ActionCreator.setUser({
@@ -53,8 +40,6 @@ describe(`Action creator for`, () => {
 describe(`Reducer works correctly`, () => {
   it(`without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
-      isAuthorizationRequired: false,
-      isAuthPage: false,
       user: {
         id: null,
         email: ``,
@@ -89,17 +74,6 @@ describe(`Reducer works correctly`, () => {
         name: `example`,
         avatarUrl: `/wtw/static/avatar/9.jpg`
       }
-    });
-  });
-
-  it(`when the status changes, the isAuthorizationRequired state changes`, () => {
-    expect(reducer({
-      isAuthorizationRequired: false
-    }, {
-      type: ActionType.REQUIRED_AUTHORIZATION,
-      payload: true,
-    })).toEqual({
-      isAuthorizationRequired: true
     });
   });
 

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 
 const avatarBlock = (avatarLink) => (
@@ -8,24 +9,23 @@ const avatarBlock = (avatarLink) => (
   </div>
 );
 
-const signInLink = (moveToAuth) => (
-  <a onClick={moveToAuth} href="#" className="user-block__link">Sign in</a>
+const signInLink = () => (
+  <Link to='/login' className="user-block__link">Sign in</Link>
 );
 
 const UserBlock = (props) => {
-  const {avatarLink, isAuth, moveToAuth} = props;
+  const {avatarLink, isAuth} = props;
 
   return (
     <div className="user-block">
-      {isAuth ? avatarBlock(avatarLink) : signInLink(moveToAuth)}
+      {isAuth ? avatarBlock(avatarLink) : signInLink()}
     </div>
   );
 };
 
 UserBlock.propTypes = {
   avatarLink: PropTypes.string.isRequired,
-  isAuth: PropTypes.bool.isRequired,
-  moveToAuth: PropTypes.func.isRequired
+  isAuth: PropTypes.bool.isRequired
 };
 
 export default UserBlock;

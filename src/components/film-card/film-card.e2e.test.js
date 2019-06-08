@@ -20,6 +20,7 @@ it(`Clicking on the card will trigger a callback`, () => {
     movie={film}
     key={0}
     onClick={clickHandler}
+    isMainPage={true}
   />);
 
   const card = filmCard.find(`.catalog__movies-card`);
@@ -36,6 +37,7 @@ it(`Clicking on the card will transfer the active card`, () => {
     movie={film}
     key={0}
     onClick={clickHandler}
+    isMainPage={true}
   />);
 
   const card = filmCard.find(`.catalog__movies-card`);

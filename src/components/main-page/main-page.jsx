@@ -34,8 +34,7 @@ const MainPage = (props) => {
     featuredFilm,
     genres,
     onClick,
-    isAuth,
-    moveToAuth
+    isAuth
   } = props;
 
   return (
@@ -51,7 +50,6 @@ const MainPage = (props) => {
           <UserBlock
             avatarLink={avatarLink}
             isAuth={isAuth}
-            moveToAuth={moveToAuth}
           />
         </header>
 
@@ -69,6 +67,7 @@ const MainPage = (props) => {
           />
           <MoviesList
             onClick={onClick}
+            isMainPage={true}
           />
           {createButtonShowMore()}
         </section>
@@ -87,13 +86,9 @@ MainPage.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired
   }),
-  genres: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    filmGenre: PropTypes.string.isRequired,
-  })),
+  genres: PropTypes.arrayOf(PropTypes.string.isRequired),
   onClick: PropTypes.func,
-  isAuth: PropTypes.bool.isRequired,
-  moveToAuth: PropTypes.func.isRequired
+  isAuth: PropTypes.bool.isRequired
 };
 
 export default MainPage;
