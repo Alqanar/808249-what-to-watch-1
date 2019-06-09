@@ -1,13 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Footer from "./footer.jsx";
+import PlayButton from "./play-button.tsx";
 
-it(`Footer correctly renders`, () => {
+
+it(`Play button correctly renders`, () => {
   const tree = renderer
-    .create(<Footer />)
+    .create(<PlayButton />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
-

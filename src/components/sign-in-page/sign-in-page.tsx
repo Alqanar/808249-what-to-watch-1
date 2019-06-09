@@ -1,12 +1,21 @@
-import React, {Fragment} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import Sprite from "../sprite/sprite.jsx";
-import Logo from "../logo/logo.jsx";
-import Footer from "../footer/footer.jsx";
+import Sprite from "../sprite/sprite";
+import Logo from "../logo/logo";
+import Footer from "../footer/footer";
 
 
-const SignInPage = (props) => {
+interface IProps {
+  email: string,
+  pass: string,
+  onEmailInputChange: () => void,
+  onPassInputChange: () => void,
+  onSignInButtonClick: () => Promise<void>,
+  isErrorEmail: boolean,
+  isErrorPass: boolean
+};
+
+const SignInPage: React.FC<IProps> = (props) => {
   const {
     email,
     pass,
@@ -18,7 +27,7 @@ const SignInPage = (props) => {
   } = props;
 
   return (
-    <Fragment>
+    <>
       <Sprite />
       <div className="user-page">
         <header className="page-header user-page__head">
@@ -70,18 +79,9 @@ const SignInPage = (props) => {
           hrefLink='/'
         />
       </div>
-    </Fragment>
+    </>
   );
 };
 
-SignInPage.propTypes = {
-  email: PropTypes.string.isRequired,
-  pass: PropTypes.string.isRequired,
-  onEmailInputChange: PropTypes.func.isRequired,
-  onPassInputChange: PropTypes.func.isRequired,
-  onSignInButtonClick: PropTypes.func.isRequired,
-  isErrorEmail: PropTypes.bool.isRequired,
-  isErrorPass: PropTypes.bool.isRequired
-};
 
 export default SignInPage;

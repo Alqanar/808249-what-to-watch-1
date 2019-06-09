@@ -1,13 +1,20 @@
-import React, {Fragment} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import Sprite from "../sprite/sprite.jsx";
-import Logo from "../logo/logo.jsx";
-import UserBlock from "../user-block/user-block.jsx";
-import MoviesList from "../movies-list/movies-list.jsx";
-import Footer from "../footer/footer.jsx";
+import Sprite from "../sprite/sprite";
+import Logo from "../logo/logo";
+import UserBlock from "../user-block/user-block";
+import MoviesList from "../movies-list/movies-list";
+import Footer from "../footer/footer";
+import { Film } from "../../types";
 
-const FavouritePage = (props) => {
+
+interface IProps {
+  avatarLink: string,
+  isAuth: boolean,
+  onClick: () => Film,
+};
+
+const FavouritePage: React.FC<IProps> = (props) => {
   const {
     avatarLink,
     isAuth,
@@ -15,7 +22,7 @@ const FavouritePage = (props) => {
   } = props;
 
   return (
-    <Fragment>
+    <>
       <Sprite />
       <div className="user-page">
         <header className="page-header user-page__head">
@@ -39,14 +46,8 @@ const FavouritePage = (props) => {
           hrefLink='/'
         />
       </div>
-    </Fragment>
+    </>
   );
-};
-
-FavouritePage.propTypes = {
-  avatarLink: PropTypes.string.isRequired,
-  isAuth: PropTypes.bool.isRequired,
-  onClick: PropTypes.func,
 };
 
 export default FavouritePage;

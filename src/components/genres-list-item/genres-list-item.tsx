@@ -1,8 +1,13 @@
-import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
 
-class GenresListItem extends PureComponent {
+interface IProps {
+  name: string,
+  onGenreClick: (name: string) => Promise<void>,
+  isActive: boolean
+};
+
+class GenresListItem extends React.PureComponent<IProps, null> {
   constructor(props) {
     super(props);
 
@@ -10,7 +15,7 @@ class GenresListItem extends PureComponent {
   }
 
   render() {
-    const {name, isActive} = this.props;
+    const { name, isActive } = this.props;
 
     return (
       <li
@@ -30,17 +35,11 @@ class GenresListItem extends PureComponent {
   }
 
   _handleGenreItemClick(event) {
-    const {name, onGenreClick} = this.props;
+    const { name, onGenreClick } = this.props;
 
     event.preventDefault();
     onGenreClick(name);
   }
 }
-
-GenresListItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  onGenreClick: PropTypes.func,
-  isActive: PropTypes.bool
-};
 
 export default GenresListItem;

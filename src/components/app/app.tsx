@@ -1,24 +1,31 @@
-import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {Switch, Route} from "react-router-dom";
+import * as React from "react";
+import { connect } from "react-redux";
+import { Switch, Route } from "react-router-dom";
 
-import MainPage from "../main-page/main-page.jsx";
-import SignInPage from "../sign-in-page/sign-in-page.jsx";
-import withAuthorizationState from "../../hocs/with-authorization-state.jsx";
-import FavouritePage from "../favourite-page/favourite-page.jsx";
-import {Operation} from "../../reducer/authorization/authorization.js";
-import {getGenresList} from "../../reducer/movie/selectors.js";
-import composedWithPrivateRoute from "../../hocs/with-private-route.jsx";
+import MainPage from "../main-page/main-page";
+import SignInPage from "../sign-in-page/sign-in-page";
+import withAuthorizationState from "../../hocs/with-authorization-state";
+import FavouritePage from "../favourite-page/favourite-page";
+import { Operation } from "../../reducer/authorization/authorization.js";
+import { getGenresList } from "../../reducer/movie/selectors.js";
+import composedWithPrivateRoute from "../../hocs/with-private-route";
 import {
   featuredFilm
 } from "../../mocks/mock-data.js";
+import { Film } from "../../types.js";
 
+
+interface IProps {
+  signIn: (email: string, pass: string) => Promise<void>,
+  avatarLink: string,
+  userId: string,
+  genresList: string[]
+};
 
 const SignInPageWrapped = withAuthorizationState(SignInPage);
 const FavouritePageWrapped = composedWithPrivateRoute(FavouritePage);
 
-class App extends PureComponent {
+class App extends React.PureComponent<IProps, null> {
   constructor(props) {
     super(props);
 
@@ -38,7 +45,7 @@ class App extends PureComponent {
     );
   }
 
-  _getMovieCard(movieCard) {
+  _getMovieCard(movieCard: Film): Film {
     return movieCard;
   }
 
@@ -75,8 +82,8 @@ class App extends PureComponent {
     );
   }
 
-  _renderSignInPage({history}) {
-    const {signIn} = this.props;
+  _renderSignInPage({ history }) {
+    const { signIn } = this.props;
 
     return (
       <SignInPageWrapped
@@ -86,13 +93,6 @@ class App extends PureComponent {
     );
   }
 }
-
-App.propTypes = {
-  signIn: PropTypes.func.isRequired,
-  avatarLink: PropTypes.string.isRequired,
-  userId: PropTypes.number,
-  genresList: PropTypes.array.isRequired
-};
 
 const mapDispatchToProps = (dispatch) => ({
   signIn: (email, pass) => dispatch(Operation.requestAuthorization(email, pass)),
@@ -105,6 +105,6 @@ const mapStateToProps = (state, ownProps) => ({
   genresList: getGenresList(state)
 });
 
-export {App};
+export { App };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

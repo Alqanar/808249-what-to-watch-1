@@ -3,7 +3,7 @@ export const featuredFilmMock = {
   coverLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`,
   posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`,
   genre: `Sci-Fi`,
-  year: `2019`
+  released: `2019`
 };
 
 export const genresMock = [

@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 
-const Sprite = () => {
+const Sprite: React.FC = () => {
   return (
     <div className="visually-hidden">
       <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -32,7 +32,7 @@ const Sprite = () => {
             clipRule="evenodd"
             d="M27 23.8571V16H23.8571V23.8571H16V27H23.8571H27L27 23.8571Z"
             fill="#FFF9D9"
-            fillOpacity="0.7"/>
+            fillOpacity="0.7" />
           <path
             fillRule="evenodd"
             clipRule="evenodd"

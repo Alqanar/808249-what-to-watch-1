@@ -1,24 +1,32 @@
-import React, {PureComponent, createRef} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import VideoPlayer from "../video-player/video-player.jsx";
+import VideoPlayer from "../video-player/video-player";
+import { Film } from "../../types";
 
 
-class FilmCard extends PureComponent {
+const IMG_WIDTH = "280";
+const IMG_HEIGHT = "175";
+
+interface IProps {
+  movie: Film,
+  onClick: (movie: Film) => Film,
+  isMainPage: boolean
+};
+
+class FilmCard extends React.PureComponent<IProps, null> {
+  private videoRef = React.createRef<HTMLVideoElement>();
+  private timeOutPlayVideo: number | null = null;
+
   constructor(props) {
     super(props);
 
     this._handleCardClick = this._handleCardClick.bind(this);
     this._handleCardMouseEnter = this._handleCardMouseEnter.bind(this);
     this._handleCardMouseLeave = this._handleCardMouseLeave.bind(this);
-
-    this._videoRef = createRef();
-
-    this._timeOutPlayVideo = null;
   }
 
   render() {
-    const {movie, movie: {name, posterLink}, isMainPage} = this.props;
+    const { movie, movie: { name, posterLink }, isMainPage } = this.props;
 
     return (
       <article
@@ -33,17 +41,17 @@ class FilmCard extends PureComponent {
         <div className="small-movie-card__image">
           {isMainPage ? (
             <VideoPlayer
-              ref={this._videoRef}
+              ref={this.videoRef}
               film={movie}
             />
           ) : (
-            <img
-              src={posterLink}
-              alt={name}
-              width="280"
-              height="175"
-            />
-          )}
+              <img
+                src={posterLink}
+                alt={name}
+                width={IMG_WIDTH}
+                height={IMG_HEIGHT}
+              />
+            )}
         </div>
         <h3 className="small-movie-card__title">
           <a className="small-movie-card__link" href="movie-page.html">{name}</a>
@@ -53,26 +61,26 @@ class FilmCard extends PureComponent {
   }
 
   _handleCardClick() {
-    const {movie, onClick} = this.props;
+    const { movie, onClick } = this.props;
 
     onClick(movie);
   }
 
   _handleCardMouseEnter() {
-    this._timeOutPlayVideo = setTimeout(() => this._playVideo(), 1000);
+    this.timeOutPlayVideo = window.setTimeout(() => this._playVideo(), 1000);
   }
 
   _handleCardMouseLeave() {
-    clearTimeout(this._timeOutPlayVideo);
+    clearTimeout(this.timeOutPlayVideo);
     this._stopVideo();
   }
 
   _playVideo() {
-    this._videoRef.current.play();
+    this.videoRef.current.play();
   }
 
   _stopVideo() {
-    const video = this._videoRef.current;
+    const video = this.videoRef.current;
 
     video.pause();
     video.currentTime = 0;
@@ -80,13 +88,5 @@ class FilmCard extends PureComponent {
   }
 }
 
-FilmCard.propTypes = {
-  movie: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    posterLink: PropTypes.string
-  }).isRequired,
-  onClick: PropTypes.func,
-  isMainPage: PropTypes.bool.isRequired
-};
 
 export default FilmCard;

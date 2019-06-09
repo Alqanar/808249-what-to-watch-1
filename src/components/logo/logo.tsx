@@ -1,38 +1,35 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import * as React from "react";
+import { Link } from "react-router-dom";
 
 
-const Logo = (props) => {
-  const {className, hrefLink} = props;
+interface IProps {
+  className?: string,
+  hrefLink?: string
+};
+
+const CustomLink = ({ className, children }) => {
+  return (
+    <a className={className}>
+      {children}
+    </a>
+  );
+}
+
+const Logo: React.FC<IProps> = (props) => {
+  const { className = ``, hrefLink = `#` } = props;
+  const LinkType = hrefLink === `#` ? CustomLink : Link;
 
   return (
     <div className="logo">
-      {hrefLink === `#` ? (
-        <a className={`logo__link ${className}`}>
+      <LinkType to={hrefLink} className={`logo__link ${className}`}>
+        <>
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
-        </a>
-      ) : (
-        <Link to={hrefLink} className={`logo__link ${className}`}>
-          <span className="logo__letter logo__letter--1">W</span>
-          <span className="logo__letter logo__letter--2">T</span>
-          <span className="logo__letter logo__letter--3">W</span>
-        </Link>
-      )}
+        </>
+      </LinkType>
     </div>
   );
-};
-
-Logo.propTypes = {
-  className: PropTypes.string,
-  hrefLink: PropTypes.string
-};
-
-Logo.defaultProps = {
-  className: ``,
-  hrefLink: `#`
 };
 
 export default Logo;

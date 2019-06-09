@@ -1,13 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Footer from "./footer.jsx";
+import MovieCardButtons from "./movie-card-buttons.tsx";
 
-it(`Footer correctly renders`, () => {
+
+it(`Movie card buttons correctly renders`, () => {
   const tree = renderer
-    .create(<Footer />)
+    .create(<MovieCardButtons />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
-

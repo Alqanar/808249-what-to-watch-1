@@ -1,11 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import Logo from "../logo/logo.jsx";
+import Logo from "../logo/logo";
 
 
-const Footer = (props) => {
-  const {hrefLink} = props;
+interface IProps {
+  hrefLink?: string
+};
+
+const Footer: React.FC<IProps> = (props) => {
+  const { hrefLink = `#` } = props;
 
   return (
     <footer className="page-footer">
@@ -19,14 +22,6 @@ const Footer = (props) => {
       </div>
     </footer>
   );
-};
-
-Footer.propTypes = {
-  hrefLink: PropTypes.string
-};
-
-Footer.defaultProps = {
-  hrefLink: `#`
 };
 
 export default Footer;

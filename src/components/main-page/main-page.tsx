@@ -1,17 +1,25 @@
-import React, {Fragment} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import Sprite from "../sprite/sprite.jsx";
-import Logo from "../logo/logo.jsx";
-import UserBlock from "../user-block/user-block.jsx";
-import FeaturedFilmCard from "../featured-film-card/featured-film-card.jsx";
-import MoviesList from "../movies-list/movies-list.jsx";
-import GenresList from "../genres-list/genres-list.jsx";
-import Footer from "../footer/footer.jsx";
+import Sprite from "../sprite/sprite";
+import Logo from "../logo/logo";
+import UserBlock from "../user-block/user-block";
+import FeaturedFilmCard from "../featured-film-card/featured-film-card";
+import MoviesList from "../movies-list/movies-list";
+import GenresList from "../genres-list/genres-list";
+import Footer from "../footer/footer";
+import { Film } from "../../types";
 
+
+interface IProps {
+  avatarLink: string,
+  featuredFilm: Film,
+  genres: string[],
+  onClick: (movie: Film) => Film,
+  isAuth: boolean
+};
 
 const createFeaturedFilmImage = (data) => {
-  const {name, coverLink} = data;
+  const { name, coverLink } = data;
 
   return (
     <div className="movie-card__bg">
@@ -28,7 +36,7 @@ const createButtonShowMore = () => {
   );
 };
 
-const MainPage = (props) => {
+const MainPage: React.FC<IProps> = (props) => {
   const {
     avatarLink,
     featuredFilm,
@@ -38,7 +46,7 @@ const MainPage = (props) => {
   } = props;
 
   return (
-    <Fragment>
+    <>
       <Sprite />
       <section className="movie-card">
         {createFeaturedFilmImage(featuredFilm)}
@@ -73,22 +81,8 @@ const MainPage = (props) => {
         </section>
         <Footer />
       </div>
-    </Fragment>
+    </>
   );
-};
-
-MainPage.propTypes = {
-  avatarLink: PropTypes.string.isRequired,
-  featuredFilm: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    coverLink: PropTypes.string.isRequired,
-    posterLink: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired
-  }),
-  genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-  onClick: PropTypes.func,
-  isAuth: PropTypes.bool.isRequired
 };
 
 export default MainPage;

@@ -1,13 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Footer from "./footer.jsx";
+import MyListButton from "./my-list-button.tsx";
 
-it(`Footer correctly renders`, () => {
+
+it(`My list button correctly renders`, () => {
   const tree = renderer
-    .create(<Footer />)
+    .create(<MyListButton />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
-

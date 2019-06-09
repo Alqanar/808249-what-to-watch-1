@@ -1,9 +1,21 @@
-import React, {PureComponent} from 'react';
-import PropTypes from "prop-types";
+import * as React from "react";
+import { History } from "history";
 
 
 const withAuthorizationState = (Component) => {
-  class WithAuthorizationState extends PureComponent {
+  interface IProps {
+    onSignInButtonClick: (email: string, pass: string) => Promise<void>,
+    history: History
+  };
+
+  interface IState {
+    email: string,
+    pass: string,
+    isErrorEmail: boolean,
+    isErrorPass: boolean
+  }
+
+  class WithAuthorizationState extends React.PureComponent<IProps, IState> {
     constructor(props) {
       super(props);
 
@@ -20,7 +32,7 @@ const withAuthorizationState = (Component) => {
     }
 
     render() {
-      const {email, pass, isErrorEmail, isErrorPass} = this.state;
+      const { email, pass, isErrorEmail, isErrorPass } = this.state;
 
       return <Component
         {...this.props}
@@ -49,8 +61,8 @@ const withAuthorizationState = (Component) => {
     }
 
     _handleSignInButtonClick(event) {
-      const {email, pass} = this.state;
-      const {onSignInButtonClick} = this.props;
+      const { email, pass } = this.state;
+      const { onSignInButtonClick } = this.props;
 
       event.preventDefault();
       this.setState({
@@ -68,11 +80,6 @@ const withAuthorizationState = (Component) => {
       }
     }
   }
-
-  WithAuthorizationState.propTypes = {
-    onSignInButtonClick: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
-  };
 
   return WithAuthorizationState;
 };

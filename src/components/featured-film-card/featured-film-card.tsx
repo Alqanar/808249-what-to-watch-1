@@ -1,5 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+
+import MovieMasterData from "../movie-master-data/movie-master-data"
+import { Film } from "../../types";
+
+
+interface IProps {
+  featuredFilm: Film
+};
 
 const createPoster = (name, posterLink) => {
   return (
@@ -9,57 +16,20 @@ const createPoster = (name, posterLink) => {
   );
 };
 
-const createButtonsForMovieData = () => {
-  return (
-    <div className="movie-card__buttons">
-      <button className="btn btn--play movie-card__button" type="button">
-        <svg viewBox="0 0 19 19" width="19" height="19">
-          <use xlinkHref="#play-s"/>
-        </svg>
-        <span>Play</span>
-      </button>
-      <button className="btn btn--list movie-card__button" type="button">
-        <svg viewBox="0 0 19 20" width="19" height="20">
-          <use xlinkHref="#add"/>
-        </svg>
-        <span>My list</span>
-      </button>
-    </div>
-  );
-};
-
-const createMovieData = (name, genre, year) => {
-  return (
-    <div className="movie-card__desc">
-      <h2 className="movie-card__title">{name}</h2>
-      <p className="movie-card__meta">
-        <span className="movie-card__genre">{genre}</span>
-        <span className="movie-card__year">{year}</span>
-      </p>
-
-      {createButtonsForMovieData()}
-    </div>
-  );
-};
-
-const FeaturedFilmCard = (props) => {
-  const {featuredFilm: {name, posterLink, genre, year}} = props;
+const FeaturedFilmCard: React.FC<IProps> = (props) => {
+  const { featuredFilm: { name, posterLink, genre, released } } = props;
 
   return (
     <div className="movie-card__info">
       {createPoster(name, posterLink)}
-      {createMovieData(name, genre, year)}
+
+      <MovieMasterData
+        name={name}
+        genre={genre}
+        year={released}
+      />
     </div>
   );
-};
-
-FeaturedFilmCard.propTypes = {
-  featuredFilm: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    posterLink: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired
-  })
 };
 
 export default FeaturedFilmCard;
