@@ -11,6 +11,7 @@ const createAPI = (onLoginFail) => {
   });
 
   const onSuccess = (response) => response;
+
   const onFail = (err) => {
     if (err.status === 403) {
       onLoginFail();

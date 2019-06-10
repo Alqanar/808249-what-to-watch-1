@@ -6,13 +6,14 @@ import { compose } from "recompose";
 
 const withPrivateRoute = (Component) => {
   interface IProps {
-    userId: number
+    userId: number,
+    needAuth: boolean
   };
   const WithPrivateRoute: React.FC<IProps> = (props) => {
-    const { userId } = props;
+    const { userId, needAuth } = props;
     const isAutharisation = Boolean(userId);
 
-    return isAutharisation ? (
+    return isAutharisation && !needAuth ? (
       <Component
         {...props}
       />
@@ -28,6 +29,7 @@ const withPrivateRoute = (Component) => {
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
   userId: state.authorization.user.id,
+  needAuth: state.authorization.needAuth
 });
 
 const composedWithPrivateRoute = compose(

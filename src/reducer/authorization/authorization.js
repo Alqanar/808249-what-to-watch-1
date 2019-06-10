@@ -4,14 +4,41 @@ const initialState = {
     email: ``,
     name: ``,
     avatarUrl: ``
-  }
+  },
+  needAuth: false
 };
 
 const ActionType = {
-  SET_USER: `SET_USER`
+  EMPTY_ACTION: `EMPTY_ACTION`,
+  SET_USER: `SET_USER`,
+  SET_NEED_AUTH: `SET_NEED_AUTH`,
+  RESET: `RESET`
 };
 
 const ActionCreator = {
+
+  executeEmptyAction: () => ({
+    type: ActionType.EMPTY_ACTION
+  }),
+
+  reset: () => ({
+    type: ActionType.RESET
+  }),
+
+  restoreUser: () => {
+    if (localStorage) {
+      const userData = localStorage.getItem(`user`);
+      if (userData) {
+        return ActionCreator.setUser(JSON.parse(userData));
+      }
+    }
+    return ActionCreator.executeEmptyAction();
+  },
+
+  setNeedAuth: (flag) => ({
+    type: ActionType.SET_NEED_AUTH,
+    payload: flag
+  }),
 
   setUser: (userObject) => ({
     type: ActionType.SET_USER,
@@ -25,6 +52,14 @@ const ActionCreator = {
 };
 
 const Operation = {
+  invalidateUser: () => (dispatch) => {
+    if (localStorage) {
+      localStorage.removeItem(`user`);
+    }
+    dispatch(ActionCreator.reset());
+    dispatch(ActionCreator.setNeedAuth(true));
+  },
+
   requestAuthorization: (login, password) => (dispatch, _, api) => {
     return api.post(`/login`, {
       email: login,
@@ -32,6 +67,9 @@ const Operation = {
     })
     .then((response) => {
       dispatch(ActionCreator.setUser(response.data));
+      if (localStorage) {
+        localStorage.setItem(`user`, JSON.stringify(response.data));
+      }
     });
   }
 };
@@ -42,9 +80,18 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_USER:
       return {
         ...state,
-        user: action.payload,
-        isAuthorizationRequired: false,
-        isAuthPage: false
+        user: action.payload
+      };
+
+    case ActionType.SET_NEED_AUTH:
+      return {
+        ...state,
+        needAuth: action.payload
+      };
+
+    case ActionType.RESET:
+      return {
+        ...initialState
       };
 
     default:

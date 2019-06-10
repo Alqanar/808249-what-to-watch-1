@@ -6,20 +6,19 @@ import MainPage from "../main-page/main-page";
 import SignInPage from "../sign-in-page/sign-in-page";
 import withAuthorizationState from "../../hocs/with-authorization-state";
 import FavouritePage from "../favourite-page/favourite-page";
-import { Operation } from "../../reducer/authorization/authorization.js";
+import { Operation, ActionCreator } from "../../reducer/authorization/authorization.js";
 import { getGenresList } from "../../reducer/movie/selectors.js";
 import composedWithPrivateRoute from "../../hocs/with-private-route";
-import {
-  featuredFilm
-} from "../../mocks/mock-data.js";
+import { featuredFilm } from "../../mocks/mock-data.js";
 import { Film } from "../../types.js";
 
 
 interface IProps {
-  signIn: (email: string, pass: string) => Promise<void>,
   avatarLink: string,
+  genresList: string[],
+  reseteNeedAuth: () => void,
+  signIn: (email: string, pass: string) => Promise<void>,
   userId: string,
-  genresList: string[]
 };
 
 const SignInPageWrapped = withAuthorizationState(SignInPage);
@@ -83,12 +82,13 @@ class App extends React.PureComponent<IProps, null> {
   }
 
   _renderSignInPage({ history }) {
-    const { signIn } = this.props;
+    const { signIn, reseteNeedAuth } = this.props;
 
     return (
       <SignInPageWrapped
         onSignInButtonClick={signIn}
         history={history}
+        onMount={reseteNeedAuth}
       />
     );
   }
@@ -96,6 +96,7 @@ class App extends React.PureComponent<IProps, null> {
 
 const mapDispatchToProps = (dispatch) => ({
   signIn: (email, pass) => dispatch(Operation.requestAuthorization(email, pass)),
+  resetNeedAuth: () => dispatch(ActionCreator.setNeedAuth(false))
 });
 
 const mapStateToProps = (state, ownProps) => ({

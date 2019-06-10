@@ -11,13 +11,19 @@ import App from "./components/app/app";
 import reducer from "./reducer/reducer.js";
 import { Operation } from "./reducer/movie/movie.js";
 import createAPI from "./api.js";
+import {
+  ActionCreator,
+  Operation as AuthOperation
+} from "./reducer/authorization/authorization.js";
 
+
+let store;
 
 declare const __REDUX_DEVTOOLS_EXTENSION__: () => any;
 
-const api = createAPI(() => history.pushState(null, null, `/login`));
+const api = createAPI(() => store.dispatch(AuthOperation.invalidateUser()));
 
-const store = createStore(
+store = createStore(
   reducer,
   compose(
     applyMiddleware(
@@ -29,6 +35,7 @@ const store = createStore(
 );
 
 store.dispatch(Operation.loadFilms());
+store.dispatch(ActionCreator.restoreUser());
 
 ReactDOM.render(
   <Provider store={store}>

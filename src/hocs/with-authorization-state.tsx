@@ -5,7 +5,8 @@ import { History } from "history";
 const withAuthorizationState = (Component) => {
   interface IProps {
     onSignInButtonClick: (email: string, pass: string) => Promise<void>,
-    history: History
+    history: History,
+    onMount?: () => void
   };
 
   interface IState {
