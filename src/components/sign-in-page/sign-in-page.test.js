@@ -6,19 +6,19 @@ import SignInPage from "./sign-in-page.tsx";
 
 
 it(`Sign In page correctly renders`, () => {
-  const tree = renderer
-    .create(<BrowserRouter>
-      <SignInPage
-        email=""
-        pass=""
-        onEmailInputChange={() => {}}
-        onPassInputChange={() => {}}
-        onSignInButtonClick={() => {}}
-        isErrorEmail={false}
-        isErrorPass={false}
-      />
-    </BrowserRouter>)
-    .toJSON();
+    const tree = renderer
+        .create(<BrowserRouter>
+            <SignInPage
+                email=""
+                pass=""
+                onEmailInputChange={() => {}}
+                onPassInputChange={() => {}}
+                onSignInButtonClick={() => {}}
+                isErrorEmail={false}
+                isErrorPass={false}
+            />
+        </BrowserRouter>)
+        .toJSON();
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
 });

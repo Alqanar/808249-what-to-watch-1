@@ -4,18 +4,29 @@ env:
   commonjs: true
   jest: true
 
-extends: ['htmlacademy/es6', 'plugin:react/recommended']
+extends: [
+  'htmlacademy/es6',
+  'plugin:react/recommended',
+  'plugin:@typescript-eslint/recommended',
+]
 
 parserOptions:
   ecmaFeatures:
-    jsx: true
     experimentalObjectRestSpread: true
   ecmaVersion: 6
   sourceType: module
+  project: './tsconfig.json'
 
-plugins: ['react']
+parser: '@typescript-eslint/parser'
+
+plugins: ['@typescript-eslint', 'react']
 
 settings:
+  'import/ignore': ['node_modules']
   react:
     version: '16'
+
+rules:
+  '@typescript-eslint/interface-name-prefix': [2, 'always']
+  'react/prop-types': 0
     

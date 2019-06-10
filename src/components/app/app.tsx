@@ -1,111 +1,111 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { Switch, Route } from "react-router-dom";
+import {connect} from "react-redux";
+import {Switch, Route} from "react-router-dom";
 
 import MainPage from "../main-page/main-page";
 import SignInPage from "../sign-in-page/sign-in-page";
 import withAuthorizationState from "../../hocs/with-authorization-state";
 import FavouritePage from "../favourite-page/favourite-page";
-import { Operation, ActionCreator } from "../../reducer/authorization/authorization.js";
-import { getGenresList } from "../../reducer/movie/selectors.js";
+import {Operation, ActionCreator} from "../../reducer/authorization/authorization.js";
+import {getGenresList} from "../../reducer/movie/selectors.js";
 import composedWithPrivateRoute from "../../hocs/with-private-route";
-import { featuredFilm } from "../../mocks/mock-data.js";
-import { Film } from "../../types.js";
+import {featuredFilm} from "../../mocks/mock-data.js";
+import {Film} from "../../types.js";
 
 
 interface IProps {
-  avatarLink: string,
-  genresList: string[],
-  reseteNeedAuth: () => void,
-  signIn: (email: string, pass: string) => Promise<void>,
-  userId: string,
-};
+    avatarLink: string;
+    genresList: string[];
+    reseteNeedAuth: () => void;
+    signIn: (email: string, pass: string) => Promise<void>;
+    userId: string;
+}
 
 const SignInPageWrapped = withAuthorizationState(SignInPage);
 const FavouritePageWrapped = composedWithPrivateRoute(FavouritePage);
 
 class App extends React.PureComponent<IProps, null> {
-  constructor(props) {
-    super(props);
+    public constructor(props) {
+        super(props);
 
-    this._getMovieCard = this._getMovieCard.bind(this);
-    this._renderMainPage = this._renderMainPage.bind(this);
-    this._renderSignInPage = this._renderSignInPage.bind(this);
-    this._renderFavouritePage = this._renderFavouritePage.bind(this);
-  }
+        this.getMovieCard = this.getMovieCard.bind(this);
+        this.renderMainPage = this.renderMainPage.bind(this);
+        this.renderSignInPage = this.renderSignInPage.bind(this);
+        this.renderFavouritePage = this.renderFavouritePage.bind(this);
+    }
 
-  render() {
-    return (
-      <Switch>
-        <Route path="/" exact render={this._renderMainPage} />
-        <Route path="/login" render={this._renderSignInPage} />
-        <Route path="/favorites" render={this._renderFavouritePage} />
-      </Switch>
-    );
-  }
+    public render(): React.ReactElement {
+        return (
+            <Switch>
+                <Route path="/" exact render={this.renderMainPage} />
+                <Route path="/login" render={this.renderSignInPage} />
+                <Route path="/favorites" render={this.renderFavouritePage} />
+            </Switch>
+        );
+    }
 
-  _getMovieCard(movieCard: Film): Film {
-    return movieCard;
-  }
+    private getMovieCard(movieCard: Film): Film {
+        return movieCard;
+    }
 
-  _renderFavouritePage() {
-    const {
-      avatarLink,
-      userId
-    } = this.props;
+    private renderFavouritePage(): React.ReactElement {
+        const {
+            avatarLink,
+            userId
+        } = this.props;
 
-    return (
-      <FavouritePageWrapped
-        avatarLink={avatarLink}
-        isAuth={Boolean(userId)}
-        onClick={this._getMovieCard}
-      />
-    );
-  }
+        return (
+            <FavouritePageWrapped
+                avatarLink={avatarLink}
+                isAuth={Boolean(userId)}
+                onClick={this.getMovieCard}
+            />
+        );
+    }
 
-  _renderMainPage() {
-    const {
-      avatarLink,
-      userId,
-      genresList
-    } = this.props;
+    private renderMainPage(): React.ReactElement {
+        const {
+            avatarLink,
+            userId,
+            genresList
+        } = this.props;
 
-    return (
-      <MainPage
-        avatarLink={avatarLink}
-        featuredFilm={featuredFilm}
-        genres={genresList}
-        onClick={this._getMovieCard}
-        isAuth={Boolean(userId)}
-      />
-    );
-  }
+        return (
+            <MainPage
+                avatarLink={avatarLink}
+                featuredFilm={featuredFilm}
+                genres={genresList}
+                onClick={this.getMovieCard}
+                isAuth={Boolean(userId)}
+            />
+        );
+    }
 
-  _renderSignInPage({ history }) {
-    const { signIn, reseteNeedAuth } = this.props;
+    private renderSignInPage({history}): React.ReactElement {
+        const {signIn, reseteNeedAuth} = this.props;
 
-    return (
-      <SignInPageWrapped
-        onSignInButtonClick={signIn}
-        history={history}
-        onMount={reseteNeedAuth}
-      />
-    );
-  }
+        return (
+            <SignInPageWrapped
+                onSignInButtonClick={signIn}
+                history={history}
+                onMount={reseteNeedAuth}
+            />
+        );
+    }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  signIn: (email, pass) => dispatch(Operation.requestAuthorization(email, pass)),
-  resetNeedAuth: () => dispatch(ActionCreator.setNeedAuth(false))
+const mapDispatchToProps = (dispatch): object => ({
+    signIn: (email, pass): Promise<void> => dispatch(Operation.requestAuthorization(email, pass)),
+    resetNeedAuth: (): void => dispatch(ActionCreator.setNeedAuth(false))
 });
 
-const mapStateToProps = (state, ownProps) => ({
-  ...ownProps,
-  avatarLink: state.authorization.user.avatarUrl,
-  userId: state.authorization.user.id,
-  genresList: getGenresList(state)
+const mapStateToProps = (state, ownProps): void => ({
+    ...ownProps,
+    avatarLink: state.authorization.user.avatarUrl,
+    userId: state.authorization.user.id,
+    genresList: getGenresList(state)
 });
 
-export { App };
+export {App};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

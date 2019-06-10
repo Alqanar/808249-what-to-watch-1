@@ -8,83 +8,83 @@ import {App} from "./app.tsx";
 
 
 const films = [
-  {
-    id: `0`,
-    name: `The Aftermath`,
-    posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_1000125.jpg`,
-    trailer: `https://youtu.be/FPv3e2FZOgo`
-  },
-  {
-    id: `1`,
-    name: `The Professor and the Madman`,
-    posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg`,
-    trailer: `https://youtu.be/ESYU-bkmxuI`
-  },
-  {
-    id: `2`,
-    name: `Five Feet Apart`,
-    posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_1151373.jpg`,
-    trailer: `https://youtu.be/XtgCqMZofqM`
-  }
+    {
+        id: `0`,
+        name: `The Aftermath`,
+        posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_1000125.jpg`,
+        trailer: `https://youtu.be/FPv3e2FZOgo`
+    },
+    {
+        id: `1`,
+        name: `The Professor and the Madman`,
+        posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg`,
+        trailer: `https://youtu.be/ESYU-bkmxuI`
+    },
+    {
+        id: `2`,
+        name: `Five Feet Apart`,
+        posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_1151373.jpg`,
+        trailer: `https://youtu.be/XtgCqMZofqM`
+    }
 ];
 
 const testInitialState = {
-  movie: {
-    genre: `All genres`,
-    films
-  }
+    movie: {
+        genre: `All genres`,
+        films
+    }
 };
 
 const genres = [
-  `All genres`,
-  `Comedies`,
-  `Crime`,
-  `Documentary`,
-  `Dramas`,
-  `Horror`,
-  `Kids & Family`,
-  `Romance`,
-  `Sci-Fi`,
-  `Thrillers`
+    `All genres`,
+    `Comedies`,
+    `Crime`,
+    `Documentary`,
+    `Dramas`,
+    `Horror`,
+    `Kids & Family`,
+    `Romance`,
+    `Sci-Fi`,
+    `Thrillers`
 ];
 
 
 describe(`App correctly renders`, () => {
-  it(`when isAuthorizationRequired = false renders Main Page`, () => {
-    const tree = renderer
-      .create(
-          <Provider store={createStore(() => testInitialState)}>
-            <BrowserRouter>
-              <App
-                signIn={() => {}}
-                avatarLink="img/avatar.jpg"
-                userId={null}
-                genresList={genres}
-              />
-            </BrowserRouter>
-          </Provider>
-      )
-      .toJSON();
+    it(`when isAuthorizationRequired = false renders Main Page`, () => {
+        const tree = renderer
+            .create(
+                <Provider store={createStore(() => testInitialState)}>
+                    <BrowserRouter>
+                        <App
+                            signIn={() => {}}
+                            avatarLink="img/avatar.jpg"
+                            userId={null}
+                            genresList={genres}
+                        />
+                    </BrowserRouter>
+                </Provider>
+            )
+            .toJSON();
 
-    expect(tree).toMatchSnapshot();
-  });
+        expect(tree).toMatchSnapshot();
+    });
 
-  it(`when isAuthorizationRequired = true renders Sign In Page`, () => {
-    const tree = renderer
-      .create(
-          <Provider store={createStore(() => testInitialState)}>
-            <BrowserRouter>
-              <App
-                signIn={() => {}}
-                avatarLink="img/avatar.jpg"
-                userId={null}
-                genresList={genres}
-              />
-            </BrowserRouter>
-          </Provider>
-      )
-      .toJSON();
+    it(`when isAuthorizationRequired = true renders Sign In Page`, () => {
+        const tree = renderer
+            .create(
+                <Provider store={createStore(() => testInitialState)}>
+                    <BrowserRouter>
+                        <App
+                            signIn={() => {}}
+                            avatarLink="img/avatar.jpg"
+                            userId={null}
+                            genresList={genres}
+                        />
+                    </BrowserRouter>
+                </Provider>
+            )
+            .toJSON();
 
-    expect(tree).toMatchSnapshot();
-  });
+        expect(tree).toMatchSnapshot();
+    });
 });

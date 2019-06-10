@@ -5,6 +5,6 @@ import {reducer as movie} from "./movie/movie.js";
 
 
 export default combineReducers({
-  authorization,
-  movie
+    authorization,
+    movie
 });
