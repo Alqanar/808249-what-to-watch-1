@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Logo from "./logo.jsx";
+import Logo from "./logo.tsx";
 
 
 it(`Logo correctly renders`, () => {

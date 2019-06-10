@@ -2,7 +2,7 @@ export const featuredFilmMock = {
   name: `Avengers: Endgame`,
   coverLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`,
   posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`,
-  genre: `Sci-Fi`,
+  genre: [`Sci-Fi`],
   released: `2019`
 };
 

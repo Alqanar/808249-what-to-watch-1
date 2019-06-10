@@ -3,7 +3,7 @@ import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {BrowserRouter} from "react-router-dom";
 
-import {withPrivateRoute} from "./with-private-route.jsx";
+import {withPrivateRoute} from "./with-private-route.tsx";
 
 Enzyme.configure({adapter: new Adapter()});
 

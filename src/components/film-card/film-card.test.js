@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import FilmCard from "./film-card.jsx";
+
+import FilmCard from "./film-card.tsx";
 
 
 const film = {

@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {BrowserRouter} from "react-router-dom";
 
-import SignInPage from "./sign-in-page.jsx";
+import SignInPage from "./sign-in-page.tsx";
 
 
 it(`Sign In page correctly renders`, () => {

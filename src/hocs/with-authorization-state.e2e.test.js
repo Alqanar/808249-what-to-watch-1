@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import withAuthorizationState from "./with-authorization-state.jsx";
+import withAuthorizationState from "./with-authorization-state.tsx";
 
 Enzyme.configure({adapter: new Adapter()});
 

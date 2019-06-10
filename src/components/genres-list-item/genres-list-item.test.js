@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import GenresListItem from "./genres-list-item.jsx";
+import GenresListItem from "./genres-list-item.tsx";
 
 
 it(`Genres list item correctly renders`, () => {

@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Sprite from "./sprite.jsx";
+
+import Sprite from "./sprite.tsx";
 
 
 it(`Sprite correctly renders`, () => {

@@ -1,7 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import UserBlock from "./user-block.jsx";
 import {BrowserRouter} from "react-router-dom";
+
+import UserBlock from "./user-block.tsx";
 
 
 describe(`User block correctly renders`, () => {

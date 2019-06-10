@@ -4,7 +4,7 @@ import {Provider} from "react-redux";
 import {createStore} from "redux";
 import {BrowserRouter} from "react-router-dom";
 
-import MainPage from "./main-page.jsx";
+import MainPage from "./main-page.tsx";
 import {
   featuredFilmMock,
   genresMock,
