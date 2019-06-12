@@ -2,11 +2,11 @@ import {createSelector} from "reselect";
 
 
 const getGenre = (state) => (
-  state.movie.genre
+    state.movie.genre
 );
 
 const getFilms = (state) => (
-  state.movie.films
+    state.movie.films
 );
 
 export const getFilterFilms = createSelector(
@@ -15,12 +15,12 @@ export const getFilterFilms = createSelector(
     getFilms,
 
     (selectedGenre, filmsList) => {
-      if (selectedGenre === `All genres`) {
-        return filmsList;
-      }
-      return filmsList.filter((film) =>
-        film.genre.some((filmGenre) =>
-          filmGenre === selectedGenre));
+        if (selectedGenre === `All genres`) {
+            return filmsList;
+        }
+        return filmsList.filter((film) =>
+            film.genre.some((filmGenre) =>
+                filmGenre === selectedGenre));
     }
 );
 
@@ -28,8 +28,8 @@ export const getGenresList = createSelector(
     getFilms,
 
     (filmsList) => {
-      return [`All genres`, ...new Set(filmsList.reduce(function (acc, film) {
-        return [...acc, ...film.genre];
-      }, []))];
+        return [`All genres`, ...new Set(filmsList.reduce(function (acc, film) {
+            return [...acc, ...film.genre];
+        }, []))];
     }
 );

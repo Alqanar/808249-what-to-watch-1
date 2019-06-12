@@ -1,13 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Logo from "./logo.jsx";
+import Logo from "./logo.tsx";
 
 
 it(`Logo correctly renders`, () => {
-  const tree = renderer
-    .create(<Logo />)
-    .toJSON();
+    const tree = renderer
+        .create(<Logo />)
+        .toJSON();
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
 });

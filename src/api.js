@@ -4,23 +4,24 @@ import axios from "axios";
 const TIMEOUT = 5000;
 
 const createAPI = (onLoginFail) => {
-  const api = axios.create({
-    baseURL: `https://es31-server.appspot.com/wtw`,
-    timeout: TIMEOUT,
-    withCredentials: true,
-  });
+    const api = axios.create({
+        baseURL: `https://es31-server.appspot.com/wtw`,
+        timeout: TIMEOUT,
+        withCredentials: true,
+    });
 
-  const onSuccess = (response) => response;
-  const onFail = (err) => {
-    if (err.status === 403) {
-      onLoginFail();
-    }
-    return err;
-  };
+    const onSuccess = (response) => response;
 
-  api.interceptors.response.use(onSuccess, onFail);
+    const onFail = (err) => {
+        if (err.status === 403) {
+            onLoginFail();
+        }
+        return err;
+    };
 
-  return api;
+    api.interceptors.response.use(onSuccess, onFail);
+
+    return api;
 };
 
 export default createAPI;
