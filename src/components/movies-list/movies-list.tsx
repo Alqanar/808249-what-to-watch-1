@@ -8,40 +8,40 @@ import {Film} from "../../types";
 
 
 interface IProps {
-    films: Film[];
-    onClick: () => Film;
-    isMainPage: boolean;
+  films: Film[];
+  onClick: () => Film;
+  isMainPage: boolean;
 }
 
 class MoviesList extends React.PureComponent<IProps, null> {
-    public constructor(props) {
-        super(props);
-    }
+  public constructor(props) {
+    super(props);
+  }
 
-    public render(): React.ReactElement {
-        const {films, onClick, isMainPage} = this.props;
-        const list = isMainPage ? films : moviesListMock;
-        const filmsList = list.map((film): React.ReactElement => (
-            <FilmCard
-                movie={film}
-                key={film.id}
-                onClick={onClick}
-                isMainPage={isMainPage}
-            />
-        ));
+  public render(): React.ReactElement {
+    const {films, onClick, isMainPage} = this.props;
+    const list = isMainPage ? films : moviesListMock;
+    const filmsList = list.map((film): React.ReactElement => (
+      <FilmCard
+        movie={film}
+        key={film.id}
+        onClick={onClick}
+        isMainPage={isMainPage}
+      />
+    ));
 
-        return (
-            <div className="catalog__movies-list">
-                {filmsList}
-            </div>
-        );
-    }
+    return (
+      <div className="catalog__movies-list">
+        {filmsList}
+      </div>
+    );
+  }
 }
 
 
 const mapStateToProps = (state, ownProps): void => ({
-    ...ownProps,
-    films: getFilterFilms(state)
+  ...ownProps,
+  films: getFilterFilms(state)
 });
 
 export {MoviesList};

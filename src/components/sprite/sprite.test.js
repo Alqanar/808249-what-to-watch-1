@@ -5,9 +5,9 @@ import Sprite from "./sprite.tsx";
 
 
 it(`Sprite correctly renders`, () => {
-    const tree = renderer
-        .create(<Sprite />)
-        .toJSON();
+  const tree = renderer
+    .create(<Sprite />)
+    .toJSON();
 
-    expect(tree).toMatchSnapshot();
+  expect(tree).toMatchSnapshot();
 });

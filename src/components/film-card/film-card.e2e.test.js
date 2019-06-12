@@ -8,41 +8,41 @@ import FilmCard from "./film-card.tsx";
 Enzyme.configure({adapter: new Adapter()});
 
 const film = {
-    id: `0`,
-    name: `Avengers: Endgame`,
-    posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`,
-    trailer: `https://youtu.be/TcMBFSGVi1c`
+  id: `0`,
+  name: `Avengers: Endgame`,
+  posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`,
+  trailer: `https://youtu.be/TcMBFSGVi1c`
 };
 
 it(`Clicking on the card will trigger a callback`, () => {
-    const clickHandler = jest.fn();
-    const filmCard = shallow(<FilmCard
-        movie={film}
-        key={0}
-        onClick={clickHandler}
-        isMainPage={true}
-    />);
+  const clickHandler = jest.fn();
+  const filmCard = shallow(<FilmCard
+    movie={film}
+    key={0}
+    onClick={clickHandler}
+    isMainPage={true}
+  />);
 
-    const card = filmCard.find(`.catalog__movies-card`);
+  const card = filmCard.find(`.catalog__movies-card`);
 
 
-    card.simulate(`click`, {preventDefault() {}});
+  card.simulate(`click`, {preventDefault() {}});
 
-    expect(clickHandler).toHaveBeenCalledTimes(1);
+  expect(clickHandler).toHaveBeenCalledTimes(1);
 });
 
 it(`Clicking on the card will transfer the active card`, () => {
-    const clickHandler = jest.fn();
-    const filmCard = shallow(<FilmCard
-        movie={film}
-        key={0}
-        onClick={clickHandler}
-        isMainPage={true}
-    />);
+  const clickHandler = jest.fn();
+  const filmCard = shallow(<FilmCard
+    movie={film}
+    key={0}
+    onClick={clickHandler}
+    isMainPage={true}
+  />);
 
-    const card = filmCard.find(`.catalog__movies-card`);
+  const card = filmCard.find(`.catalog__movies-card`);
 
-    card.simulate(`click`, {preventDefault() {}});
+  card.simulate(`click`, {preventDefault() {}});
 
-    expect(clickHandler).toHaveBeenCalledWith(film);
+  expect(clickHandler).toHaveBeenCalledWith(film);
 });

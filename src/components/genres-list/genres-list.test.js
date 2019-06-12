@@ -5,26 +5,26 @@ import {GenresList} from "./genres-list.tsx";
 
 
 const genres = [
-    `All genres`,
-    `Comedies`,
-    `Crime`,
-    `Documentary`,
-    `Dramas`,
-    `Horror`,
-    `Kids & Family`,
-    `Romance`,
-    `Sci-Fi`,
-    `Thrillers`
+  `All genres`,
+  `Comedies`,
+  `Crime`,
+  `Documentary`,
+  `Dramas`,
+  `Horror`,
+  `Kids & Family`,
+  `Romance`,
+  `Sci-Fi`,
+  `Thrillers`
 ];
 
 it(`Genres list correctly renders`, () => {
-    const tree = renderer
-        .create(<GenresList
-            genres={genres}
-            activeGenre="Dramas"
-            onSetGenre={() => {}}
-        />)
-        .toJSON();
+  const tree = renderer
+    .create(<GenresList
+      genres={genres}
+      activeGenre="Dramas"
+      onSetGenre={() => {}}
+    />)
+    .toJSON();
 
-    expect(tree).toMatchSnapshot();
+  expect(tree).toMatchSnapshot();
 });

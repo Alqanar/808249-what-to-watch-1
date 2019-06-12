@@ -7,7 +7,7 @@ env:
 extends: [
   'htmlacademy/es6',
   'plugin:react/recommended',
-  'plugin:@typescript-eslint/recommended',
+  'plugin:@typescript-eslint/recommended'
 ]
 
 parserOptions:
@@ -29,4 +29,5 @@ settings:
 rules:
   '@typescript-eslint/interface-name-prefix': [2, 'always']
   'react/prop-types': 0
+  '@typescript-eslint/indent': ['error', 2]
     

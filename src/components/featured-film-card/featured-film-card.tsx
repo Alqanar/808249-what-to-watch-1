@@ -5,31 +5,31 @@ import {Film} from "../../types";
 
 
 interface IProps {
-    featuredFilm: Film;
+  featuredFilm: Film;
 }
 
 const createPoster = (name, posterLink): React.ReactElement => {
-    return (
-        <div className="movie-card__poster">
-            <img src={posterLink} alt={`${name} poster`} width="218" height="327" />
-        </div>
-    );
+  return (
+    <div className="movie-card__poster">
+      <img src={posterLink} alt={`${name} poster`} width="218" height="327" />
+    </div>
+  );
 };
 
 const FeaturedFilmCard: React.FC<IProps> = (props): React.ReactElement => {
-    const {featuredFilm: {name, posterLink, genre, released}} = props;
+  const {featuredFilm: {name, posterLink, genre, released}} = props;
 
-    return (
-        <div className="movie-card__info">
-            {createPoster(name, posterLink)}
+  return (
+    <div className="movie-card__info">
+      {createPoster(name, posterLink)}
 
-            <MovieMasterData
-                name={name}
-                genre={genre}
-                year={released}
-            />
-        </div>
-    );
+      <MovieMasterData
+        name={name}
+        genre={genre}
+        year={released}
+      />
+    </div>
+  );
 };
 
 export default FeaturedFilmCard;

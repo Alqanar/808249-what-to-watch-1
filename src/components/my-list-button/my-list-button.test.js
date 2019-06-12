@@ -5,9 +5,9 @@ import MyListButton from "./my-list-button.tsx";
 
 
 it(`My list button correctly renders`, () => {
-    const tree = renderer
-        .create(<MyListButton />)
-        .toJSON();
+  const tree = renderer
+    .create(<MyListButton />)
+    .toJSON();
 
-    expect(tree).toMatchSnapshot();
+  expect(tree).toMatchSnapshot();
 });
