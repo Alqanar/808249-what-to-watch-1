@@ -4,12 +4,12 @@ import {connect} from "react-redux";
 import FilmCard from "../film-card/film-card";
 import {getFilterFilms} from "../../reducer/movie/selectors.js";
 import {moviesListMock} from "../main-page/test-mock-data.js";
-import {Film} from "../../types";
+import {IFilm} from "../../types";
 
 
 interface IProps {
-  films: Film[];
-  onClick: () => Film;
+  films: IFilm[];
+  onClick: () => IFilm;
   isMainPage: boolean;
 }
 

@@ -10,7 +10,7 @@ import {Operation, ActionCreator} from "../../reducer/authorization/authorizatio
 import {getGenresList} from "../../reducer/movie/selectors.js";
 import composedWithPrivateRoute from "../../hocs/with-private-route";
 import {featuredFilm} from "../../mocks/mock-data.js";
-import {Film} from "../../types.js";
+import {IFilm} from "../../types.js";
 
 
 interface IProps {
@@ -32,6 +32,7 @@ class App extends React.PureComponent<IProps, null> {
     this.renderMainPage = this.renderMainPage.bind(this);
     this.renderSignInPage = this.renderSignInPage.bind(this);
     this.renderFavouritePage = this.renderFavouritePage.bind(this);
+    this.renderFilm = this.renderFilm.bind(this);
   }
 
   public render(): React.ReactElement {
@@ -40,11 +41,12 @@ class App extends React.PureComponent<IProps, null> {
         <Route path="/" exact render={this.renderMainPage} />
         <Route path="/login" render={this.renderSignInPage} />
         <Route path="/favorites" render={this.renderFavouritePage} />
+        <Route path="/film/:id" render={this.renderFilm} />
       </Switch>
     );
   }
 
-  private getMovieCard(movieCard: Film): Film {
+  private getMovieCard(movieCard: IFilm): IFilm {
     return movieCard;
   }
 
@@ -59,6 +61,18 @@ class App extends React.PureComponent<IProps, null> {
         avatarLink={avatarLink}
         isAuth={Boolean(userId)}
         onClick={this.getMovieCard}
+      />
+    );
+  }
+
+  private renderFilm(): React.ReactElement {
+    const {signIn, reseteNeedAuth} = this.props;
+
+    return (
+      <SignInPageWrapped
+        onSignInButtonClick={signIn}
+        history={history}
+        onMount={reseteNeedAuth}
       />
     );
   }

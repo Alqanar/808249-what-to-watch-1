@@ -10,12 +10,26 @@ const featuredFilm = {
   released: `2019`
 };
 
-it(`Movie card ifo correctly renders`, () => {
-  const tree = renderer
-    .create(<FeaturedFilmCard
-      featuredFilm={featuredFilm}
-    />)
-    .toJSON();
+describe(`Featured film card correctly renders`, () => {
+  it(`when needVanish not passed renders div wrapper`, () => {
+    const tree = renderer
+      .create(<FeaturedFilmCard
+        featuredFilm={featuredFilm}
+        className={`movie-card__info`}
+      />)
+      .toJSON();
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`when needVanish not passed renders without wrapper`, () => {
+    const tree = renderer
+      .create(<FeaturedFilmCard
+        featuredFilm={featuredFilm}
+        needVanish
+      />)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });

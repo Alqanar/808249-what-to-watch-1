@@ -1,13 +1,13 @@
 import * as React from "react";
 
-import {Film} from "../../types";
+import {IFilm} from "../../types";
 
 
 const VIDEO_WIDTH = `280`;
 const VIDEO_HEIGHT = `175`;
 
 interface IProps {
-  film: Film;
+  film: IFilm;
 }
 
 type Ref = HTMLVideoElement

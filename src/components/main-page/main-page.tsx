@@ -8,14 +8,14 @@ import FeaturedFilmCard from "../featured-film-card/featured-film-card";
 import MoviesList from "../movies-list/movies-list";
 import GenresList from "../genres-list/genres-list";
 import Footer from "../footer/footer";
-import {Film} from "../../types";
+import {IFilm} from "../../types";
 
 
 interface IProps {
   avatarLink: string;
-  featuredFilm: Film;
+  featuredFilm: IFilm;
   genres: string[];
-  onClick: (movie: Film) => Film;
+  onClick: (movie: IFilm) => IFilm;
   isAuth: boolean;
 }
 
@@ -57,6 +57,7 @@ const MainPage: React.FC<IProps> = (props): React.ReactElement => {
         <div className="movie-card__wrap">
           <FeaturedFilmCard
             featuredFilm={featuredFilm}
+            className={`movie-card__info`}
           />
         </div>
       </section>

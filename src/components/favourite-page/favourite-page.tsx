@@ -5,13 +5,13 @@ import Logo from "../logo/logo";
 import UserBlock from "../user-block/user-block";
 import MoviesList from "../movies-list/movies-list";
 import Footer from "../footer/footer";
-import {Film} from "../../types";
+import {IFilm} from "../../types";
 
 
 interface IProps {
   avatarLink: string;
   isAuth: boolean;
-  onClick: () => Film;
+  onClick: () => IFilm;
 }
 
 const FavouritePage: React.FC<IProps> = (props): React.ReactElement => {

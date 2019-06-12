@@ -1,15 +1,15 @@
 import * as React from "react";
 
 import VideoPlayer from "../video-player/video-player";
-import {Film} from "../../types";
+import {IFilm} from "../../types";
 
 
 const IMG_WIDTH = `280`;
 const IMG_HEIGHT = `175`;
 
 interface IProps {
-  movie: Film;
-  onClick: (movie: Film) => Film;
+  movie: IFilm;
+  onClick: (movie: IFilm) => IFilm;
   isMainPage: boolean;
 }
 

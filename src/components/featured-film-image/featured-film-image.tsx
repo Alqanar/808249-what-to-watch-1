@@ -1,8 +1,8 @@
 import * as React from "react";
-import {Film} from "../../types";
+import {IFilm} from "../../types";
 
 interface IProps {
-  film: Film;
+  film: IFilm;
 }
 
 const FeaturedFilmImage: React.FC<IProps> = (props): React.ReactElement => {

@@ -1,34 +1,52 @@
 import * as React from "react";
 
+import ShakyWrapper from "../shaky-wrapper/shaky-wrapper";
+import FilmPoster from "../film-poster/film-poster";
 import MovieMasterData from "../movie-master-data/movie-master-data";
-import {Film} from "../../types";
+import {IFilm} from "../../types";
 
 
 interface IProps {
-  featuredFilm: Film;
+  featuredFilm: IFilm;
+  needVanish?: boolean;
+  className?: string;
+  needReview?: boolean;
 }
 
-const createPoster = (name, posterLink): React.ReactElement => {
-  return (
-    <div className="movie-card__poster">
-      <img src={posterLink} alt={`${name} poster`} width="218" height="327" />
-    </div>
-  );
-};
-
 const FeaturedFilmCard: React.FC<IProps> = (props): React.ReactElement => {
-  const {featuredFilm: {name, posterLink, genre, released}} = props;
+  const {
+    featuredFilm: {
+      name,
+      posterLink,
+      genre,
+      released
+    },
+    needVanish,
+    className,
+    needReview
+  } = props;
 
   return (
-    <div className="movie-card__info">
-      {createPoster(name, posterLink)}
+    <ShakyWrapper
+      needVanish={needVanish}
+      className={className}
+    >
+      <>
+        {needVanish ? `` :
+          <FilmPoster
+            name={name}
+            posterLink={posterLink}
+          />
+        }
 
-      <MovieMasterData
-        name={name}
-        genre={genre}
-        year={released}
-      />
-    </div>
+        <MovieMasterData
+          name={name}
+          genre={genre}
+          year={released}
+          needReview={needReview}
+        />
+      </>
+    </ShakyWrapper>
   );
 };
 
