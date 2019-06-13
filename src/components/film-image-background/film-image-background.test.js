@@ -1,10 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import FeaturedFilmImage from "./featured-film-image.tsx";
+import FilmImageBackground from "./film-image-background";
 
 
-const featuredFilmMock = {
+const filmMock = {
   name: `Avengers: Endgame`,
   coverLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`,
   posterLink: `https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`,
@@ -15,8 +15,8 @@ const featuredFilmMock = {
 it(`Image of the featured film correctly renders`, () => {
   const tree = renderer
     .create(
-      <FeaturedFilmImage
-        film={featuredFilmMock}
+      <FilmImageBackground
+        film={filmMock}
       />
     )
     .toJSON();

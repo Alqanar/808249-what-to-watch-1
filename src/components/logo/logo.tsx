@@ -22,11 +22,11 @@ const Logo: React.FC<IProps> = (props): React.ReactElement => {
   return (
     <div className="logo">
       <LinkType to={hrefLink} className={`logo__link ${className}`}>
-              <>
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </>
+        <>
+          <span className="logo__letter logo__letter--1">W</span>
+          <span className="logo__letter logo__letter--2">T</span>
+          <span className="logo__letter logo__letter--3">W</span>
+        </>
       </LinkType>
     </div>
   );

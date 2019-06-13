@@ -5,7 +5,7 @@ import {createStore, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
 import {compose} from "recompose";
 import logger from 'redux-logger';
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 
 import App from "./components/app/app";
 import reducer from "./reducer/reducer.js";
@@ -15,6 +15,7 @@ import {
   ActionCreator,
   Operation as AuthOperation
 } from "./reducer/authorization/authorization.js";
+import history from "./history";
 
 
 let store;
@@ -39,9 +40,9 @@ store.dispatch(ActionCreator.restoreUser());
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById(`root`)
 );

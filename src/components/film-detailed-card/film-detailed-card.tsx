@@ -7,17 +7,17 @@ import {IFilm} from "../../types";
 
 
 interface IProps {
-  featuredFilm: IFilm;
+  film: IFilm;
   needVanish?: boolean;
   className?: string;
   needReview?: boolean;
 }
 
-const FeaturedFilmCard: React.FC<IProps> = (props): React.ReactElement => {
+const FilmDetailedCard: React.FC<IProps> = (props): React.ReactElement => {
   const {
-    featuredFilm: {
+    film: {
       name,
-      posterLink,
+      posterImage,
       genre,
       released
     },
@@ -35,7 +35,7 @@ const FeaturedFilmCard: React.FC<IProps> = (props): React.ReactElement => {
         {needVanish ? `` :
           <FilmPoster
             name={name}
-            posterLink={posterLink}
+            posterImage={posterImage}
           />
         }
 
@@ -50,4 +50,4 @@ const FeaturedFilmCard: React.FC<IProps> = (props): React.ReactElement => {
   );
 };
 
-export default FeaturedFilmCard;
+export default FilmDetailedCard;

@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const detailsItem = (parameter: string, value: React.ReactElement): React.ReactElement => (
-  <p className="movie-card__details-item">
+  <p className="movie-card__details-item" key={parameter}>
     <strong className="movie-card__details-name">{parameter}</strong>
     <span className="movie-card__details-value">{value}</span>
   </p>
@@ -27,10 +27,10 @@ const DetailsTab: React.FC<IProps> = (props): React.ReactElement => {
   const {film: {director, starring, duration, genre, released}} = props;
 
   const starList = starring.map((name): React.ReactElement => (
-      <>
-        {`${name},`}
-        <br />
-      </>
+    <React.Fragment key={name}>
+      {`${name},`}
+      <br />
+    </React.Fragment>
   ));
 
   return (

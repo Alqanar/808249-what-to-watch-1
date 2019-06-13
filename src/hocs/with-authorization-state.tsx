@@ -1,10 +1,10 @@
 import * as React from "react";
-import {History} from "history";
+
+import history from "../history";
 
 
 interface IProps {
   onSignInButtonClick: (email: string, pass: string) => Promise<void>;
-  history: History;
   onMount?: () => void;
 }
 
@@ -74,7 +74,7 @@ function withAuthorizationState<T>(Component: React.ComponentType<T>): React.Com
       if (email && pass) {
         onSignInButtonClick(email, pass)
           .then((): void => {
-            this.props.history.push(`/`);
+            history.push(`/`);
           });
       } else {
         this.setState({

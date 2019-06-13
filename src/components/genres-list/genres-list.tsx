@@ -25,7 +25,8 @@ class GenresList extends React.PureComponent<IProps, null> {
         key={i}
         isActive={activeGenre === name}
         onGenreClick={onSetGenre}
-      />);
+      />
+    );
 
     return (
       <ul className="catalog__genres-list">

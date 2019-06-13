@@ -17,3 +17,16 @@ export interface IFilm {
   starring: string[];
   videoLink: string;
 }
+
+interface IUser {
+  id: number;
+  name: string;
+}
+
+export interface IReview {
+  id: number;
+  user: IUser;
+  rating: number;
+  comment: string;
+  date: string;
+}

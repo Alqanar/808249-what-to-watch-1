@@ -1,35 +1,37 @@
 import * as React from "react";
 import {Route, NavLink} from "react-router-dom";
 
-import OverviewTab from "../overview-tab/overview-tab";
 import DetailsTab from "../details-tab/details-tab";
+import OverviewTab from "../overview-tab/overview-tab";
+import ReviewsTab from "../reviews-tab/reviews-tab";
 import {IFilm} from "../../types";
 
 const NAVIGATION_FIELDS = [
   {
-    link: `/`,
+    link: ``,
     name: `Overview`
   },
   {
-    link: `/details`,
+    link: `details`,
     name: `Details`
   },
   {
-    link: `/reviews`,
+    link: `reviews`,
     name: `Reviews`
   }
-]
+];
 
 
 interface IProps {
   film: IFilm;
 }
 
-const createNavigationItem = (link, name): React.ReactElement => {
+const createNavigationItem = (id: string, link: string, name: string): React.ReactElement => {
   return (
     <li className="movie-nav__item" key={link + name}>
       <NavLink
-        to={`/film/:id${link}`}
+        to={`/film/${id}/${link}`}
+        className="movie-nav__link"
         activeClassName="movie-nav__item--active"
       >
         {name}
@@ -38,27 +40,20 @@ const createNavigationItem = (link, name): React.ReactElement => {
   );
 };
 
-function Reviews ({match}) {
-  return (
-    <div>
-      <h3>Reviews</h3>
-    </div>
-  );
-}
-
 class FilmCardNavigation extends React.PureComponent<IProps, null> {
   public constructor(props) {
     super(props);
 
-    this.getMovieCard = this.getMovieCard.bind(this);
     this.renderOverviewTab = this.renderOverviewTab.bind(this);
     this.renderDetailsTab = this.renderDetailsTab.bind(this);
-    this.renderFavouritePage = this.renderFavouritePage.bind(this);
+    this.renderReviewsTab = this.renderReviewsTab.bind(this);
   }
 
   public render(): React.ReactElement {
+    const {film} = this.props;
+
     const navigationList = NAVIGATION_FIELDS.map(({link, name}): React.ReactElement =>
-      createNavigationItem(name, link)
+      createNavigationItem(film.id, link, name)
     );
 
     return (
@@ -70,8 +65,18 @@ class FilmCardNavigation extends React.PureComponent<IProps, null> {
         </nav>
         <Route path="/film/:id/" exact render={this.renderOverviewTab} />
         <Route path="/film/:id/details" render={this.renderDetailsTab} />
-        <Route path="/film/:id/reviews" component={Reviews} />
+        <Route path="/film/:id/reviews" render={this.renderReviewsTab} />
       </div>
+    );
+  }
+
+  private renderDetailsTab(): React.ReactElement {
+    const {film} = this.props;
+
+    return (
+      <DetailsTab
+        film={film}
+      />
     );
   }
 
@@ -85,11 +90,11 @@ class FilmCardNavigation extends React.PureComponent<IProps, null> {
     );
   }
 
-  private renderDetailsTab(): React.ReactElement {
+  private renderReviewsTab(): React.ReactElement {
     const {film} = this.props;
 
     return (
-      <DetailsTab
+      <ReviewsTab
         film={film}
       />
     );

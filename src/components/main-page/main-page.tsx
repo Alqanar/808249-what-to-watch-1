@@ -1,10 +1,6 @@
 import * as React from "react";
 
-import Sprite from "../sprite/sprite";
-import FeaturedFilmImage from "../featured-film-image/featured-film-image";
-import Logo from "../logo/logo";
-import UserBlock from "../user-block/user-block";
-import FeaturedFilmCard from "../featured-film-card/featured-film-card";
+import FilmCardDetails from "../film-card-details/film-card-details";
 import MoviesList from "../movies-list/movies-list";
 import GenresList from "../genres-list/genres-list";
 import Footer from "../footer/footer";
@@ -15,7 +11,7 @@ interface IProps {
   avatarLink: string;
   featuredFilm: IFilm;
   genres: string[];
-  onClick: (movie: IFilm) => IFilm;
+  onClick: (movie: IFilm) => void;
   isAuth: boolean;
 }
 
@@ -38,29 +34,13 @@ const MainPage: React.FC<IProps> = (props): React.ReactElement => {
 
   return (
     <>
-      <Sprite />
-      <section className="movie-card">
-        <FeaturedFilmImage
-          film={featuredFilm}
-        />
-
-        <h1 className="visually-hidden">WTW</h1>
-
-        <header className="page-header movie-card__head">
-          <Logo />
-          <UserBlock
-            avatarLink={avatarLink}
-            isAuth={isAuth}
-          />
-        </header>
-
-        <div className="movie-card__wrap">
-          <FeaturedFilmCard
-            featuredFilm={featuredFilm}
-            className={`movie-card__info`}
-          />
-        </div>
-      </section>
+      <FilmCardDetails
+        isShort
+        avatarLink={avatarLink}
+        film={featuredFilm}
+        isAuth={isAuth}
+        className={`movie-card__info`}
+      />
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>

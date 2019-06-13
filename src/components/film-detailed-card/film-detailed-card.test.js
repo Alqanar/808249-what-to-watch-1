@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import FeaturedFilmCard from "./featured-film-card.tsx";
+import FilmDetailedCard from "./film-detailed-card.tsx";
 
 const featuredFilm = {
   name: `Avengers: Endgame`,
@@ -13,7 +13,7 @@ const featuredFilm = {
 describe(`Featured film card correctly renders`, () => {
   it(`when needVanish not passed renders div wrapper`, () => {
     const tree = renderer
-      .create(<FeaturedFilmCard
+      .create(<FilmDetailedCard
         featuredFilm={featuredFilm}
         className={`movie-card__info`}
       />)
@@ -24,7 +24,7 @@ describe(`Featured film card correctly renders`, () => {
 
   it(`when needVanish not passed renders without wrapper`, () => {
     const tree = renderer
-      .create(<FeaturedFilmCard
+      .create(<FilmDetailedCard
         featuredFilm={featuredFilm}
         needVanish
       />)

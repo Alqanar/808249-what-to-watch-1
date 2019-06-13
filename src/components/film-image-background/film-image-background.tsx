@@ -5,7 +5,7 @@ interface IProps {
   film: IFilm;
 }
 
-const FeaturedFilmImage: React.FC<IProps> = (props): React.ReactElement => {
+const FilmImageBackground: React.FC<IProps> = (props): React.ReactElement => {
   const {name, coverLink} = props.film;
 
   return (
@@ -15,4 +15,4 @@ const FeaturedFilmImage: React.FC<IProps> = (props): React.ReactElement => {
   );
 };
 
-export default FeaturedFilmImage;
+export default FilmImageBackground;

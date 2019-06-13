@@ -6,16 +6,16 @@ const HEIGHT_IMG = `327`;
 
 interface IProps {
   name: string;
-  posterLink: string;
+  posterImage: string;
   isBig?: boolean;
 }
 
 const FilmPoster: React.FC<IProps> = (props): React.ReactElement => {
-  const {name, posterLink, isBig} = props;
+  const {name, posterImage, isBig} = props;
 
   return (
     <div className={`movie-card__poster ${isBig ? `movie-card__poster--big` : ``}`}>
-      <img src={posterLink} alt={`${name} poster`} width={WIDTH_IMG} height={HEIGHT_IMG} />
+      <img src={posterImage} alt={`${name} poster`} width={WIDTH_IMG} height={HEIGHT_IMG} />
     </div>
   );
 };

@@ -2,15 +2,18 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {Switch, Route} from "react-router-dom";
 
-import MainPage from "../main-page/main-page";
-import SignInPage from "../sign-in-page/sign-in-page";
-import withAuthorizationState from "../../hocs/with-authorization-state";
 import FavouritePage from "../favourite-page/favourite-page";
-import {Operation, ActionCreator} from "../../reducer/authorization/authorization.js";
-import {getGenresList} from "../../reducer/movie/selectors.js";
+import MainPage from "../main-page/main-page";
+import FilmPage from "../film-page/film-page";
+import SignInPage from "../sign-in-page/sign-in-page";
+
 import composedWithPrivateRoute from "../../hocs/with-private-route";
-import {featuredFilm} from "../../mocks/mock-data.js";
+import history from "../../history";
+import withAuthorizationState from "../../hocs/with-authorization-state";
+import {getGenresList} from "../../reducer/movie/selectors.js";
 import {IFilm} from "../../types.js";
+import {featuredFilm} from "../../mocks/mock-data.js";
+import {Operation, ActionCreator} from "../../reducer/authorization/authorization.js";
 
 
 interface IProps {
@@ -19,6 +22,7 @@ interface IProps {
   reseteNeedAuth: () => void;
   signIn: (email: string, pass: string) => Promise<void>;
   userId: string;
+  allFilms: IFilm[];
 }
 
 const SignInPageWrapped = withAuthorizationState(SignInPage);
@@ -28,11 +32,11 @@ class App extends React.PureComponent<IProps, null> {
   public constructor(props) {
     super(props);
 
-    this.getMovieCard = this.getMovieCard.bind(this);
+    this.goToFilmPage = this.goToFilmPage.bind(this);
     this.renderMainPage = this.renderMainPage.bind(this);
     this.renderSignInPage = this.renderSignInPage.bind(this);
     this.renderFavouritePage = this.renderFavouritePage.bind(this);
-    this.renderFilm = this.renderFilm.bind(this);
+    this.renderFilmPage = this.renderFilmPage.bind(this);
   }
 
   public render(): React.ReactElement {
@@ -41,13 +45,13 @@ class App extends React.PureComponent<IProps, null> {
         <Route path="/" exact render={this.renderMainPage} />
         <Route path="/login" render={this.renderSignInPage} />
         <Route path="/favorites" render={this.renderFavouritePage} />
-        <Route path="/film/:id" render={this.renderFilm} />
+        <Route path="/film/:id" render={this.renderFilmPage} />
       </Switch>
     );
   }
 
-  private getMovieCard(movieCard: IFilm): IFilm {
-    return movieCard;
+  private goToFilmPage(movieCard: IFilm): void {
+    history.push(`/film/${movieCard.id}`);
   }
 
   private renderFavouritePage(): React.ReactElement {
@@ -60,19 +64,22 @@ class App extends React.PureComponent<IProps, null> {
       <FavouritePageWrapped
         avatarLink={avatarLink}
         isAuth={Boolean(userId)}
-        onClick={this.getMovieCard}
+        onClick={this.goToFilmPage}
       />
     );
   }
 
-  private renderFilm(): React.ReactElement {
-    const {signIn, reseteNeedAuth} = this.props;
+  private renderFilmPage({match: {params: {id}}}): React.ReactElement {
+    const {
+      avatarLink,
+      userId
+    } = this.props;
 
     return (
-      <SignInPageWrapped
-        onSignInButtonClick={signIn}
-        history={history}
-        onMount={reseteNeedAuth}
+      <FilmPage
+        avatarLink={avatarLink}
+        film={this.getChosenFilm(id)}
+        isAuth={Boolean(userId)}
       />
     );
   }
@@ -89,22 +96,26 @@ class App extends React.PureComponent<IProps, null> {
         avatarLink={avatarLink}
         featuredFilm={featuredFilm}
         genres={genresList}
-        onClick={this.getMovieCard}
+        onClick={this.goToFilmPage}
         isAuth={Boolean(userId)}
       />
     );
   }
 
-  private renderSignInPage({history}): React.ReactElement {
+  private renderSignInPage(): React.ReactElement {
     const {signIn, reseteNeedAuth} = this.props;
 
     return (
       <SignInPageWrapped
         onSignInButtonClick={signIn}
-        history={history}
         onMount={reseteNeedAuth}
       />
     );
+  }
+
+  private getChosenFilm(filmId: string): IFilm {
+    const {allFilms} = this.props;
+    return allFilms.find((film: IFilm): boolean => film.id === filmId);
   }
 }
 
@@ -117,7 +128,8 @@ const mapStateToProps = (state, ownProps): void => ({
   ...ownProps,
   avatarLink: state.authorization.user.avatarUrl,
   userId: state.authorization.user.id,
-  genresList: getGenresList(state)
+  genresList: getGenresList(state),
+  allFilms: state.movie.films
 });
 
 export {App};
