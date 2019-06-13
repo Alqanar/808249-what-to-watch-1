@@ -20,9 +20,10 @@ import history from "./history";
 
 let store;
 
-declare const __REDUX_DEVTOOLS_EXTENSION__: () => any;
-
 const api = createAPI((): void => store.dispatch(AuthOperation.invalidateUser()));
+
+const returnArg = <T extends any>(a: T): T => a;
+const reduxDevToolsMiddleware = window[`__REDUX_DEVTOOLS_EXTENSION__`] || returnArg;
 
 store = createStore(
   reducer,
@@ -31,7 +32,7 @@ store = createStore(
       logger,
       thunk.withExtraArgument(api)
     ),
-    __REDUX_DEVTOOLS_EXTENSION__ && __REDUX_DEVTOOLS_EXTENSION__()
+    reduxDevToolsMiddleware
   )
 );
 
