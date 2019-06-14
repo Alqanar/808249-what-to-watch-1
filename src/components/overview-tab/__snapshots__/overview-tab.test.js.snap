@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Overview tab is correctly renders 1`] = `
+Array [
+  <div
+    className="movie-rating"
+  >
+    <div
+      className="movie-rating__score"
+    >
+      8.8
+    </div>
+    <p
+      className="movie-rating__meta"
+    >
+      <span
+        className="movie-rating__level"
+      >
+        Very good
+      </span>
+      <span
+        className="movie-rating__count"
+      >
+        441946 ratings
+      </span>
+    </p>
+  </div>,
+  <div
+    className="movie-card__text"
+  >
+    <p>
+      After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to undo Thanos' actions and restore order to the universe.
+    </p>
+    <p
+      className="movie-card__director"
+    >
+      <strong>
+        Director: Russo brothers
+      </strong>
+    </p>
+    <p
+      className="movie-card__starring"
+    >
+      <strong>
+        Starring: Robert Downey Jr., Chris Hemsworth, Mark Ruffalo
+      </strong>
+    </p>
+  </div>,
+]
+`;
