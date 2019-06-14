@@ -1,4 +1,4 @@
-import transformFilmObject from "../transformFilmObject.js"
+import transformFilmObject from "../transformFilmObject.js";
 
 
 const featuredFilmFromServer = {

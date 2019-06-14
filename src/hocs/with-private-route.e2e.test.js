@@ -1,9 +1,10 @@
 import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 
 import {withPrivateRoute} from "./with-private-route.tsx";
+import history from "../history.ts";
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -18,11 +19,11 @@ const MockComponentWrapped = withPrivateRoute(MockComponent);
 describe(`withPrivateRoute works correctly`, () => {
   it(`if the autharisation true we see component page`, () => {
     const wrapper = mount(
-      <BrowserRouter>
+      <Router history={history}>
         <MockComponentWrapped
           userId={123}
         />
-      </BrowserRouter>
+      </Router>
     );
 
     const container = wrapper.find(`.new-page`);
@@ -32,11 +33,11 @@ describe(`withPrivateRoute works correctly`, () => {
 
   it(`if the autharisation true we see component page`, () => {
     const wrapper = mount(
-      <BrowserRouter>
+      <Router history={history}>
         <MockComponentWrapped
           userId={undefined}
         />
-      </BrowserRouter>
+      </Router>
     );
 
     expect(wrapper.html()).toBeFalsy();

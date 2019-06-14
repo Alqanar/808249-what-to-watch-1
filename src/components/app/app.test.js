@@ -2,9 +2,10 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import {createStore} from "redux";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 
 import {App} from "./app.tsx";
+import history from "../../history.ts";
 
 
 const films = [
@@ -54,14 +55,14 @@ describe(`App correctly renders`, () => {
     const tree = renderer
       .create(
         <Provider store={createStore(() => testInitialState)}>
-          <BrowserRouter>
+          <Router history={history}>
             <App
               signIn={() => {}}
               avatarLink="img/avatar.jpg"
               userId={null}
               genresList={genres}
             />
-          </BrowserRouter>
+          </Router>
         </Provider>
       )
       .toJSON();
@@ -73,14 +74,14 @@ describe(`App correctly renders`, () => {
     const tree = renderer
       .create(
         <Provider store={createStore(() => testInitialState)}>
-          <BrowserRouter>
+          <Router history={history}>
             <App
               signIn={() => {}}
               avatarLink="img/avatar.jpg"
               userId={null}
               genresList={genres}
             />
-          </BrowserRouter>
+          </Router>
         </Provider>
       )
       .toJSON();

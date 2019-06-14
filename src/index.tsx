@@ -23,7 +23,8 @@ let store;
 const api = createAPI((): void => store.dispatch(AuthOperation.invalidateUser()));
 
 const returnArg = <T extends any>(a: T): T => a;
-const reduxDevToolsMiddleware = window[`__REDUX_DEVTOOLS_EXTENSION__`] || returnArg;
+const createReturnArg = (): typeof returnArg => returnArg;
+const reduxDevToolsMiddleware = window[`__REDUX_DEVTOOLS_EXTENSION__`] || createReturnArg;
 
 store = createStore(
   reducer,
@@ -32,7 +33,7 @@ store = createStore(
       logger,
       thunk.withExtraArgument(api)
     ),
-    reduxDevToolsMiddleware
+    reduxDevToolsMiddleware()
   )
 );
 

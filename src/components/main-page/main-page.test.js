@@ -2,8 +2,9 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import {createStore} from "redux";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 
+import history from "../../history.ts";
 import MainPage from "./main-page.tsx";
 import {
   featuredFilmMock,
@@ -23,14 +24,14 @@ it(`Main page correctly renders`, () => {
   const tree = renderer
     .create(
       <Provider store={createStore(() => testInitialState)}>
-        <BrowserRouter>
+        <Router history={history}>
           <MainPage
             avatarLink='img/avatar.jpg'
             featuredFilm={featuredFilmMock}
             genres={genresMock}
             isAuth={false}
           />
-        </BrowserRouter>
+        </Router>
       </Provider>
     )
     .toJSON();

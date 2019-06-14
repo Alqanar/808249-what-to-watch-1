@@ -116,7 +116,12 @@ Array [
     </svg>
   </div>,
   <section
-    className="movie-card"
+    className="movie-card "
+    style={
+      Object {
+        "background": "#e1b0b2",
+      }
+    }
   >
     <div
       className="movie-card__bg"
@@ -176,7 +181,7 @@ Array [
         className="movie-card__info"
       >
         <div
-          className="movie-card__poster"
+          className="movie-card__poster "
         >
           <img
             alt="The Grand Budapest Hotel poster"
@@ -199,7 +204,7 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Drama
+              Comedy
             </span>
             <span
               className="movie-card__year"
@@ -633,7 +638,12 @@ Array [
     </svg>
   </div>,
   <section
-    className="movie-card"
+    className="movie-card "
+    style={
+      Object {
+        "background": "#e1b0b2",
+      }
+    }
   >
     <div
       className="movie-card__bg"
@@ -693,7 +703,7 @@ Array [
         className="movie-card__info"
       >
         <div
-          className="movie-card__poster"
+          className="movie-card__poster "
         >
           <img
             alt="The Grand Budapest Hotel poster"
@@ -716,7 +726,7 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Drama
+              Comedy
             </span>
             <span
               className="movie-card__year"
