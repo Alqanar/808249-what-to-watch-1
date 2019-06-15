@@ -4,26 +4,29 @@ import MovieCardButtons from "../movie-card-buttons/movie-card-buttons";
 
 
 interface IProps {
-    name: string;
-    genre: string[];
-    year: number;
+  name: string;
+  genre: string[];
+  year: number;
+  needReview?: boolean;
 }
 
 const MovieMasterData: React.FC<IProps> = (props): React.ReactElement => {
-    const {name, genre, year} = props;
+  const {name, genre, year, needReview} = props;
 
-    return (
-        <div className="movie-card__desc">
-            <h2 className="movie-card__title">{name}</h2>
-            <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre.join(`, `)}</span>
-                <span className="movie-card__year">{year}</span>
-            </p>
+  return (
+    <div className="movie-card__desc">
+      <h2 className="movie-card__title">{name}</h2>
+      <p className="movie-card__meta">
+        <span className="movie-card__genre">{genre.join(`, `)}</span>
+        <span className="movie-card__year">{year}</span>
+      </p>
 
-            <MovieCardButtons />
+      <MovieCardButtons
+        needReview={needReview}
+      />
 
-        </div>
-    );
+    </div>
+  );
 };
 
 export default MovieMasterData;

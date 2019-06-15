@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Poster of the film correctly renders when isBig not passed div render with class 'movie-card__poster' 1`] = `
+<div
+  className="movie-card__poster "
+>
+  <img
+    alt="Avengers: Endgame poster"
+    height="327"
+    width="218"
+  />
+</div>
+`;
+
+exports[`Poster of the film correctly renders when isBig passed div render with classes 'movie-card__poster' and 'movie-card__poster--big' 1`] = `
+<div
+  className="movie-card__poster movie-card__poster--big"
+>
+  <img
+    alt="Avengers: Endgame poster"
+    height="327"
+    width="218"
+  />
+</div>
+`;

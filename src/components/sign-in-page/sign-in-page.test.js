@@ -1,24 +1,27 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 
 import SignInPage from "./sign-in-page.tsx";
+import history from "../../history.ts";
 
 
 it(`Sign In page correctly renders`, () => {
-    const tree = renderer
-        .create(<BrowserRouter>
-            <SignInPage
-                email=""
-                pass=""
-                onEmailInputChange={() => {}}
-                onPassInputChange={() => {}}
-                onSignInButtonClick={() => {}}
-                isErrorEmail={false}
-                isErrorPass={false}
-            />
-        </BrowserRouter>)
-        .toJSON();
+  const tree = renderer
+    .create(
+      <Router history={history}>
+        <SignInPage
+          email=""
+          pass=""
+          onEmailInputChange={() => {}}
+          onPassInputChange={() => {}}
+          onSignInButtonClick={() => {}}
+          isErrorEmail={false}
+          isErrorPass={false}
+        />
+      </Router>
+    )
+    .toJSON();
 
-    expect(tree).toMatchSnapshot();
+  expect(tree).toMatchSnapshot();
 });

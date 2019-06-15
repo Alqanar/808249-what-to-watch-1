@@ -5,9 +5,9 @@ import Logo from "./logo.tsx";
 
 
 it(`Logo correctly renders`, () => {
-    const tree = renderer
-        .create(<Logo />)
-        .toJSON();
+  const tree = renderer
+    .create(<Logo />)
+    .toJSON();
 
-    expect(tree).toMatchSnapshot();
+  expect(tree).toMatchSnapshot();
 });

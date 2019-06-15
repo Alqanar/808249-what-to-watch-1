@@ -116,7 +116,12 @@ Array [
     </svg>
   </div>,
   <section
-    className="movie-card"
+    className="movie-card "
+    style={
+      Object {
+        "background": "#c5abd5",
+      }
+    }
   >
     <div
       className="movie-card__bg"
@@ -176,12 +181,12 @@ Array [
         className="movie-card__info"
       >
         <div
-          className="movie-card__poster"
+          className="movie-card__poster "
         >
           <img
             alt="Avengers: Endgame poster"
             height="327"
-            src="https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg"
+            src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SY1000_CR0,0,674,1000_AL_.jpg"
             width="218"
           />
         </div>
@@ -422,7 +427,7 @@ Array [
               loop={true}
               muted={true}
               poster="https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg"
-              src="https://youtu.be/ESYU-bkmxuI"
+              src="https://youtu.be/FPv3e2FZOgo"
               width="280"
             />
           </div>

@@ -5,9 +5,9 @@ import MovieCardButtons from "./movie-card-buttons.tsx";
 
 
 it(`Movie card buttons correctly renders`, () => {
-    const tree = renderer
-        .create(<MovieCardButtons />)
-        .toJSON();
+  const tree = renderer
+    .create(<MovieCardButtons />)
+    .toJSON();
 
-    expect(tree).toMatchSnapshot();
+  expect(tree).toMatchSnapshot();
 });

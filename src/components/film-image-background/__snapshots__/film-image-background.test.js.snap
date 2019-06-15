@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image of the featured film correctly renders 1`] = `
+<div
+  className="movie-card__bg"
+>
+  <img
+    alt="Avengers: Endgame"
+    src="https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg"
+  />
+</div>
+`;
