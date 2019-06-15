@@ -49,7 +49,7 @@ const MainPage: React.FC<IProps> = (props): React.ReactElement => {
           />
           <MoviesList
             onClick={onClick}
-            isMainPage={true}
+            useAllFilms={true}
           />
           {createButtonShowMore()}
         </section>

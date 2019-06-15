@@ -28,7 +28,7 @@ it(`Movie list correctly renders`, () => {
   const tree = renderer
     .create(<MoviesList
       films={films}
-      isMainPage={true}
+      useAllFilms={true}
     />)
     .toJSON();
 

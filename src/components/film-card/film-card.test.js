@@ -12,24 +12,24 @@ const film = {
 };
 
 describe(`Film card correctly renders`, () => {
-  it(`when isMainPage true`, () => {
+  it(`when useAllFilms true`, () => {
     const tree = renderer
       .create(<FilmCard
         movie={film}
         key={0}
-        isMainPage={true}
+        useAllFilms={true}
       />)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
-  it(`when isMainPage false`, () => {
+  it(`when useAllFilms false`, () => {
     const tree = renderer
       .create(<FilmCard
         movie={film}
         key={0}
-        isMainPage={false}
+        useAllFilms={false}
       />)
       .toJSON();
 

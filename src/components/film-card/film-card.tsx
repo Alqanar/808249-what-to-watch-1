@@ -9,8 +9,8 @@ const IMG_HEIGHT = `175`;
 
 interface IProps {
   movie: IFilm;
-  onClick: (movie: IFilm) => IFilm;
-  isMainPage: boolean;
+  onClick: (movie: IFilm) => void;
+  useAllFilms: boolean;
 }
 
 class FilmCard extends React.PureComponent<IProps, null> {
@@ -26,20 +26,20 @@ class FilmCard extends React.PureComponent<IProps, null> {
   }
 
   public render(): React.ReactElement {
-    const {movie, movie: {name, posterLink}, isMainPage} = this.props;
+    const {movie, movie: {name, posterLink}, useAllFilms} = this.props;
 
     return (
       <article
         onClick={this.handleCardClick}
-        onMouseEnter={isMainPage ? this.handleCardMouseEnter : undefined}
-        onMouseLeave={isMainPage ? this.handleCardMouseLeave : undefined}
+        onMouseEnter={useAllFilms ? this.handleCardMouseEnter : undefined}
+        onMouseLeave={useAllFilms ? this.handleCardMouseLeave : undefined}
         className="small-movie-card catalog__movies-card"
       >
-        {isMainPage ? `` : (
+        {useAllFilms ? `` : (
           <button className="small-movie-card__play-btn" type="button">Play</button>
         )}
         <div className="small-movie-card__image">
-          {isMainPage ? (
+          {useAllFilms ? (
             <VideoPlayer
               ref={this.videoRef}
               film={movie}

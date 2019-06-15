@@ -9,8 +9,11 @@ import {IFilm} from "../../types";
 
 interface IProps {
   films: IFilm[];
-  onClick: () => IFilm;
-  isMainPage: boolean;
+  onClick: (films: IFilm) => void;
+  useAllFilms: boolean;
+  fiteredGenre?: string[];
+  limit?: number;
+  excludeFilmId?: string;
 }
 
 class MoviesList extends React.PureComponent<IProps, null> {
@@ -19,22 +22,47 @@ class MoviesList extends React.PureComponent<IProps, null> {
   }
 
   public render(): React.ReactElement {
-    const {films, onClick, isMainPage} = this.props;
-    const list = isMainPage ? films : moviesListMock;
-    const filmsList = list.map((film): React.ReactElement => (
-      <FilmCard
-        movie={film}
-        key={film.id}
-        onClick={onClick}
-        isMainPage={isMainPage}
-      />
-    ));
-
     return (
       <div className="catalog__movies-list">
-        {filmsList}
+        {this.filmsList}
       </div>
     );
+  }
+
+  private get filmsList(): React.ReactElement {
+    const {
+      films,
+      onClick,
+      useAllFilms,
+      fiteredGenre,
+      limit,
+      excludeFilmId
+    } = this.props;
+
+    const list = useAllFilms ? films : moviesListMock;
+    const filmsLimit = limit ? limit : films.length;
+
+    return list
+      .filter(({id, genre}): boolean => {
+        if (id === excludeFilmId) {
+          return false;
+        }
+        if (!fiteredGenre) {
+          return true;
+        }
+        return genre
+          .some((item): boolean => fiteredGenre
+            .some((filtereGenreItem): boolean => item === filtereGenreItem));
+      })
+      .splice(0, filmsLimit)
+      .map((film): React.ReactElement => (
+        <FilmCard
+          movie={film}
+          key={film.id}
+          onClick={onClick}
+          useAllFilms={useAllFilms}
+        />
+      ));
   }
 }
 

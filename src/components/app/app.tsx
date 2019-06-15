@@ -80,6 +80,7 @@ class App extends React.PureComponent<IProps, null> {
         avatarLink={avatarLink}
         film={this.getChosenFilm(id)}
         isAuth={Boolean(userId)}
+        onClick={this.goToFilmPage}
       />
     );
   }

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Film card correctly renders when isMainPage false 1`] = `
+exports[`Film card correctly renders when useAllFilms false 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
   onClick={[Function]}
@@ -34,7 +34,7 @@ exports[`Film card correctly renders when isMainPage false 1`] = `
 </article>
 `;
 
-exports[`Film card correctly renders when isMainPage true 1`] = `
+exports[`Film card correctly renders when useAllFilms true 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
   onClick={[Function]}

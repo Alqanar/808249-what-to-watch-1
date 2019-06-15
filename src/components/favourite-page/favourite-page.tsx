@@ -11,7 +11,7 @@ import {IFilm} from "../../types";
 interface IProps {
   avatarLink: string;
   isAuth: boolean;
-  onClick: () => IFilm;
+  onClick: (film: IFilm) => void;
 }
 
 const FavouritePage: React.FC<IProps> = (props): React.ReactElement => {
@@ -39,7 +39,6 @@ const FavouritePage: React.FC<IProps> = (props): React.ReactElement => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <MoviesList
             onClick={onClick}
-            isMainPage={false}
           />
         </section>
         <Footer
