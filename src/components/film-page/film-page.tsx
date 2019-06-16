@@ -31,6 +31,10 @@ class FilmPage extends React.PureComponent<IProps, null> {
       onClick
     } = this.props;
 
+    if (!film) {
+      return <div></div>;
+    }
+
     return (
       <>
       <FilmCardDetails
