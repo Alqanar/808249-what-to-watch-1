@@ -14,6 +14,9 @@ interface IProps {
   fiteredGenre?: string[];
   limit?: number;
   excludeFilmId?: string;
+  onMoreButtonClick: () => void;
+  currentLength: number;
+  resetCurrentLength: () => void;
 }
 
 class MoviesList extends React.PureComponent<IProps, null> {
@@ -21,11 +24,26 @@ class MoviesList extends React.PureComponent<IProps, null> {
     super(props);
   }
 
+  public componentDidUpdate(oldProps: IProps): void {
+    const {films, resetCurrentLength} = this.props;
+
+    if (films.length !== oldProps.films.length) {
+      resetCurrentLength();
+    }
+  }
+
   public render(): React.ReactElement {
+    const {onMoreButtonClick, films, currentLength = films.length} = this.props;
+
     return (
-      <div className="catalog__movies-list">
-        {this.filmsList}
-      </div>
+      <>
+        <div className="catalog__movies-list">
+          {this.filmsList}
+        </div>
+        <div className={`catalog__more ${currentLength >= films.length ? `visually-hidden` : ``}`}>
+          <button onClick={onMoreButtonClick} className="catalog__button" type="button">Show more</button>
+        </div>
+      </>
     );
   }
 
@@ -36,11 +54,12 @@ class MoviesList extends React.PureComponent<IProps, null> {
       useAllFilms,
       fiteredGenre,
       limit,
-      excludeFilmId
+      excludeFilmId,
+      currentLength = films.length
     } = this.props;
 
     const list = useAllFilms ? films : moviesListMock;
-    const filmsLimit = limit ? limit : films.length;
+    const filmsLimit = limit ? limit : currentLength;
 
     return list
       .filter(({id, genre}): boolean => {

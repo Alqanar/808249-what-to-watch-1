@@ -5,8 +5,11 @@ import Logo from "../logo/logo";
 import UserBlock from "../user-block/user-block";
 import MoviesList from "../movies-list/movies-list";
 import Footer from "../footer/footer";
+import withPagination from "../../hocs/with-pagination";
 import {IFilm} from "../../types";
 
+
+const MoviesListWrapped = withPagination(MoviesList);
 
 interface IProps {
   avatarLink: string;
@@ -37,8 +40,9 @@ const FavouritePage: React.FC<IProps> = (props): React.ReactElement => {
         </header>
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <MoviesList
+          <MoviesListWrapped
             onClick={onClick}
+            useAllFilms={false}
           />
         </section>
         <Footer

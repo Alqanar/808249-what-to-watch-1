@@ -50,27 +50,8 @@ const genres = [
 ];
 
 
-describe(`App correctly renders`, () => {
-  it(`when isAuthorizationRequired = false renders Main Page`, () => {
-    const tree = renderer
-      .create(
-        <Provider store={createStore(() => testInitialState)}>
-          <Router history={history}>
-            <App
-              signIn={() => {}}
-              avatarLink="img/avatar.jpg"
-              userId={null}
-              genresList={genres}
-            />
-          </Router>
-        </Provider>
-      )
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`when isAuthorizationRequired = true renders Sign In Page`, () => {
+describe(`App`, () => {
+  it(`is correctly renders`, () => {
     const tree = renderer
       .create(
         <Provider store={createStore(() => testInitialState)}>
