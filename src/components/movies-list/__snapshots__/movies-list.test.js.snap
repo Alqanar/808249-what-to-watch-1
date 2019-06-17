@@ -1,98 +1,110 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Movie list correctly renders 1`] = `
-<div
-  className="catalog__movies-list"
->
-  <article
-    className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+Array [
+  <div
+    className="catalog__movies-list"
   >
-    
-    <div
-      className="small-movie-card__image"
+    <article
+      className="small-movie-card catalog__movies-card"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
-      <video
-        height="175"
-        loop={true}
-        muted={true}
-        poster="https://st.kp.yandex.net/images/film_iphone/iphone360_1000125.jpg"
-        src="https://youtu.be/FPv3e2FZOgo"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
+      
+      <div
+        className="small-movie-card__image"
       >
-        The Aftermath
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+        <video
+          height="175"
+          loop={true}
+          muted={true}
+          poster="https://st.kp.yandex.net/images/film_iphone/iphone360_1000125.jpg"
+          src="https://youtu.be/FPv3e2FZOgo"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          The Aftermath
+        </a>
+      </h3>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          height="175"
+          loop={true}
+          muted={true}
+          poster="https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg"
+          src="https://youtu.be/ESYU-bkmxuI"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          The Professor and the Madman
+        </a>
+      </h3>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          height="175"
+          loop={true}
+          muted={true}
+          poster="https://st.kp.yandex.net/images/film_iphone/iphone360_1151373.jpg"
+          src="https://youtu.be/XtgCqMZofqM"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          Five Feet Apart
+        </a>
+      </h3>
+    </article>
+  </div>,
+  <div
+    className="catalog__more visually-hidden"
   >
-    
-    <div
-      className="small-movie-card__image"
+    <button
+      className="catalog__button"
+      type="button"
     >
-      <video
-        height="175"
-        loop={true}
-        muted={true}
-        poster="https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg"
-        src="https://youtu.be/ESYU-bkmxuI"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-      >
-        The Professor and the Madman
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    
-    <div
-      className="small-movie-card__image"
-    >
-      <video
-        height="175"
-        loop={true}
-        muted={true}
-        poster="https://st.kp.yandex.net/images/film_iphone/iphone360_1151373.jpg"
-        src="https://youtu.be/XtgCqMZofqM"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-      >
-        Five Feet Apart
-      </a>
-    </h3>
-  </article>
-</div>
+      Show more
+    </button>
+  </div>,
+]
 `;

@@ -4,6 +4,7 @@ import FilmCardDetails from "../film-card-details/film-card-details";
 import MoviesList from "../movies-list/movies-list";
 import GenresList from "../genres-list/genres-list";
 import Footer from "../footer/footer";
+import withPagination from "../../hocs/with-pagination";
 import {IFilm} from "../../types";
 
 
@@ -15,13 +16,7 @@ interface IProps {
   isAuth: boolean;
 }
 
-const createButtonShowMore = (): React.ReactElement => {
-  return (
-    <div className="catalog__more">
-      <button className="catalog__button" type="button">Show more</button>
-    </div>
-  );
-};
+const MoviesListWrapped = withPagination(MoviesList);
 
 const MainPage: React.FC<IProps> = (props): React.ReactElement => {
   const {
@@ -47,11 +42,10 @@ const MainPage: React.FC<IProps> = (props): React.ReactElement => {
           <GenresList
             genres={genres}
           />
-          <MoviesList
+          <MoviesListWrapped
             onClick={onClick}
-            useAllFilms={true}
+            useAllFilms
           />
-          {createButtonShowMore()}
         </section>
         <Footer />
       </div>
