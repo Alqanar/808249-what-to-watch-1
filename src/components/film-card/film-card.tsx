@@ -8,8 +8,8 @@ const IMG_WIDTH = `280`;
 const IMG_HEIGHT = `175`;
 
 interface IProps {
-  movie: IFilm;
-  onClick: (movie: IFilm) => void;
+  film: IFilm;
+  onClick: (film: IFilm) => void;
   useAllFilms: boolean;
 }
 
@@ -26,32 +26,25 @@ class FilmCard extends React.PureComponent<IProps, null> {
   }
 
   public render(): React.ReactElement {
-    const {movie, movie: {name, posterLink}, useAllFilms} = this.props;
+    const {film, film: {name}} = this.props;
 
     return (
       <article
         onClick={this.handleCardClick}
-        onMouseEnter={useAllFilms ? this.handleCardMouseEnter : undefined}
-        onMouseLeave={useAllFilms ? this.handleCardMouseLeave : undefined}
+        onMouseEnter={this.handleCardMouseEnter}
+        onMouseLeave={this.handleCardMouseLeave}
         className="small-movie-card catalog__movies-card"
       >
-        {useAllFilms ? `` : (
-          <button className="small-movie-card__play-btn" type="button">Play</button>
-        )}
         <div className="small-movie-card__image">
-          {useAllFilms ? (
-            <VideoPlayer
-              ref={this.videoRef}
-              film={movie}
-            />
-          ) : (
-            <img
-              src={posterLink}
-              alt={name}
-              width={IMG_WIDTH}
-              height={IMG_HEIGHT}
-            />
-          )}
+          <VideoPlayer
+            ref={this.videoRef}
+            film={film}
+            isPreview
+            width={IMG_WIDTH}
+            height={IMG_HEIGHT}
+            isMuted
+            isLoop
+          />
         </div>
         <h3 className="small-movie-card__title">
           <a className="small-movie-card__link" href="movie-page.html">{name}</a>
@@ -61,9 +54,9 @@ class FilmCard extends React.PureComponent<IProps, null> {
   }
 
   private handleCardClick(): void {
-    const {movie, onClick} = this.props;
+    const {film, onClick} = this.props;
 
-    onClick(movie);
+    onClick(film);
   }
 
   private handleCardMouseEnter(): void {

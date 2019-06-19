@@ -76,7 +76,7 @@ class MoviesList extends React.PureComponent<IProps, null> {
       .splice(0, filmsLimit)
       .map((film): React.ReactElement => (
         <FilmCard
-          movie={film}
+          film={film}
           key={film.id}
           onClick={onClick}
           useAllFilms={useAllFilms}
