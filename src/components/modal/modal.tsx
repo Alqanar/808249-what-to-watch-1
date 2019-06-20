@@ -2,22 +2,23 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 
-const modalRoot = document.getElementById(`root`);
-
 class Modal extends React.PureComponent<{}> {
-  private modalContainer: HTMLElement ;
+  private modalContainer: HTMLElement;
+  private modalRoot: HTMLElement;
+
   public constructor(props) {
     super(props);
 
+    this.modalRoot = document.getElementById(`root`);
     this.modalContainer = document.createElement(`div`);
   }
 
   public componentDidMount(): void {
-    modalRoot.appendChild(this.modalContainer);
+    this.modalRoot.appendChild(this.modalContainer);
   }
 
   public componentWillUnmount(): void {
-    modalRoot.removeChild(this.modalContainer);
+    this.modalRoot.removeChild(this.modalContainer);
   }
 
   public render(): React.ReactElement {

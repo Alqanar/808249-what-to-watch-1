@@ -10,7 +10,6 @@ const IMG_HEIGHT = `175`;
 interface IProps {
   film: IFilm;
   onClick: (film: IFilm) => void;
-  useAllFilms: boolean;
 }
 
 class FilmCard extends React.PureComponent<IProps, null> {
@@ -26,7 +25,7 @@ class FilmCard extends React.PureComponent<IProps, null> {
   }
 
   public render(): React.ReactElement {
-    const {film, film: {name}} = this.props;
+    const {film} = this.props;
 
     return (
       <article
@@ -47,7 +46,7 @@ class FilmCard extends React.PureComponent<IProps, null> {
           />
         </div>
         <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" href="movie-page.html">{name}</a>
+          <a className="small-movie-card__link" href="movie-page.html">{film.name}</a>
         </h3>
       </article>
     );

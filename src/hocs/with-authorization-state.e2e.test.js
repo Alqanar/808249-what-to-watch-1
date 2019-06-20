@@ -5,8 +5,8 @@ import Adapter from "enzyme-adapter-react-16";
 
 import withAuthorizationState from "./with-authorization-state.tsx";
 
-Enzyme.configure({adapter: new Adapter()});
 
+Enzyme.configure({adapter: new Adapter()});
 
 const MockComponent = ({
   email,

@@ -29,9 +29,12 @@ it(`Player popup correctly renders`, () => {
     .create(
       <PlayerPopup
         film={movieMock}
-        isPaused={false}
-        value={`30`}
-        timer={136}
+        isFilmPlaying={false}
+        progress={30}
+        timer={1360}
+        onSwitchPausePlay={() => {}}
+        onExit={() => {}}
+        onChangeProgress={() => {}}
       />
     )
     .toJSON();

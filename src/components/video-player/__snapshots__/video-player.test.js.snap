@@ -2,11 +2,7 @@
 
 exports[`Video player is correctly renders 1`] = `
 <video
-  height="175"
-  loop={true}
-  muted={true}
-  poster="https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg"
-  src="https://youtu.be/TcMBFSGVi1c"
-  width="280"
+  className=""
+  poster=""
 />
 `;

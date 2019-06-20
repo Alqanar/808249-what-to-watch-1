@@ -22,8 +22,7 @@ const MovieMasterData: React.FC<IProps> = (props): React.ReactElement => {
     film,
     needReview,
     isPlayerOpened,
-    onPlayButtonClick,
-    onExitButtonClick
+    onPlayButtonClick
   } = props;
 
   return (
@@ -44,8 +43,6 @@ const MovieMasterData: React.FC<IProps> = (props): React.ReactElement => {
         <Modal>
           <PlayerPopupWrapped
             film={film}
-            isPaused={false}
-            onExit={onExitButtonClick}
           />
         </Modal>
       )}

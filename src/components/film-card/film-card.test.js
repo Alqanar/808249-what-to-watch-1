@@ -11,25 +11,12 @@ const film = {
   trailer: `https://youtu.be/TcMBFSGVi1c`
 };
 
-describe(`Film card correctly renders`, () => {
-  it(`when useAllFilms true`, () => {
+describe(`Film card`, () => {
+  it(`correctly renders`, () => {
     const tree = renderer
       .create(<FilmCard
-        movie={film}
+        film={film}
         key={0}
-        useAllFilms={true}
-      />)
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`when useAllFilms false`, () => {
-    const tree = renderer
-      .create(<FilmCard
-        movie={film}
-        key={0}
-        useAllFilms={false}
       />)
       .toJSON();
 

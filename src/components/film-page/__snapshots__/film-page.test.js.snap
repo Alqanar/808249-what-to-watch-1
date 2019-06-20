@@ -213,6 +213,7 @@ Array [
           >
             <button
               className="btn btn--play movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -342,11 +343,11 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          
           <div
             className="small-movie-card__image"
           >
             <video
+              className=""
               height="175"
               loop={true}
               muted={true}
@@ -372,11 +373,11 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          
           <div
             className="small-movie-card__image"
           >
             <video
+              className=""
               height="175"
               loop={true}
               muted={true}

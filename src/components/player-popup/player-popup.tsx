@@ -12,7 +12,7 @@ interface IProps {
   progress: number;
   timer: number;
   onSwitchPausePlay: (event: Event) => void;
-  onExit: () => void;
+  onExitButtonClick: () => void;
   onChangeProgress: (progress: number, remainingTime: number) => void;
 }
 
@@ -69,7 +69,7 @@ class PlayerPopup extends React.PureComponent<IProps, null> {
   }
 
   public render(): React.ReactElement {
-    const {film, progress, timer, onExit} = this.props;
+    const {film, progress, timer, onExitButtonClick} = this.props;
 
     return (
       <>
@@ -82,7 +82,7 @@ class PlayerPopup extends React.PureComponent<IProps, null> {
             isAutoPlay
             changeRemainingTime={this.handleChangeRemainingTime}
           />
-          <button onClick={onExit} type="button" className="player__exit">Exit</button>
+          <button onClick={onExitButtonClick} type="button" className="player__exit">Exit</button>
           <div className="player__controls">
             {showPlayerTime(progress, timer)}
             <div className="player__controls-row">

@@ -79,7 +79,6 @@ class MoviesList extends React.PureComponent<IProps, null> {
           film={film}
           key={film.id}
           onClick={onClick}
-          useAllFilms={useAllFilms}
         />
       ));
   }
