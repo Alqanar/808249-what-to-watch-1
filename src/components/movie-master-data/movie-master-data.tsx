@@ -1,31 +1,52 @@
 import * as React from "react";
 
+import Modal from "../modal/modal";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons";
+import PlayerPopup from "../player-popup/player-popup";
+import withPlayer from "../../hocs/with-player";
+import {IFilm} from "../../types";
 
 
 interface IProps {
-  name: string;
-  genre: string[];
-  year: number;
+  film: IFilm;
   needReview?: boolean;
+  isPlayerOpened: boolean;
+  onPlayButtonClick: () => void;
+  onExitButtonClick: () => void;
 }
 
+const PlayerPopupWrapped = withPlayer(PlayerPopup);
+
 const MovieMasterData: React.FC<IProps> = (props): React.ReactElement => {
-  const {name, genre, year, needReview} = props;
+  const {
+    film,
+    needReview,
+    isPlayerOpened,
+    onPlayButtonClick
+  } = props;
 
   return (
-    <div className="movie-card__desc">
-      <h2 className="movie-card__title">{name}</h2>
-      <p className="movie-card__meta">
-        <span className="movie-card__genre">{genre.join(`, `)}</span>
-        <span className="movie-card__year">{year}</span>
-      </p>
+    <>
+      <div className="movie-card__desc">
+        <h2 className="movie-card__title">{film.name}</h2>
+        <p className="movie-card__meta">
+          <span className="movie-card__genre">{film.genre.join(`, `)}</span>
+          <span className="movie-card__year">{film.released}</span>
+        </p>
 
-      <MovieCardButtons
-        needReview={needReview}
-      />
-
-    </div>
+        <MovieCardButtons
+          needReview={needReview}
+          onPlayButtonClick={onPlayButtonClick}
+        />
+      </div>
+      {isPlayerOpened && (
+        <Modal>
+          <PlayerPopupWrapped
+            film={film}
+          />
+        </Modal>
+      )}
+    </>
   );
 };
 

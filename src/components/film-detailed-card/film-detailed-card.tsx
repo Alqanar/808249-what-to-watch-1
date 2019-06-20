@@ -3,6 +3,7 @@ import * as React from "react";
 import ShakyWrapper from "../shaky-wrapper/shaky-wrapper";
 import FilmPoster from "../film-poster/film-poster";
 import MovieMasterData from "../movie-master-data/movie-master-data";
+import withPlayerPopup from "../../hocs/with-player-popup";
 import {IFilm} from "../../types";
 
 
@@ -13,13 +14,14 @@ interface IProps {
   needReview?: boolean;
 }
 
+const MovieMasterDataWrapped = withPlayerPopup(MovieMasterData);
+
 const FilmDetailedCard: React.FC<IProps> = (props): React.ReactElement => {
   const {
+    film,
     film: {
       name,
-      posterImage,
-      genre,
-      released
+      posterImage
     },
     needVanish,
     className,
@@ -39,10 +41,8 @@ const FilmDetailedCard: React.FC<IProps> = (props): React.ReactElement => {
           />
         }
 
-        <MovieMasterData
-          name={name}
-          genre={genre}
-          year={released}
+        <MovieMasterDataWrapped
+          film={film}
           needReview={needReview}
         />
       </>

@@ -1,11 +1,21 @@
 import * as React from "react";
+import {Subtract} from "utility-types";
 
 import history from "../history";
 
 
 interface IProps {
   onSignInButtonClick: (email: string, pass: string) => Promise<void>;
-  onMount?: () => void;
+}
+
+interface IInjectedProps {
+  email: string;
+  pass: string;
+  onEmailInputChange: () => void;
+  onPassInputChange: () => void;
+  onSignInButtonClick: () => void;
+  isErrorEmail: boolean;
+  isErrorPass: boolean;
 }
 
 interface IState {
@@ -15,7 +25,11 @@ interface IState {
   isErrorPass: boolean;
 }
 
-function withAuthorizationState<T>(Component: React.ComponentType<T>): React.ComponentClass<IProps & T, IState> {
+// eslint-disable-next-line
+function withAuthorizationState(Component) {
+
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, IInjectedProps>;
 
   class WithAuthorizationState extends React.PureComponent<IProps & T, IState> {
     public constructor(props) {

@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import MovieMasterData from "./movie-master-data.tsx";
+import PlayerPopup from "./player-popup.tsx";
 
 
 const movieMock = {
@@ -24,11 +24,17 @@ const movieMock = {
   videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
 };
 
-it(`Movie master data correctly renders`, () => {
+it(`Player popup correctly renders`, () => {
   const tree = renderer
     .create(
-      <MovieMasterData
+      <PlayerPopup
         film={movieMock}
+        isFilmPlaying={false}
+        progress={30}
+        timer={1360}
+        onSwitchPausePlay={() => {}}
+        onExit={() => {}}
+        onChangeProgress={() => {}}
       />
     )
     .toJSON();

@@ -929,6 +929,7 @@ main {
   right: 0;
   bottom: 0;
   z-index: 1;
+  background-color:#000;
   /* &::after {
     content: '';
     position: absolute;

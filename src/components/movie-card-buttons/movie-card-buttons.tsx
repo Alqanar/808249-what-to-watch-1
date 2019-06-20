@@ -5,14 +5,17 @@ import MyListButton from "../my-list-button/my-list-button";
 
 interface IProps {
   needReview?: boolean;
+  onPlayButtonClick: () => void;
 }
 
 const MovieCardButtons: React.FC<IProps> = (props): React.ReactElement => {
-  const {needReview} = props;
+  const {needReview, onPlayButtonClick} = props;
 
   return (
     <div className="movie-card__buttons">
-      <PlayButton />
+      <PlayButton
+        onPlayButtonClick={onPlayButtonClick}
+      />
       <MyListButton />
 
       {needReview && (

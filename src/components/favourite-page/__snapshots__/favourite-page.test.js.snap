@@ -177,20 +177,19 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="The Aftermath"
+            <video
+              className=""
               height="175"
-              src="https://st.kp.yandex.net/images/film_iphone/iphone360_1000125.jpg"
+              loop={true}
+              muted={true}
+              poster="https://st.kp.yandex.net/images/film_iphone/iphone360_1000125.jpg"
+              src="https://youtu.be/FPv3e2FZOgo"
               width="280"
             />
           </div>
@@ -208,20 +207,19 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="The Professor and the Madman"
+            <video
+              className=""
               height="175"
-              src="https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg"
+              loop={true}
+              muted={true}
+              poster="https://st.kp.yandex.net/images/film_iphone/iphone360_996027.jpg"
+              src="https://youtu.be/FPv3e2FZOgo"
               width="280"
             />
           </div>
@@ -239,20 +237,19 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Five Feet Apart"
+            <video
+              className=""
               height="175"
-              src="https://st.kp.yandex.net/images/film_iphone/iphone360_1151373.jpg"
+              loop={true}
+              muted={true}
+              poster="https://st.kp.yandex.net/images/film_iphone/iphone360_1151373.jpg"
+              src="https://youtu.be/XtgCqMZofqM"
               width="280"
             />
           </div>

@@ -1,24 +1,28 @@
 import * as React from "react";
-
-import {IFilm} from "../types";
+import {Subtract} from "utility-types";
 
 
 const DEFAULT_PAGE_SIZE = 20;
 
 interface IProps {
   pageSize?: number;
-  useAllFilms: boolean;
-  onClick: (films: IFilm) => void;
-  fiteredGenre?: string[];
-  limit?: number;
-  excludeFilmId?: string;
+}
+
+interface IInjectedProps {
+  currentLength: number;
+  onMoreButtonClick: () => void;
+  resetCurrentLength: () => void;
 }
 
 interface IState {
   currentLength: number;
 }
 
-function withPagination<T>(Component: React.ComponentType<T>): React.ComponentClass<IProps & T, IState> {
+// eslint-disable-next-line
+function withPagination(Component) {
+
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, IInjectedProps>;
 
   class WithPagination extends React.PureComponent<IProps & T, IState> {
     public constructor(props) {
