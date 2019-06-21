@@ -16,12 +16,24 @@ describe(`Poster of the film correctly renders`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`when isBig passed div render with classes 'movie-card__poster' and 'movie-card__poster--big'`, () => {
+  it(`when size L div render with classes 'movie-card__poster' and 'movie-card__poster--big'`, () => {
     const tree = renderer
       .create(<FilmPoster
         name={`Avengers: Endgame`}
         posterLink={`https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`}
-        isBig
+        size="L"
+      />)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`when size S div render with classes 'movie-card__poster' and 'movie-card__poster--small'`, () => {
+    const tree = renderer
+      .create(<FilmPoster
+        name={`Avengers: Endgame`}
+        posterLink={`https://st.kp.yandex.net/images/film_iphone/iphone360_843650.jpg`}
+        size="S"
       />)
       .toJSON();
 

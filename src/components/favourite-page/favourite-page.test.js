@@ -81,7 +81,7 @@ it(`Favourite page correctly renders`, () => {
       <Provider store={createStore(() => testInitialState)}>
         <Router history={history}>
           <FavouritePage
-            avatarLink='img/avatar.jpg'
+            avatarLink="img/avatar.jpg"
             isAuth={false}
           />
         </Router>

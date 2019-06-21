@@ -35,8 +35,8 @@ class ReviewsTab extends React.PureComponent<IProps, null> {
   public render(): React.ReactElement {
     const {reviews} = this.props;
 
-    const partOneReviews = reviews.slice(0, Math.ceil(reviews.length / 2));
-    const partTwoReviews = reviews.slice(Math.floor(reviews.length / 2));
+    const partOneReviews = reviews.splice(0, Math.ceil(reviews.length / 2));
+    const partTwoReviews = reviews;
 
     return (
       <div className="movie-card__reviews movie-card__row">

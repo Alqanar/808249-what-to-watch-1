@@ -76,7 +76,7 @@ const FilmCardDetails: React.FC<IProps> = (props): React.ReactElement => {
                 <FilmPoster
                   name={film.name}
                   posterImage={film.posterImage}
-                  isBig
+                  size="L"
                 />
                 <FilmCardNavigation
                   film={film}

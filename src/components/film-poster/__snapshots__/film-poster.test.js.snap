@@ -12,9 +12,21 @@ exports[`Poster of the film correctly renders when isBig not passed div render w
 </div>
 `;
 
-exports[`Poster of the film correctly renders when isBig passed div render with classes 'movie-card__poster' and 'movie-card__poster--big' 1`] = `
+exports[`Poster of the film correctly renders when size L div render with classes 'movie-card__poster' and 'movie-card__poster--big' 1`] = `
 <div
   className="movie-card__poster movie-card__poster--big"
+>
+  <img
+    alt="Avengers: Endgame poster"
+    height="327"
+    width="218"
+  />
+</div>
+`;
+
+exports[`Poster of the film correctly renders when size S div render with classes 'movie-card__poster' and 'movie-card__poster--small' 1`] = `
+<div
+  className="movie-card__poster movie-card__poster--small"
 >
   <img
     alt="Avengers: Endgame poster"

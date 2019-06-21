@@ -28,6 +28,12 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.setReviews(filmId, response.data));
       });
+  },
+  sendReview: (filmId, {rating, comment}) => (_, __, api) => {
+    return api.post(`/comments/${filmId}`, {
+      rating,
+      comment
+    });
   }
 };
 
