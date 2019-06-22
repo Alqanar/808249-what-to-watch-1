@@ -97,7 +97,7 @@ describe(`Reducer works correctly`, () => {
 
     apiMock
       .onPost(`/comments/${filmId}`)
-      .replyOnce(200, reviewPostMockData);
+      .reply(200, reviewPostMockData);
 
     const reviewSender = Operation.sendReview(filmId, reviewPostMockData);
 

@@ -31,6 +31,7 @@ class MyListButton extends React.PureComponent<IProps, null> {
 
   public render(): React.ReactElement {
     const {favorite} = this.props;
+
     return (
       <button onClick={this.handleMyListButtonClick} className="btn btn--list movie-card__button" type="button">
         {favorite ? iconFavorite() : iconNotFavorite()}

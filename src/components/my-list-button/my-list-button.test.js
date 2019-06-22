@@ -9,6 +9,8 @@ it(`My list button correctly renders`, () => {
     .create(
       <MyListButton
         favorite={false}
+        id="7"
+        sendFavoriteStatus={() => {}}
       />
     )
     .toJSON();

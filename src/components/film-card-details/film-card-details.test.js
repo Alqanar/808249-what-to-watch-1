@@ -1,6 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
+import {Provider} from "react-redux";
+import {createStore} from "redux";
 
 import FilmCardDetails from "./film-card-details";
 import history from "../../history.ts";
@@ -28,16 +30,25 @@ const movieMock = {
   videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
 };
 
+const testInitialState = {
+  genre: `All genres`,
+  films: []
+};
+
 describe(`film card details correctly renders`, () => {
   it(`when isShort passed poster of the film renders at the up of the page and we aren't see navigation of the film card`, () => {
     const tree = renderer
-      .create(<FilmCardDetails
-        isShort
-        avatarLink={avatarLink}
-        film={movieMock}
-        isAuth={true}
-        className={`movie-card__info`}
-      />)
+      .create(
+        <Provider store={createStore(() => testInitialState)}>
+          <FilmCardDetails
+            isShort
+            avatarLink={avatarLink}
+            film={movieMock}
+            isAuth={true}
+            className={`movie-card__info`}
+          />
+        </Provider>
+      )
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -46,15 +57,17 @@ describe(`film card details correctly renders`, () => {
   it(`when isShort not passed poster of the film renders at the middle of the page and we are seeing navigation of the film card, flag of the need review added button '+ Add review'`, () => {
     const tree = renderer
       .create(
-        <Router history={history}>
-          <FilmCardDetails
-            avatarLink={avatarLink}
-            isAuth={true}
-            needVanish
-            needReview
-            film={movieMock}
-          />
-        </Router>
+        <Provider store={createStore(() => testInitialState)}>
+          <Router history={history}>
+            <FilmCardDetails
+              avatarLink={avatarLink}
+              isAuth={true}
+              needVanish
+              needReview
+              film={movieMock}
+            />
+          </Router>
+        </Provider>
       )
       .toJSON();
 
