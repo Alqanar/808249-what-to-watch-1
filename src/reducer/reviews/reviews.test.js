@@ -90,20 +90,20 @@ describe(`Reducer works correctly`, () => {
       });
   });
 
-  it(`Should make a correct API sends to /comments/:id/review`, function () {
+  it(`Should make a correct API sends to /comments/:id/review`, function (done) {
     const dispatch = jest.fn();
     const api = createAPI(dispatch);
     const apiMock = new MockAdapter(api);
 
     apiMock
-      .onPost(`https://es31-server.appspot.com/wtw/comments/${filmId}`)
-      // .onPost(`/comments/${filmId}`)
-      .reply(200, reviewPostMockData);
+      .onPost(`/comments/${filmId}`)
+      .replyOnce(200, reviewPostMockData);
 
     const reviewSender = Operation.sendReview(filmId, reviewPostMockData);
 
-    reviewSender(undefined, undefined, api);
-
-    expect(apiMock.history.post[0].data).toBe(JSON.stringify({rating: 3, comment: `It was very interesting`}));
+    reviewSender(undefined, undefined, api).then(() => {
+      expect(apiMock.history.post[0].data).toBe(JSON.stringify({rating: 3, comment: `It was very interesting`}));
+      done();
+    });
   });
 });
