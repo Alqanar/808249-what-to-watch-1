@@ -5,20 +5,24 @@ import PlayButton from "../play-button/play-button";
 import MyListButton from "../my-list-button/my-list-button";
 
 interface IProps {
-  id?: string;
+  favorite: boolean;
+  id: string;
   needReview?: boolean;
   onPlayButtonClick: () => void;
 }
 
 const MovieCardButtons: React.FC<IProps> = (props): React.ReactElement => {
-  const {id, needReview, onPlayButtonClick} = props;
+  const {id, needReview, onPlayButtonClick, favorite} = props;
 
   return (
     <div className="movie-card__buttons">
       <PlayButton
         onPlayButtonClick={onPlayButtonClick}
       />
-      <MyListButton />
+      <MyListButton
+        favorite={favorite}
+        id={id}
+      />
 
       {needReview && (
         <Link to={`/film/${id}/review`} className="btn movie-card__button">Add review</Link>

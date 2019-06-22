@@ -38,6 +38,7 @@ const MovieMasterData: React.FC<IProps> = (props): React.ReactElement => {
           id={film.id}
           needReview={needReview}
           onPlayButtonClick={onPlayButtonClick}
+          favorite={film.favorite}
         />
       </div>
       {isPlayerOpened && (
