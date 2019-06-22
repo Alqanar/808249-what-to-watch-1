@@ -35,6 +35,7 @@ const MovieMasterData: React.FC<IProps> = (props): React.ReactElement => {
         </p>
 
         <MovieCardButtons
+          id={film.id}
           needReview={needReview}
           onPlayButtonClick={onPlayButtonClick}
         />

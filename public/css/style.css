@@ -361,7 +361,7 @@ main {
   margin: 0 auto; }
 
 .add-review__text {
-  background: #E8C3C4;
+  background: #ffffff;
   border-radius: 8px; }
 
 .add-review__textarea {
@@ -810,7 +810,8 @@ main {
 .movie-card__reviews-col {
   width: calc((100% - 60px) / 2);
   margin-right: 60px;
-  max-width: 380px; }
+  max-width: 380px;
+  min-width: 380px; }
   .movie-card__reviews-col:last-child {
     margin-right: 0; }
 

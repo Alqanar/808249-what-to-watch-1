@@ -32,6 +32,11 @@ const reviewsMockData = [
   }
 ];
 
+const reviewPostMockData = {
+  rating: 3,
+  comment: `It was very interesting`
+};
+
 const filmId = `1`;
 
 it(`Action creator for set reviews returns correct action`, () => {
@@ -83,5 +88,22 @@ describe(`Reducer works correctly`, () => {
           payload: {filmId, reviews: reviewsMockData}
         });
       });
+  });
+
+  it(`Should make a correct API sends to /comments/:id/review`, function (done) {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+
+    apiMock
+      .onPost(`/comments/${filmId}`)
+      .replyOnce(200, reviewPostMockData);
+
+    const reviewSender = Operation.sendReview(filmId, reviewPostMockData);
+
+    reviewSender(undefined, undefined, api).then(() => {
+      expect(apiMock.history.post[0].data).toBe(JSON.stringify({rating: 3, comment: `It was very interesting`}));
+      done();
+    });
   });
 });

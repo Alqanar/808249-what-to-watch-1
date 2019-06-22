@@ -2,14 +2,17 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {Switch, Route} from "react-router-dom";
 
+import AddReviewPage from "../add-review-page/add-review-page";
 import FavouritePage from "../favourite-page/favourite-page";
-import MainPage from "../main-page/main-page";
 import FilmPage from "../film-page/film-page";
+import MainPage from "../main-page/main-page";
 import SignInPage from "../sign-in-page/sign-in-page";
 
 import composedWithPrivateRoute from "../../hocs/with-private-route";
-import history from "../../history";
 import withAuthorizationState from "../../hocs/with-authorization-state";
+import withDisableState from "../../hocs/with-disable-state";
+
+import history from "../../history";
 import {getGenresList} from "../../reducer/movie/selectors.js";
 import {IFilm} from "../../types.js";
 import {featuredFilm} from "../../mocks/mock-data.js";
@@ -27,6 +30,7 @@ interface IProps {
 
 const SignInPageWrapped = withAuthorizationState(SignInPage);
 const FavouritePageWrapped = composedWithPrivateRoute(FavouritePage);
+const AddReviewPageWrapped = composedWithPrivateRoute(withDisableState(AddReviewPage));
 
 class App extends React.PureComponent<IProps, null> {
   public constructor(props) {
@@ -37,6 +41,7 @@ class App extends React.PureComponent<IProps, null> {
     this.renderSignInPage = this.renderSignInPage.bind(this);
     this.renderFavouritePage = this.renderFavouritePage.bind(this);
     this.renderFilmPage = this.renderFilmPage.bind(this);
+    this.renderAddReviewPage = this.renderAddReviewPage.bind(this);
   }
 
   public render(): React.ReactElement {
@@ -45,6 +50,7 @@ class App extends React.PureComponent<IProps, null> {
         <Route path="/" exact render={this.renderMainPage} />
         <Route path="/login" render={this.renderSignInPage} />
         <Route path="/favorites" render={this.renderFavouritePage} />
+        <Route path="/film/:id/review" render={this.renderAddReviewPage} />
         <Route path="/film/:id" render={this.renderFilmPage} />
       </Switch>
     );
@@ -52,6 +58,20 @@ class App extends React.PureComponent<IProps, null> {
 
   private goToFilmPage(movieCard: IFilm): void {
     history.push(`/film/${movieCard.id}`);
+  }
+
+  private renderAddReviewPage({match: {params: {id}}}): React.ReactElement {
+    const {
+      avatarLink,
+      userId
+    } = this.props;
+    return (
+      <AddReviewPageWrapped
+        film={this.getChosenFilm(id)}
+        avatarLink={avatarLink}
+        isAuth={Boolean(userId)}
+      />
+    );
   }
 
   private renderFavouritePage(): React.ReactElement {

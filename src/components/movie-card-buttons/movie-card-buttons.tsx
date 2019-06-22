@@ -1,15 +1,17 @@
 import * as React from "react";
+import {Link} from "react-router-dom";
 
 import PlayButton from "../play-button/play-button";
 import MyListButton from "../my-list-button/my-list-button";
 
 interface IProps {
+  id?: string;
   needReview?: boolean;
   onPlayButtonClick: () => void;
 }
 
 const MovieCardButtons: React.FC<IProps> = (props): React.ReactElement => {
-  const {needReview, onPlayButtonClick} = props;
+  const {id, needReview, onPlayButtonClick} = props;
 
   return (
     <div className="movie-card__buttons">
@@ -19,7 +21,7 @@ const MovieCardButtons: React.FC<IProps> = (props): React.ReactElement => {
       <MyListButton />
 
       {needReview && (
-        <a href="add-review.html" className="btn movie-card__button">Add review</a>
+        <Link to={`/film/${id}/review`} className="btn movie-card__button">Add review</Link>
       )}
     </div>
   );
