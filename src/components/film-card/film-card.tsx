@@ -1,4 +1,5 @@
 import * as React from "react";
+import {Link} from "react-router-dom";
 
 import VideoPlayer from "../video-player/video-player";
 import {IFilm} from "../../types";
@@ -46,7 +47,7 @@ class FilmCard extends React.PureComponent<IProps, null> {
           />
         </div>
         <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" href="movie-page.html">{film.name}</a>
+          <Link to={`/film/${film.id}`} className="small-movie-card__link">{film.name}</Link>
         </h3>
       </article>
     );

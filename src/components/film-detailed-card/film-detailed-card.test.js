@@ -1,5 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import {createStore} from "redux";
 
 import FilmDetailedCard from "./film-detailed-card.tsx";
 
@@ -23,13 +25,27 @@ const movieMock = {
   videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
 };
 
+const testInitialState = {
+  genre: `All genres`,
+  films: [],
+  authorization: {
+    user: {
+      id: `1`
+    }
+  }
+};
+
 describe(`Featured film card correctly renders`, () => {
   it(`when needVanish not passed renders div wrapper`, () => {
     const tree = renderer
-      .create(<FilmDetailedCard
-        film={movieMock}
-        className={`movie-card__info`}
-      />)
+      .create(
+        <Provider store={createStore(() => testInitialState)}>
+          <FilmDetailedCard
+            film={movieMock}
+            className={`movie-card__info`}
+          />
+        </Provider>
+      )
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -37,10 +53,14 @@ describe(`Featured film card correctly renders`, () => {
 
   it(`when needVanish not passed renders without wrapper`, () => {
     const tree = renderer
-      .create(<FilmDetailedCard
-        film={movieMock}
-        needVanish
-      />)
+      .create(
+        <Provider store={createStore(() => testInitialState)}>
+          <FilmDetailedCard
+            film={movieMock}
+            needVanish
+          />
+        </Provider>
+      )
       .toJSON();
 
     expect(tree).toMatchSnapshot();

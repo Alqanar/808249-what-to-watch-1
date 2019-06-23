@@ -15,7 +15,6 @@ import withDisableState from "../../hocs/with-disable-state";
 import history from "../../history";
 import {getGenresList} from "../../reducer/movie/selectors.js";
 import {IFilm} from "../../types.js";
-import {featuredFilm} from "../../mocks/mock-data.js";
 import {Operation, ActionCreator} from "../../reducer/authorization/authorization.js";
 
 
@@ -26,6 +25,7 @@ interface IProps {
   signIn: (email: string, pass: string) => Promise<void>;
   userId: string;
   allFilms: IFilm[];
+  promotedFilm: IFilm;
 }
 
 const SignInPageWrapped = withAuthorizationState(SignInPage);
@@ -109,13 +109,14 @@ class App extends React.PureComponent<IProps, null> {
     const {
       avatarLink,
       userId,
-      genresList
+      genresList,
+      promotedFilm
     } = this.props;
 
     return (
       <MainPage
         avatarLink={avatarLink}
-        featuredFilm={featuredFilm}
+        featuredFilm={promotedFilm}
         genres={genresList}
         onClick={this.goToFilmPage}
         isAuth={Boolean(userId)}
@@ -150,7 +151,8 @@ const mapStateToProps = (state, ownProps): void => ({
   avatarLink: state.authorization.user.avatarUrl,
   userId: state.authorization.user.id,
   genresList: getGenresList(state),
-  allFilms: state.movie.films
+  allFilms: state.movie.films,
+  promotedFilm: state.movie.promotedFilm
 });
 
 export {App};

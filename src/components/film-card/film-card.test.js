@@ -1,7 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Router} from "react-router-dom";
 
 import FilmCard from "./film-card.tsx";
+import history from "../../history.ts";
 
 
 const film = {
@@ -14,10 +16,14 @@ const film = {
 describe(`Film card`, () => {
   it(`correctly renders`, () => {
     const tree = renderer
-      .create(<FilmCard
-        film={film}
-        key={0}
-      />)
+      .create(
+        <Router history={history}>
+          <FilmCard
+            film={film}
+            key={0}
+          />
+        </Router>
+      )
       .toJSON();
 
     expect(tree).toMatchSnapshot();

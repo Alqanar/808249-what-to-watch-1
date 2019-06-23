@@ -1,8 +1,10 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
+import {Router} from "react-router-dom";
 
 import FilmCard from "./film-card.tsx";
+import history from "../../history.ts";
 
 
 Enzyme.configure({adapter: new Adapter()});
@@ -29,11 +31,15 @@ const film = {
 
 it(`Clicking on the card will trigger a callback`, () => {
   const clickHandler = jest.fn();
-  const filmCard = shallow(<FilmCard
-    film={film}
-    key={0}
-    onClick={clickHandler}
-  />);
+  const filmCard = mount(
+    <Router history={history}>
+      <FilmCard
+        film={film}
+        key={0}
+        onClick={clickHandler}
+      />
+    </Router>
+  );
 
   const card = filmCard.find(`.catalog__movies-card`);
 

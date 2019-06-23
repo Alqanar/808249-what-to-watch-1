@@ -30,7 +30,6 @@ const filmFromServer = {
   'video_link': `http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4`
 };
 
-
 it(`Action creator for set genre returns correct action`, () => {
   expect(ActionCreator.setGenre(`Sci-Fi`)).toEqual({
     type: ActionType.SET_GENRE,
@@ -38,12 +37,12 @@ it(`Action creator for set genre returns correct action`, () => {
   });
 });
 
-
 describe(`Reducer works correctly`, () => {
   it(`Without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
       genre: `All genres`,
-      films: []
+      films: [],
+      promotedFilm: null
     });
   });
 
@@ -63,6 +62,48 @@ describe(`Reducer works correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_FILMS,
           payload: [transformFilmObject(filmFromServer)],
+        });
+      });
+  });
+
+  it(`Should make a correct API sends to /favorite/: film_id/: status`, function () {
+    const {id, is_favorite: isFavorite} = filmFromServer;
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const status = !isFavorite;
+    const favoriteStatusSender = Operation.sendFavoriteStatus(id, status);
+
+    apiMock
+      .onPost(`/favorite/${id}/${status ? 1 : 0}`)
+      .reply(200);
+
+    return favoriteStatusSender(dispatch, undefined, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_FAVORITE_STATUS,
+          payload: {id, status},
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /films/promo`, function () {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const promotedFilmsLoader = Operation.loadPromotedFilm();
+
+    apiMock
+      .onGet(`/films/promo`)
+      .reply(200, filmFromServer);
+
+    return promotedFilmsLoader(dispatch, undefined, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_PROMOTED_FILM,
+          payload: transformFilmObject(filmFromServer)
         });
       });
   });

@@ -29,7 +29,8 @@ Array [
       >
         <a
           className="small-movie-card__link"
-          href="movie-page.html"
+          href="/film/0"
+          onClick={[Function]}
         >
           The Aftermath
         </a>
@@ -59,7 +60,8 @@ Array [
       >
         <a
           className="small-movie-card__link"
-          href="movie-page.html"
+          href="/film/1"
+          onClick={[Function]}
         >
           The Professor and the Madman
         </a>
@@ -89,7 +91,8 @@ Array [
       >
         <a
           className="small-movie-card__link"
-          href="movie-page.html"
+          href="/film/2"
+          onClick={[Function]}
         >
           Five Feet Apart
         </a>

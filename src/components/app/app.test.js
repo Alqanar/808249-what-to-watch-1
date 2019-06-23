@@ -29,10 +29,36 @@ const films = [
   }
 ];
 
+const promotedFilm = {
+  id: 1,
+  name: `The Grand Budapest Hotel`,
+  posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
+  posterLink: `img/the-grand-budapest-hotel.jpg`,
+  coverLink: `img/bg-the-grand-budapest-hotel.jpg`,
+  backgroundColor: `#e1b0b2`,
+  videoLink: `https://some-link`,
+  trailer: `https://some-link`,
+  description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustaves friend and protege.`,
+  rating: 8.9,
+  scoresCount: 240,
+  director: `Wes Andreson`,
+  starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+  duration: 99,
+  genre: [`Comedy`],
+  released: 2014,
+  favorite: false,
+};
+
 const testInitialState = {
   movie: {
     genre: `All genres`,
-    films
+    films,
+    promotedFilm
+  },
+  authorization: {
+    user: {
+      id: `1`
+    }
   }
 };
 
@@ -61,6 +87,7 @@ describe(`App`, () => {
               avatarLink="img/avatar.jpg"
               userId={null}
               genresList={genres}
+              promotedFilm={promotedFilm}
             />
           </Router>
         </Provider>

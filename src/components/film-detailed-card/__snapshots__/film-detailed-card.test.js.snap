@@ -59,6 +59,7 @@ exports[`Featured film card correctly renders when needVanish not passed renders
       </button>
       <button
         className="btn btn--list movie-card__button"
+        onClick={[Function]}
         type="button"
       >
         <svg
@@ -127,6 +128,7 @@ Array [
       </button>
       <button
         className="btn btn--list movie-card__button"
+        onClick={[Function]}
         type="button"
       >
         <svg
