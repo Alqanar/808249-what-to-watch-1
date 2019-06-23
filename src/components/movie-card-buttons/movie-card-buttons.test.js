@@ -8,7 +8,12 @@ import MovieCardButtons from "./movie-card-buttons.tsx";
 
 const testInitialState = {
   genre: `All genres`,
-  films: []
+  films: [],
+  authorization: {
+    user: {
+      id: `1`
+    }
+  }
 };
 
 it(`Movie card buttons correctly renders`, () => {

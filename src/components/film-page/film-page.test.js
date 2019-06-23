@@ -74,6 +74,11 @@ const testInitialState = {
   movie: {
     genre: `All genres`,
     films: moviesListMock
+  },
+  authorization: {
+    user: {
+      id: `1`
+    }
   }
 };
 

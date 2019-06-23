@@ -27,7 +27,12 @@ const movieMock = {
 
 const testInitialState = {
   genre: `All genres`,
-  films: []
+  films: [],
+  authorization: {
+    user: {
+      id: `1`
+    }
+  }
 };
 
 describe(`Featured film card correctly renders`, () => {

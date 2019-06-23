@@ -33,6 +33,11 @@ const testInitialState = {
   movie: {
     genre: `All genres`,
     films
+  },
+  authorization: {
+    user: {
+      id: `1`
+    }
   }
 };
 
