@@ -25,7 +25,8 @@ exports[`Film card correctly renders 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="movie-page.html"
+      href="/film/0"
+      onClick={[Function]}
     >
       Avengers: Endgame
     </a>
