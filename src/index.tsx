@@ -37,6 +37,7 @@ store = createStore(
   )
 );
 
+store.dispatch(Operation.loadPromotedFilm());
 store.dispatch(Operation.loadFilms());
 store.dispatch(ActionCreator.restoreUser());
 

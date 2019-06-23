@@ -3,30 +3,36 @@ import transformFilmObject from "../../transformFilmObject.js";
 
 const initialState = {
   genre: `All genres`,
-  films: []
+  films: [],
+  promotedFilm: null
 };
 
 const ActionType = {
   SET_GENRE: `SET_GENRE`,
+  SET_FAVORITE_STATUS: `SET_FAVORITE_STATUS`,
   SET_FILMS: `SET_FILMS`,
-  SET_FAVORITE_STATUS: `SET_FAVORITE_STATUS`
+  SET_PROMOTED_FILM: `SET_PROMOTED_FILM`
 };
 
 const ActionCreator = {
+  setFavoriteStatus: (id, status) => ({
+    type: ActionType.SET_FAVORITE_STATUS,
+    payload: {id, status}
+  }),
+
+  setFilms: (films) => ({
+    type: ActionType.SET_FILMS,
+    payload: films
+  }),
 
   setGenre: (genre) => ({
     type: ActionType.SET_GENRE,
     payload: genre
   }),
 
-  setFilms: (films) => ({
-    type: ActionType.SET_FILMS,
-    payload: films,
-  }),
-
-  setFavoriteStatus: (id, status) => ({
-    type: ActionType.SET_FAVORITE_STATUS,
-    payload: {id, status}
+  setPromotedFilm: (promotedFilm) => ({
+    type: ActionType.SET_PROMOTED_FILM,
+    payload: promotedFilm,
   })
 };
 
@@ -37,12 +43,20 @@ const Operation = {
         dispatch(ActionCreator.setFilms(response.data.map(transformFilmObject)));
       });
   },
+
+  loadPromotedFilm: () => (dispatch, _, api) => {
+    return api.get(`/films/promo`)
+      .then((response) => {
+        dispatch(ActionCreator.setPromotedFilm(transformFilmObject(response.data)));
+      });
+  },
+
   sendFavoriteStatus: (id, status) => (dispatch, _, api) => {
     return api.post(`/favorite/${id}/${status ? 1 : 0}`)
       .then(() => {
         dispatch(ActionCreator.setFavoriteStatus(id, status));
       });
-  }
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -52,12 +66,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         genre: action.payload
-      };
-
-    case ActionType.SET_FILMS:
-      return {
-        ...state,
-        films: action.payload
       };
 
     case ActionType.SET_FAVORITE_STATUS:
@@ -72,6 +80,18 @@ const reducer = (state = initialState, action) => {
           }
           return film;
         })
+      };
+
+    case ActionType.SET_FILMS:
+      return {
+        ...state,
+        films: action.payload
+      };
+
+    case ActionType.SET_PROMOTED_FILM:
+      return {
+        ...state,
+        promotedFilm: action.payload
       };
 
     default:

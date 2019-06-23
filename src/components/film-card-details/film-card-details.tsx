@@ -37,15 +37,19 @@ const FilmCardDetails: React.FC<IProps> = (props): React.ReactElement => {
       <Sprite />
       <section
         className={`movie-card ${isShort ? `` : `movie-card--full`}`}
-        style={{background: film.backgroundColor}}>
+        style={{background: film ? film.backgroundColor : `#ffffff`}}>
         <ShakyWrapper
           needVanish={isShort}
           className={isShort ? `` : `movie-card__hero`}
         >
           <>
-            <FilmImageBackground
-              film={film}
-            />
+            {film ? (
+              <FilmImageBackground
+                film={film}
+              />
+            ) : (
+              <div></div>
+            )}
 
             <h1 className="visually-hidden">WTW</h1>
 
@@ -59,17 +63,21 @@ const FilmCardDetails: React.FC<IProps> = (props): React.ReactElement => {
               />
             </header>
 
-            <div className="movie-card__wrap">
-              <FilmDetailedCard
-                film={film}
-                needVanish={needVanish}
-                className={className}
-                needReview={needReview}
-              />
-            </div>
+            {film ? (
+              <div className="movie-card__wrap">
+                <FilmDetailedCard
+                  film={film}
+                  needVanish={needVanish}
+                  className={className}
+                  needReview={needReview}
+                />
+              </div>
+            ) : (
+              <div></div>
+            )}
           </>
         </ShakyWrapper>
-        {!isShort && (
+        {!isShort && film && (
           <>
             <div className="movie-card__wrap movie-card__translate-top">
               <div className="movie-card__info">

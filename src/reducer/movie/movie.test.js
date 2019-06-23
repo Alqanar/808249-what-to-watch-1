@@ -41,7 +41,8 @@ describe(`Reducer works correctly`, () => {
   it(`Without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
       genre: `All genres`,
-      films: []
+      films: [],
+      promotedFilm: null
     });
   });
 
@@ -83,6 +84,26 @@ describe(`Reducer works correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_FAVORITE_STATUS,
           payload: {id, status},
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /films/promo`, function () {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const promotedFilmsLoader = Operation.loadPromotedFilm();
+
+    apiMock
+      .onGet(`/films/promo`)
+      .reply(200, filmFromServer);
+
+    return promotedFilmsLoader(dispatch, undefined, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_PROMOTED_FILM,
+          payload: transformFilmObject(filmFromServer)
         });
       });
   });
