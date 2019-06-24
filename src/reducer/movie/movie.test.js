@@ -30,19 +30,20 @@ const filmFromServer = {
   'video_link': `http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4`
 };
 
-it(`Action creator for set genre returns correct action`, () => {
-  expect(ActionCreator.setGenre(`Sci-Fi`)).toEqual({
-    type: ActionType.SET_GENRE,
-    payload: `Sci-Fi`,
-  });
-});
-
 describe(`Reducer works correctly`, () => {
   it(`Without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
       genre: `All genres`,
       films: [],
-      promotedFilm: null
+      promotedFilm: null,
+      favoriteFilms: []
+    });
+  });
+
+  it(`Action creator for set genre returns correct action`, () => {
+    expect(ActionCreator.setGenre(`Sci-Fi`)).toEqual({
+      type: ActionType.SET_GENRE,
+      payload: `Sci-Fi`,
     });
   });
 
@@ -104,6 +105,26 @@ describe(`Reducer works correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_PROMOTED_FILM,
           payload: transformFilmObject(filmFromServer)
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /favorite`, function () {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const favoriteFilmsLoader = Operation.loadFavoriteFilms();
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, [filmFromServer]);
+
+    return favoriteFilmsLoader(dispatch, undefined, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_FAVORITE_FILMS,
+          payload: [transformFilmObject(filmFromServer)]
         });
       });
   });

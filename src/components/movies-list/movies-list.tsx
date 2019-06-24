@@ -3,25 +3,34 @@ import {connect} from "react-redux";
 
 import FilmCard from "../film-card/film-card";
 import {getFilterFilms} from "../../reducer/movie/selectors.js";
-import {moviesListMock} from "../main-page/test-mock-data.js";
 import {IFilm} from "../../types";
+import {Operation} from "../../reducer/movie/movie.js";
 
 
 interface IProps {
+  currentLength: number;
+  excludeFilmId?: string;
+  favoriteFilms: IFilm[];
   films: IFilm[];
-  onClick: (films: IFilm) => void;
-  useAllFilms: boolean;
   fiteredGenre?: string[];
   limit?: number;
-  excludeFilmId?: string;
+  loadFavoriteFilms: () => Promise<void>;
+  onClick: (films: IFilm) => void;
   onMoreButtonClick: () => void;
-  currentLength: number;
   resetCurrentLength: () => void;
+  useAllFilms: boolean;
 }
 
 class MoviesList extends React.PureComponent<IProps, null> {
   public constructor(props) {
     super(props);
+  }
+
+  public componentDidMount(): void {
+    const {useAllFilms, loadFavoriteFilms} = this.props;
+    if (!useAllFilms) {
+      loadFavoriteFilms();
+    }
   }
 
   public componentDidUpdate(oldProps: IProps): void {
@@ -33,32 +42,48 @@ class MoviesList extends React.PureComponent<IProps, null> {
   }
 
   public render(): React.ReactElement {
-    const {onMoreButtonClick, films, currentLength = films.length} = this.props;
-
     return (
       <>
         <div className="catalog__movies-list">
           {this.filmsList}
         </div>
-        <div className={`catalog__more ${currentLength >= films.length ? `visually-hidden` : ``}`}>
-          <button onClick={onMoreButtonClick} className="catalog__button" type="button">Show more</button>
-        </div>
+        {this.buttonShowMore}
       </>
     );
   }
 
-  private get filmsList(): React.ReactElement {
+  private get buttonShowMore(): React.ReactElement {
     const {
       films,
-      onClick,
-      useAllFilms,
+      currentLength = films.length,
+      onMoreButtonClick,
+      useAllFilms
+    } = this.props;
+
+    return (
+      useAllFilms ? (
+        <div className={`catalog__more ${currentLength >= films.length ? `visually-hidden` : ``}`}>
+          <button onClick={onMoreButtonClick} className="catalog__button" type="button">Show more</button>
+        </div>
+      ) : (
+        <></>
+      )
+    );
+  }
+
+  private get filmsList(): React.ReactElement[] {
+    const {
+      excludeFilmId,
+      favoriteFilms,
+      films,
       fiteredGenre,
       limit,
-      excludeFilmId,
+      onClick,
+      useAllFilms,
       currentLength = films.length
     } = this.props;
 
-    const list = useAllFilms ? films : moviesListMock;
+    const list = useAllFilms ? films : favoriteFilms;
     const filmsLimit = limit ? limit : currentLength;
 
     return list
@@ -84,12 +109,16 @@ class MoviesList extends React.PureComponent<IProps, null> {
   }
 }
 
+const mapDispatchToProps = (dispatch): object => ({
+  loadFavoriteFilms: (): Promise<void> => dispatch(Operation.loadFavoriteFilms())
+});
 
 const mapStateToProps = (state, ownProps): void => ({
   ...ownProps,
-  films: getFilterFilms(state)
+  films: getFilterFilms(state),
+  favoriteFilms: state.movie.favoriteFilms
 });
 
 export {MoviesList};
 
-export default connect(mapStateToProps)(MoviesList);
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesList);

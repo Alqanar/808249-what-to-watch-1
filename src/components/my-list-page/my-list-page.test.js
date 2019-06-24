@@ -1,10 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import thunk from "redux-thunk";
 import {Router} from "react-router-dom";
 import {Provider} from "react-redux";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 
-import FavouritePage from "./favourite-page.tsx";
+import createAPI from "../../api.js";
+import MyListPage from "./my-list-page.tsx";
 import history from "../../history.ts";
 
 
@@ -68,19 +70,32 @@ const moviesListMock = [
   }
 ];
 
-const testInitialState = {
-  movie: {
-    genre: `All genres`,
-    films: moviesListMock
-  }
+const testInitialState = () => {
+  return ({
+    movie: {
+      genre: `All genres`,
+      films: moviesListMock,
+      favoriteFilms: moviesListMock
+    }
+  });
 };
 
-it(`Favourite page correctly renders`, () => {
+const dispatch = jest.fn();
+const api = createAPI(dispatch);
+
+const store = createStore(
+  testInitialState,
+  applyMiddleware(
+    thunk.withExtraArgument(api)
+  )
+);
+
+it(`My list page correctly renders`, () => {
   const tree = renderer
     .create(
-      <Provider store={createStore(() => testInitialState)}>
+      <Provider store={store}>
         <Router history={history}>
-          <FavouritePage
+          <MyListPage
             avatarLink="img/avatar.jpg"
             isAuth={false}
           />

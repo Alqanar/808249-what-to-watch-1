@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Switch, Route} from "react-router-dom";
 
 import AddReviewPage from "../add-review-page/add-review-page";
-import FavouritePage from "../favourite-page/favourite-page";
+import MyListPage from "../my-list-page/my-list-page";
 import FilmPage from "../film-page/film-page";
 import MainPage from "../main-page/main-page";
 import SignInPage from "../sign-in-page/sign-in-page";
@@ -29,7 +29,7 @@ interface IProps {
 }
 
 const SignInPageWrapped = withAuthorizationState(SignInPage);
-const FavouritePageWrapped = composedWithPrivateRoute(FavouritePage);
+const MyListPageWrapped = composedWithPrivateRoute(MyListPage);
 const AddReviewPageWrapped = composedWithPrivateRoute(withDisableState(AddReviewPage));
 
 class App extends React.PureComponent<IProps, null> {
@@ -39,7 +39,7 @@ class App extends React.PureComponent<IProps, null> {
     this.goToFilmPage = this.goToFilmPage.bind(this);
     this.renderMainPage = this.renderMainPage.bind(this);
     this.renderSignInPage = this.renderSignInPage.bind(this);
-    this.renderFavouritePage = this.renderFavouritePage.bind(this);
+    this.renderMyListPage = this.renderMyListPage.bind(this);
     this.renderFilmPage = this.renderFilmPage.bind(this);
     this.renderAddReviewPage = this.renderAddReviewPage.bind(this);
   }
@@ -49,7 +49,7 @@ class App extends React.PureComponent<IProps, null> {
       <Switch>
         <Route path="/" exact render={this.renderMainPage} />
         <Route path="/login" render={this.renderSignInPage} />
-        <Route path="/favorites" render={this.renderFavouritePage} />
+        <Route path="/mylist" render={this.renderMyListPage} />
         <Route path="/film/:id/review" render={this.renderAddReviewPage} />
         <Route path="/film/:id" render={this.renderFilmPage} />
       </Switch>
@@ -74,14 +74,14 @@ class App extends React.PureComponent<IProps, null> {
     );
   }
 
-  private renderFavouritePage(): React.ReactElement {
+  private renderMyListPage(): React.ReactElement {
     const {
       avatarLink,
       userId
     } = this.props;
 
     return (
-      <FavouritePageWrapped
+      <MyListPageWrapped
         avatarLink={avatarLink}
         isAuth={Boolean(userId)}
         onClick={this.goToFilmPage}

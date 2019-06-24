@@ -45,13 +45,15 @@ describe(`film card details correctly renders`, () => {
     const tree = renderer
       .create(
         <Provider store={createStore(() => testInitialState)}>
-          <FilmCardDetails
-            isShort
-            avatarLink={avatarLink}
-            film={movieMock}
-            isAuth={true}
-            className={`movie-card__info`}
-          />
+          <Router history={history}>
+            <FilmCardDetails
+              isShort
+              avatarLink={avatarLink}
+              film={movieMock}
+              isAuth={true}
+              className={`movie-card__info`}
+            />
+          </Router>
         </Provider>
       )
       .toJSON();
