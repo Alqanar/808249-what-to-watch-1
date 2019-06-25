@@ -55,15 +55,23 @@ class ReviewsTab extends React.PureComponent<IProps, null> {
   }
 }
 
-
 const mapDispatchToProps = (dispatch): object => ({
   loadReviews: (id): Promise<void> => dispatch(Operation.loadReviews(id))
 });
 
-const mapStateToProps = (state, ownProps): void => ({
-  ...ownProps,
-  reviews: state.reviews.comments[ownProps.film.id] || []
-});
+const mapStateToProps = (state, ownProps): void => {
+  let reviews = [];
+  const reviewsById = state.reviews.comments[ownProps.film.id];
+  if (reviewsById) {
+    reviews = reviewsById.sort((reviewA, reviewB): number => (
+      new Date(reviewB.date).getTime() - new Date(reviewA.date).getTime()
+    ));
+  }
+  return {
+    ...ownProps,
+    reviews
+  };
+};
 
 
 export {ReviewsTab};

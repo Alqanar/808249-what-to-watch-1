@@ -8,18 +8,13 @@ const ActionType = {
 
 const ActionCreator = {
 
-  setReviews: (filmId, reviews) => {
-    const sortedReviews = reviews.sort((reviewA, reviewB) => {
-      return new Date(reviewB.date).getTime() - new Date(reviewA.date).getTime();
-    });
-    return {
-      type: ActionType.SET_REVIEWS,
-      payload: {
-        filmId,
-        reviews: sortedReviews
-      }
-    };
-  }
+  setReviews: (filmId, reviews) => ({
+    type: ActionType.SET_REVIEWS,
+    payload: {
+      filmId,
+      reviews
+    }
+  })
 };
 
 const Operation = {

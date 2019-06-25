@@ -20,7 +20,7 @@ interface IProps {
   isDisable: boolean;
   isDisableButton: boolean;
   sendReview: (id: string, {rating: number, comment: string}) => Promise<void>;
-  onFormSubmit: () => void;
+  onFormSubmit: (event) => void;
   onTextareaChange: () => void;
 }
 
@@ -135,13 +135,13 @@ class AddReviewPage extends React.PureComponent<IProps, null> {
     event.preventDefault();
 
     if (id && reviewLength >= 50 && reviewLength <= 400) {
-      onFormSubmit();
+      onFormSubmit(event);
       sendReview(id, reviewData)
         .then((): void => {
           history.push(`/film/${id}`);
         })
         .catch((): void => {
-          onFormSubmit();
+          onFormSubmit(event);
         });
     }
   }
