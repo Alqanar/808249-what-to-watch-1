@@ -89,7 +89,8 @@ function withAuthorizationState(Component) {
         onSignInButtonClick(email, pass)
           .then((): void => {
             history.push(`/`);
-          });
+          })
+          .catch((): void => {});
       } else {
         this.setState({
           isErrorEmail: Boolean(!email),

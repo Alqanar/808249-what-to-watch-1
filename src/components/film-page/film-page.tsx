@@ -50,7 +50,7 @@ class FilmPage extends React.PureComponent<IProps, null> {
           <MoviesList
             onClick={onClick}
             useAllFilms
-            fiteredGenre={film.genre}
+            fiteredGenres={film.genre}
             limit={LIMIT_SIMILAR_FILMS}
             excludeFilmId={film.id}
           />

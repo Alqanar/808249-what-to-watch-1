@@ -24,9 +24,9 @@ const convertTime = (minutes: number): string => {
 };
 
 const DetailsTab: React.FC<IProps> = (props): React.ReactElement => {
-  const {film: {director, starring, duration, genre, released}} = props;
+  const {film: {director, famousActors, duration, genre, released}} = props;
 
-  const starList = starring.map((name): React.ReactElement => (
+  const starList = famousActors.map((name): React.ReactElement => (
     <React.Fragment key={name}>
       {`${name},`}
       <br />

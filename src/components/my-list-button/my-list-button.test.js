@@ -10,7 +10,9 @@ it(`My list button correctly renders`, () => {
       <MyListButton
         favorite={false}
         id="7"
-        sendFavoriteStatus={() => {}}
+        isDisable={false}
+        onDisableChange={() => {}}
+        onSendFavoriteStatus={() => {}}
       />
     )
     .toJSON();

@@ -7,6 +7,7 @@ import Footer from "../footer/footer";
 
 interface IProps {
   email: string;
+  errorMessage: string;
   isErrorEmail: boolean;
   isErrorPass: boolean;
   onEmailInputChange: () => void;
@@ -19,17 +20,20 @@ interface IProps {
 class SignInPage extends React.PureComponent<IProps, null> {
   public constructor(props) {
     super(props);
+
+    this.renderErrorMessage = this.renderErrorMessage.bind(this);
   }
 
   public render(): React.ReactElement {
     const {
       email,
+      errorMessage,
+      isErrorEmail,
+      isErrorPass,
       pass,
       onEmailInputChange,
       onPassInputChange,
-      onSignInButtonClick,
-      isErrorEmail,
-      isErrorPass
+      onSignInButtonClick
     } = this.props;
 
     return (
@@ -44,6 +48,7 @@ class SignInPage extends React.PureComponent<IProps, null> {
           </header>
           <div className="sign-in user-page__content">
             <form action="#" className="sign-in__form">
+              {errorMessage ? this.renderErrorMessage() : ``}
               <div className="sign-in__fields">
                 <div className={`sign-in__field ${isErrorEmail ? `sign-in__field--error` : ``}`}>
                   <input
@@ -95,6 +100,16 @@ class SignInPage extends React.PureComponent<IProps, null> {
     if (onMount) {
       onMount();
     }
+  }
+
+  private renderErrorMessage(): React.ReactElement {
+    const {errorMessage} = this.props;
+
+    return (
+      <div className="sign-in__message">
+        <p>{errorMessage}</p>
+      </div>
+    );
   }
 }
 

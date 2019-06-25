@@ -14,7 +14,7 @@ export interface IFilm {
   released: number;
   duration: number;
   scoresCount: number;
-  starring: string[];
+  famousActors: string[];
   videoLink: string;
 }
 

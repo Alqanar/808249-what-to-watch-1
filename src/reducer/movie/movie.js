@@ -4,17 +4,24 @@ import transformFilmObject from "../../transformFilmObject.js";
 const initialState = {
   genre: `All genres`,
   films: [],
-  promotedFilm: null
+  promotedFilm: null,
+  favoriteFilms: []
 };
 
 const ActionType = {
   SET_GENRE: `SET_GENRE`,
+  SET_FAVORITE_FILMS: `SET_FAVORITE_FILMS`,
   SET_FAVORITE_STATUS: `SET_FAVORITE_STATUS`,
   SET_FILMS: `SET_FILMS`,
-  SET_PROMOTED_FILM: `SET_PROMOTED_FILM`
+  SET_PROMOTED_FILM: `SET_PROMOTED_FILM`,
 };
 
 const ActionCreator = {
+  setFavoriteFilms: (favoriteFilms) => ({
+    type: ActionType.SET_FAVORITE_FILMS,
+    payload: favoriteFilms
+  }),
+
   setFavoriteStatus: (id, status) => ({
     type: ActionType.SET_FAVORITE_STATUS,
     payload: {id, status}
@@ -37,6 +44,13 @@ const ActionCreator = {
 };
 
 const Operation = {
+  loadFavoriteFilms: () => (dispatch, _, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        dispatch(ActionCreator.setFavoriteFilms(response.data.map(transformFilmObject)));
+      });
+  },
+
   loadFilms: () => (dispatch, _, api) => {
     return api.get(`/films`)
       .then((response) => {
@@ -68,7 +82,23 @@ const reducer = (state = initialState, action) => {
         genre: action.payload
       };
 
+    case ActionType.SET_FAVORITE_FILMS:
+      return {
+        ...state,
+        favoriteFilms: action.payload
+      };
+
     case ActionType.SET_FAVORITE_STATUS:
+      let promotedFilm = state.promotedFilm;
+      if (
+        promotedFilm &&
+        promotedFilm.id === action.payload.id
+      ) {
+        promotedFilm = {
+          ...promotedFilm,
+          favorite: action.payload.status
+        };
+      }
       return {
         ...state,
         films: state.films.map((film) => {
@@ -79,7 +109,8 @@ const reducer = (state = initialState, action) => {
             };
           }
           return film;
-        })
+        }),
+        promotedFilm
       };
 
     case ActionType.SET_FILMS:

@@ -64,25 +64,26 @@ class PlayerPopup extends React.PureComponent<IProps, null> {
 
     this.handleFullScreenEnter = this.handleFullScreenEnter.bind(this);
     this.showControlsPlayer = this.showControlsPlayer.bind(this);
-    this.handleSwitchPausePlay = this.handleSwitchPausePlay.bind(this);
-    this.handleChangeRemainingTime = this.handleChangeRemainingTime.bind(this);
+    this.handlePausePlaySwitch = this.handlePausePlaySwitch.bind(this);
+    this.handleRemainingTimeChange = this.handleRemainingTimeChange.bind(this);
+    this.handleButtonExitClick = this.handleButtonExitClick.bind(this);
   }
 
   public render(): React.ReactElement {
-    const {film, progress, timer, onExitButtonClick} = this.props;
+    const {film, progress, timer} = this.props;
 
     return (
       <>
         <Sprite />
-        <div className="player">
+        <div className="player" style={{zIndex: 5}}>
           <VideoPlayer
             ref={this.videoRef}
             film={film}
             className={`player__video`}
             isAutoPlay
-            changeRemainingTime={this.handleChangeRemainingTime}
+            onChangeRemainingTime={this.handleRemainingTimeChange}
           />
-          <button onClick={onExitButtonClick} type="button" className="player__exit">Exit</button>
+          <button onClick={this.handleButtonExitClick} type="button" className="player__exit">Exit</button>
           <div className="player__controls">
             {showPlayerTime(progress, timer)}
             <div className="player__controls-row">
@@ -96,7 +97,13 @@ class PlayerPopup extends React.PureComponent<IProps, null> {
     );
   }
 
-  private handleChangeRemainingTime(): void {
+  private handleButtonExitClick(event): void {
+    const {onExitButtonClick} = this.props;
+    event.preventDefault();
+    onExitButtonClick();
+  }
+
+  private handleRemainingTimeChange(): void {
     const {onChangeProgress} = this.props;
     const player = this.videoRef.current;
 
@@ -111,7 +118,7 @@ class PlayerPopup extends React.PureComponent<IProps, null> {
     this.videoRef.current.requestFullscreen();
   }
 
-  private handleSwitchPausePlay(event): void {
+  private handlePausePlaySwitch(event): void {
     const {onSwitchPausePlay, isFilmPlaying} = this.props;
     const player = this.videoRef.current;
 
@@ -131,7 +138,7 @@ class PlayerPopup extends React.PureComponent<IProps, null> {
 
     return (
       <>
-        <button onClick={this.handleSwitchPausePlay} type="button" className="player__play">
+        <button onClick={this.handlePausePlaySwitch} type="button" className="player__play">
           {isFilmPlaying ? getButtonPause() : getButtonPlay()}
         </button>
       </>

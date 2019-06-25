@@ -42,7 +42,7 @@ const promotedFilm = {
   rating: 8.9,
   scoresCount: 240,
   director: `Wes Andreson`,
-  starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+  famousActors: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
   duration: 99,
   genre: [`Comedy`],
   released: 2014,
@@ -58,7 +58,8 @@ const testInitialState = {
   authorization: {
     user: {
       id: `1`
-    }
+    },
+    errorMessage: ``
   }
 };
 
@@ -83,11 +84,11 @@ describe(`App`, () => {
         <Provider store={createStore(() => testInitialState)}>
           <Router history={history}>
             <App
-              signIn={() => {}}
               avatarLink="img/avatar.jpg"
-              userId={null}
               genresList={genres}
               promotedFilm={promotedFilm}
+              signIn={() => {}}
+              userId={null}
             />
           </Router>
         </Provider>

@@ -19,14 +19,16 @@ class GenresList extends React.PureComponent<IProps, null> {
   public render(): React.ReactElement {
     const {genres, activeGenre, onSetGenre} = this.props;
 
-    const genresList = genres.map((name, i): React.ReactElement =>
-      <GenreListItem
-        name={name}
-        key={i}
-        isActive={activeGenre === name}
-        onGenreClick={onSetGenre}
-      />
-    );
+    const genresList = genres
+      .map((name, i): React.ReactElement =>
+        <GenreListItem
+          name={name}
+          key={i}
+          isActive={activeGenre === name}
+          onGenreClick={onSetGenre}
+        />
+      )
+      .slice(0, 10);
 
     return (
       <ul className="catalog__genres-list">

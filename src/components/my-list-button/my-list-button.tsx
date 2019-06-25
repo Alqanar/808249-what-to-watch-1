@@ -9,7 +9,9 @@ interface IProps {
   id: string;
   favorite: boolean;
   hasAuth: boolean;
-  sendFavoriteStatus: (id: string, favorite: boolean) => Promise<void>;
+  isDisable: boolean;
+  onDisableChange: () => void;
+  onSendFavoriteStatus: (id: string, favorite: boolean) => Promise<void>;
 }
 
 const iconNotFavorite = (): React.ReactElement => (
@@ -32,10 +34,15 @@ class MyListButton extends React.PureComponent<IProps, null> {
   }
 
   public render(): React.ReactElement {
-    const {favorite} = this.props;
+    const {favorite, isDisable} = this.props;
 
     return (
-      <button onClick={this.handleMyListButtonClick} className="btn btn--list movie-card__button" type="button">
+      <button
+        onClick={this.handleMyListButtonClick}
+        className="btn btn--list movie-card__button"
+        type="button"
+        disabled={isDisable}
+      >
         {favorite ? iconFavorite() : iconNotFavorite()}
         <span>My list</span>
       </button>
@@ -43,20 +50,23 @@ class MyListButton extends React.PureComponent<IProps, null> {
   }
 
   private handleMyListButtonClick(event): void {
-    const {id, favorite, hasAuth, sendFavoriteStatus} = this.props;
+    const {id, favorite, hasAuth, onDisableChange, onSendFavoriteStatus} = this.props;
 
     event.preventDefault();
+    onDisableChange();
 
     if (!hasAuth) {
       history.push(`/login`);
     } else {
-      sendFavoriteStatus(id, favorite);
+      onSendFavoriteStatus(id, favorite)
+        .then((): void => onDisableChange())
+        .catch((): void => onDisableChange());
     }
   }
 }
 
 const mapDispatchToProps = (dispatch): object => ({
-  sendFavoriteStatus: (id, favorite): Promise<void> => dispatch(Operation.sendFavoriteStatus(id, !favorite))
+  onSendFavoriteStatus: (id, favorite): Promise<void> => dispatch(Operation.sendFavoriteStatus(id, !favorite))
 });
 
 const mapStateToProps = (state, ownProps): void => ({

@@ -14,7 +14,7 @@ const transformFilmObject = (objectData) => ({
   'released': objectData.released,
   'duration': objectData.run_time,
   'scoresCount': objectData.scores_count,
-  'starring': objectData.starring,
+  'famousActors': objectData.starring,
   'videoLink': objectData.video_link
 });
 

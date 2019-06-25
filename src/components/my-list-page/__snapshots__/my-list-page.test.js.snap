@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Favourite page correctly renders 1`] = `
+exports[`My list page correctly renders 1`] = `
 Array [
   <div
     className="visually-hidden"
@@ -267,17 +267,6 @@ Array [
             </a>
           </h3>
         </article>
-      </div>
-      <div
-        className="catalog__more visually-hidden"
-      >
-        <button
-          className="catalog__button"
-          onClick={[Function]}
-          type="button"
-        >
-          Show more
-        </button>
       </div>
     </section>
     <footer

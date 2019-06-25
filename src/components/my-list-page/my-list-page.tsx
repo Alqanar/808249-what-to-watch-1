@@ -17,11 +17,11 @@ interface IProps {
   onClick: (film: IFilm) => void;
 }
 
-const FavouritePage: React.FC<IProps> = (props): React.ReactElement => {
+const MyListPage: React.FC<IProps> = (props): React.ReactElement => {
   const {
     avatarLink,
     isAuth,
-    onClick,
+    onClick
   } = props;
 
   return (
@@ -36,6 +36,7 @@ const FavouritePage: React.FC<IProps> = (props): React.ReactElement => {
           <UserBlock
             avatarLink={avatarLink}
             isAuth={isAuth}
+            hrefLink='#'
           />
         </header>
         <section className="catalog">
@@ -53,4 +54,4 @@ const FavouritePage: React.FC<IProps> = (props): React.ReactElement => {
   );
 };
 
-export default FavouritePage;
+export default MyListPage;

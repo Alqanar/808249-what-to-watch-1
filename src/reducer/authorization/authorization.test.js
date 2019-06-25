@@ -46,7 +46,8 @@ describe(`Reducer works correctly`, () => {
         name: ``,
         avatarUrl: ``
       },
-      needAuth: false
+      needAuth: false,
+      errorMessage: ``
     });
   });
 
@@ -95,7 +96,8 @@ describe(`Reducer works correctly`, () => {
         name: `example`,
         avatarUrl: `/wtw/static/avatar/9.jpg`
       },
-      needAuth: false
+      needAuth: false,
+      errorMessage: ``
     }, {
       type: ActionType.RESET
     })).toEqual({
@@ -105,7 +107,8 @@ describe(`Reducer works correctly`, () => {
         name: ``,
         avatarUrl: ``
       },
-      needAuth: false
+      needAuth: false,
+      errorMessage: ``
     });
   });
 
@@ -121,14 +124,19 @@ describe(`Reducer works correctly`, () => {
 
     return requestAuthorization(dispatch, undefined, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_ERROR_MESSAGE,
+          payload: ``
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.SET_USER,
           payload: {
             id: userData.id,
             email: userData.email,
             name: userData.name,
-            avatarUrl: `https://es31-server.appspot.com${userData.avatar_url}`},
+            avatarUrl: `https://es31-server.appspot.com${userData.avatar_url}`
+          }
         });
       });
   });
@@ -146,6 +154,17 @@ describe(`Reducer works correctly`, () => {
     expect(dispatch).toHaveBeenNthCalledWith(2, {
       type: ActionType.SET_NEED_AUTH,
       payload: true
+    });
+  });
+
+  it(`error that comes from callback is recorded in the state`, () => {
+    expect(reducer({
+      errorMessage: ``
+    }, {
+      type: ActionType.SET_ERROR_MESSAGE,
+      payload: `Please enter a valid email address`,
+    })).toEqual({
+      errorMessage: `Please enter a valid email address`
     });
   });
 });

@@ -173,12 +173,17 @@ Array [
           <div
             className="user-block__avatar"
           >
-            <img
-              alt="User avatar"
-              height="63"
-              src="img/avatar.jpg"
-              width="63"
-            />
+            <a
+              href="/mylist"
+              onClick={[Function]}
+            >
+              <img
+                alt="User avatar"
+                height="63"
+                src="img/avatar.jpg"
+                width="63"
+              />
+            </a>
           </div>
         </div>
       </header>
@@ -231,6 +236,7 @@ Array [
             </button>
             <button
               className="btn btn--list movie-card__button"
+              disabled={false}
               onClick={[Function]}
               type="button"
             >
@@ -284,10 +290,9 @@ Array [
               className="movie-nav__list"
             >
               <li
-                className="movie-nav__item"
+                className="movie-nav__item movie-nav__item--active"
               >
                 <a
-                  aria-current={null}
                   className="movie-nav__link"
                   href="/film/0/"
                   onClick={[Function]}
@@ -296,10 +301,9 @@ Array [
                 </a>
               </li>
               <li
-                className="movie-nav__item"
+                className="movie-nav__item "
               >
                 <a
-                  aria-current={null}
                   className="movie-nav__link"
                   href="/film/0/details"
                   onClick={[Function]}
@@ -308,10 +312,9 @@ Array [
                 </a>
               </li>
               <li
-                className="movie-nav__item"
+                className="movie-nav__item "
               >
                 <a
-                  aria-current={null}
                   className="movie-nav__link"
                   href="/film/0/reviews"
                   onClick={[Function]}
@@ -321,6 +324,50 @@ Array [
               </li>
             </ul>
           </nav>
+          <div
+            className="movie-rating"
+          >
+            <div
+              className="movie-rating__score"
+            >
+              6.3
+            </div>
+            <p
+              className="movie-rating__meta"
+            >
+              <span
+                className="movie-rating__level"
+              >
+                Good
+              </span>
+              <span
+                className="movie-rating__count"
+              >
+                2726 ratings
+              </span>
+            </p>
+          </div>
+          <div
+            className="movie-card__text"
+          >
+            <p>
+              Post World War II, a British colonel and his wife are assigned to live in Hamburg during the post-war reconstruction, but tensions arise with the German who previously owned the house.
+            </p>
+            <p
+              className="movie-card__director"
+            >
+              <strong>
+                Director: James Kent
+              </strong>
+            </p>
+            <p
+              className="movie-card__starring"
+            >
+              <strong>
+                Starring: Keira Knightley, Ned Wills, Pandora Colin
+              </strong>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -496,12 +543,17 @@ Array [
         <div
           className="user-block__avatar"
         >
-          <img
-            alt="User avatar"
-            height="63"
-            src="img/avatar.jpg"
-            width="63"
-          />
+          <a
+            href="/mylist"
+            onClick={[Function]}
+          >
+            <img
+              alt="User avatar"
+              height="63"
+              src="img/avatar.jpg"
+              width="63"
+            />
+          </a>
         </div>
       </div>
     </header>
@@ -566,6 +618,7 @@ Array [
             </button>
             <button
               className="btn btn--list movie-card__button"
+              disabled={false}
               onClick={[Function]}
               type="button"
             >

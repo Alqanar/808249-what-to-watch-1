@@ -12,7 +12,7 @@ interface IProps {
   isMuted?: boolean;
   isLoop?: boolean;
   isAutoPlay?: boolean;
-  changeRemainingTime?: () => void;
+  onChangeRemainingTime?: () => void;
 }
 
 type Ref = HTMLVideoElement
@@ -33,7 +33,7 @@ const VideoPlayer = React.forwardRef<Ref, IProps>(
       isMuted,
       isLoop,
       isAutoPlay,
-      changeRemainingTime
+      onChangeRemainingTime
     } = props;
 
     return (
@@ -47,7 +47,7 @@ const VideoPlayer = React.forwardRef<Ref, IProps>(
         muted={isMuted}
         loop={isLoop}
         autoPlay={isAutoPlay}
-        onTimeUpdate={changeRemainingTime}
+        onTimeUpdate={onChangeRemainingTime}
       />
     );
   }

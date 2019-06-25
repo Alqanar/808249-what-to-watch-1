@@ -11,7 +11,7 @@ interface IProps {
 interface IInjectedProps {
   currentLength: number;
   onMoreButtonClick: () => void;
-  resetCurrentLength: () => void;
+  onResetCurrentLength: () => void;
 }
 
 interface IState {
@@ -29,7 +29,7 @@ function withPagination(Component) {
       super(props);
 
       this.handleMoreButtonClick = this.handleMoreButtonClick.bind(this);
-      this.resetCurrentLength = this.resetCurrentLength.bind(this);
+      this.onResetCurrentLength = this.onResetCurrentLength.bind(this);
 
       this.state = {
         currentLength: props.pageSize || DEFAULT_PAGE_SIZE
@@ -43,7 +43,7 @@ function withPagination(Component) {
         {...this.props}
         onMoreButtonClick={this.handleMoreButtonClick}
         currentLength={currentLength}
-        resetCurrentLength={this.resetCurrentLength}
+        onResetCurrentLength={this.onResetCurrentLength}
       />;
     }
 
@@ -57,7 +57,7 @@ function withPagination(Component) {
       });
     }
 
-    private resetCurrentLength(): void {
+    private onResetCurrentLength(): void {
       const {pageSize = DEFAULT_PAGE_SIZE} = this.props;
 
       this.setState({

@@ -1,10 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import thunk from "redux-thunk";
 import {Router} from "react-router-dom";
 import {Provider} from "react-redux";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 
-import FavouritePage from "./favourite-page.tsx";
+import createAPI from "../../api.js";
+import MyListPage from "./my-list-page.tsx";
 import history from "../../history.ts";
 
 
@@ -25,7 +27,7 @@ const moviesListMock = [
     released: 2019,
     duration: 108,
     scoresCount: 2726,
-    starring: [`Keira Knightley`, `Ned Wills`, `Pandora Colin`],
+    famousActors: [`Keira Knightley`, `Ned Wills`, `Pandora Colin`],
     videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
   },
   {
@@ -44,7 +46,7 @@ const moviesListMock = [
     released: 2019,
     duration: 124,
     scoresCount: 10699,
-    starring: [`Natalie Dormer`, `Mel Gibson`, `Sean Penn`],
+    famousActors: [`Natalie Dormer`, `Mel Gibson`, `Sean Penn`],
     videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
   },
   {
@@ -63,24 +65,37 @@ const moviesListMock = [
     released: 2019,
     duration: 116,
     scoresCount: 11321,
-    starring: [`Haley Lu Richardson`, `Cole Sprouse`, `Moises Arias`],
+    famousActors: [`Haley Lu Richardson`, `Cole Sprouse`, `Moises Arias`],
     videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
   }
 ];
 
-const testInitialState = {
-  movie: {
-    genre: `All genres`,
-    films: moviesListMock
-  }
+const testInitialState = () => {
+  return ({
+    movie: {
+      genre: `All genres`,
+      films: moviesListMock,
+      favoriteFilms: moviesListMock
+    }
+  });
 };
 
-it(`Favourite page correctly renders`, () => {
+const dispatch = jest.fn();
+const api = createAPI(dispatch);
+
+const store = createStore(
+  testInitialState,
+  applyMiddleware(
+    thunk.withExtraArgument(api)
+  )
+);
+
+it(`My list page correctly renders`, () => {
   const tree = renderer
     .create(
-      <Provider store={createStore(() => testInitialState)}>
+      <Provider store={store}>
         <Router history={history}>
-          <FavouritePage
+          <MyListPage
             avatarLink="img/avatar.jpg"
             isAuth={false}
           />

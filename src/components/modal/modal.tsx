@@ -13,14 +13,6 @@ class Modal extends React.PureComponent<{}> {
     this.modalContainer = document.createElement(`div`);
   }
 
-  public componentDidMount(): void {
-    this.modalRoot.appendChild(this.modalContainer);
-  }
-
-  public componentWillUnmount(): void {
-    this.modalRoot.removeChild(this.modalContainer);
-  }
-
   public render(): React.ReactElement {
     const {children} = this.props;
 
@@ -28,6 +20,14 @@ class Modal extends React.PureComponent<{}> {
       children,
       this.modalContainer
     );
+  }
+
+  public componentDidMount(): void {
+    this.modalRoot.appendChild(this.modalContainer);
+  }
+
+  public componentWillUnmount(): void {
+    this.modalRoot.removeChild(this.modalContainer);
   }
 }
 

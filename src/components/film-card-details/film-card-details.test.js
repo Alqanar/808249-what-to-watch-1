@@ -26,7 +26,7 @@ const movieMock = {
   released: 2019,
   duration: 108,
   scoresCount: 2726,
-  starring: [`Keira Knightley`, `Ned Wills`, `Pandora Colin`],
+  famousActors: [`Keira Knightley`, `Ned Wills`, `Pandora Colin`],
   videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
 };
 
@@ -42,16 +42,19 @@ const testInitialState = {
 
 describe(`film card details correctly renders`, () => {
   it(`when isShort passed poster of the film renders at the up of the page and we aren't see navigation of the film card`, () => {
+    history.push(`/film/0`);
     const tree = renderer
       .create(
         <Provider store={createStore(() => testInitialState)}>
-          <FilmCardDetails
-            isShort
-            avatarLink={avatarLink}
-            film={movieMock}
-            isAuth={true}
-            className={`movie-card__info`}
-          />
+          <Router history={history}>
+            <FilmCardDetails
+              isShort
+              avatarLink={avatarLink}
+              film={movieMock}
+              isAuth={true}
+              className={`movie-card__info`}
+            />
+          </Router>
         </Provider>
       )
       .toJSON();
@@ -60,6 +63,7 @@ describe(`film card details correctly renders`, () => {
   });
 
   it(`when isShort not passed poster of the film renders at the middle of the page and we are seeing navigation of the film card, flag of the need review added button '+ Add review'`, () => {
+    history.push(`/film/0`);
     const tree = renderer
       .create(
         <Provider store={createStore(() => testInitialState)}>

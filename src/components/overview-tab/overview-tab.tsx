@@ -22,7 +22,7 @@ const decipherFilmScore = (rating): string => {
 };
 
 const OverviewTab: React.FC<IProps> = (props): React.ReactElement => {
-  const {film: {rating, scoresCount, description, director, starring}} = props;
+  const {film: {rating, scoresCount, description, director, famousActors}} = props;
 
   return (
     <>
@@ -39,7 +39,7 @@ const OverviewTab: React.FC<IProps> = (props): React.ReactElement => {
           <strong>{`Director: ${director}`}</strong>
         </p>
         <p className="movie-card__starring">
-          <strong>{`Starring: ${starring.join(`, `)}`}</strong>
+          <strong>{`Starring: ${famousActors.join(`, `)}`}</strong>
         </p>
       </div>
     </>
