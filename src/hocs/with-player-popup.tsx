@@ -40,10 +40,9 @@ function withPlayerPopup(Component) {
       />;
     }
 
-    private handleSwitchOpenedState(event): void {
+    private handleSwitchOpenedState(): void {
       const {isPlayerOpened} = this.state;
 
-      event.preventDefault();
       this.setState({
         isPlayerOpened: !isPlayerOpened
       });
