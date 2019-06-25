@@ -1,7 +1,8 @@
 import * as React from "react";
-import {Route, NavLink} from "react-router-dom";
+import {Route, Link} from "react-router-dom";
 
 import DetailsTab from "../details-tab/details-tab";
+import history from "../../history";
 import OverviewTab from "../overview-tab/overview-tab";
 import ReviewsTab from "../reviews-tab/reviews-tab";
 import {IFilm} from "../../types";
@@ -26,18 +27,27 @@ interface IProps {
   film: IFilm;
 }
 
-const createNavigationItem = (id: string, link: string, name: string): React.ReactElement => {
+const createNavigationItem = (
+  id: string,
+  link: string,
+  name: string,
+  isActive: boolean
+): React.ReactElement => {
   return (
-    <li className="movie-nav__item" key={link + name}>
-      <NavLink
-        to={`/film/${id}/${link}`}
-        className="movie-nav__link"
-        activeClassName="movie-nav__item--active"
-      >
+    <li className={`movie-nav__item ${isActive ? `movie-nav__item--active` : ``}`} key={link + name}>
+      <Link to={`/film/${id}/${link}`} className="movie-nav__link">
         {name}
-      </NavLink>
+      </Link>
     </li>
   );
+};
+
+const getActiveTab = (): string => {
+  const knownLinks = NAVIGATION_FIELDS.some((item): boolean => item.link === history.location.pathname.split(`/`).pop());
+  if (!knownLinks) {
+    return ``;
+  }
+  return history.location.pathname.split(`/`).pop();
 };
 
 class FilmCardNavigation extends React.PureComponent<IProps, null> {
@@ -47,22 +57,12 @@ class FilmCardNavigation extends React.PureComponent<IProps, null> {
     this.renderOverviewTab = this.renderOverviewTab.bind(this);
     this.renderDetailsTab = this.renderDetailsTab.bind(this);
     this.renderReviewsTab = this.renderReviewsTab.bind(this);
+    this.renderTabs = this.renderTabs.bind(this);
   }
 
   public render(): React.ReactElement {
-    const {film} = this.props;
-
-    const navigationList = NAVIGATION_FIELDS.map(({link, name}): React.ReactElement =>
-      createNavigationItem(film.id, link, name)
-    );
-
     return (
       <div className="movie-card__desc">
-        <nav className="movie-nav movie-card__nav">
-          <ul className="movie-nav__list">
-            {navigationList}
-          </ul>
-        </nav>
         <Route path="/film/:id/" exact render={this.renderOverviewTab} />
         <Route path="/film/:id/details" render={this.renderDetailsTab} />
         <Route path="/film/:id/reviews" render={this.renderReviewsTab} />
@@ -70,13 +70,33 @@ class FilmCardNavigation extends React.PureComponent<IProps, null> {
     );
   }
 
+  private renderTabs(): React.ReactElement {
+    const {film} = this.props;
+    const activeTab = getActiveTab();
+    const navigationList = NAVIGATION_FIELDS.map(({link, name}): React.ReactElement =>
+      createNavigationItem(film.id, link, name, activeTab === link)
+    );
+
+    return (
+      <nav className="movie-nav movie-card__nav">
+        <ul className="movie-nav__list">
+          {navigationList}
+        </ul>
+      </nav>
+    );
+  }
+
   private renderDetailsTab(): React.ReactElement {
     const {film} = this.props;
 
     return (
-      <DetailsTab
-        film={film}
-      />
+      <>
+        {this.renderTabs()}
+
+        <DetailsTab
+          film={film}
+        />
+      </>
     );
   }
 
@@ -84,9 +104,13 @@ class FilmCardNavigation extends React.PureComponent<IProps, null> {
     const {film} = this.props;
 
     return (
-      <OverviewTab
-        film={film}
-      />
+      <>
+        {this.renderTabs()}
+
+        <OverviewTab
+          film={film}
+        />
+      </>
     );
   }
 
@@ -94,9 +118,13 @@ class FilmCardNavigation extends React.PureComponent<IProps, null> {
     const {film} = this.props;
 
     return (
-      <ReviewsTab
-        film={film}
-      />
+      <>
+        {this.renderTabs()}
+
+        <ReviewsTab
+          film={film}
+        />
+      </>
     );
   }
 }
