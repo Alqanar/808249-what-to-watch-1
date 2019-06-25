@@ -69,7 +69,10 @@ class FilmCard extends React.PureComponent<IProps, null> {
   }
 
   private playVideo(): void {
-    this.videoRef.current.play();
+    const video = this.videoRef.current;
+    if (video) {
+      video.play();
+    }
   }
 
   private stopVideo(): void {
