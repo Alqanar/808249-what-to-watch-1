@@ -38,7 +38,7 @@ export const moviesListMock = [
     released: 2019,
     duration: 108,
     scoresCount: 2726,
-    starring: [`Keira Knightley`, `Ned Wills`, `Pandora Colin`],
+    famousActors: [`Keira Knightley`, `Ned Wills`, `Pandora Colin`],
     videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
   },
   {
@@ -57,7 +57,7 @@ export const moviesListMock = [
     released: 2019,
     duration: 124,
     scoresCount: 10699,
-    starring: [`Natalie Dormer`, `Mel Gibson`, `Sean Penn`],
+    famousActors: [`Natalie Dormer`, `Mel Gibson`, `Sean Penn`],
     videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
   },
   {
@@ -76,7 +76,7 @@ export const moviesListMock = [
     released: 2019,
     duration: 116,
     scoresCount: 11321,
-    starring: [`Haley Lu Richardson`, `Cole Sprouse`, `Moises Arias`],
+    famousActors: [`Haley Lu Richardson`, `Cole Sprouse`, `Moises Arias`],
     videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
   }
 ];

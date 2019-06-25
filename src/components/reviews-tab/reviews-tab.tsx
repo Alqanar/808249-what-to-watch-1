@@ -2,14 +2,14 @@ import * as React from "react";
 import {connect} from "react-redux";
 
 import {Operation} from "../../reducer/reviews/reviews.js";
-import {IReview, IFilm} from "../../types";
+import {IFilm, IReview} from "../../types";
 import ReviewsTabItem from "../reviews-tab-item/reviews-tab-item";
 
 
 interface IProps {
   film: IFilm;
   reviews: IReview[];
-  loadReviews: (id: string) => Promise<void>;
+  onLoadReviews: (id: string) => Promise<void>;
 }
 
 const getReviewsColumn = (reviews: IReview[]): React.ReactElement => {
@@ -47,16 +47,16 @@ class ReviewsTab extends React.PureComponent<IProps, null> {
   }
 
   public componentDidMount(): void {
-    const {film: {id}, loadReviews} = this.props;
+    const {film: {id}, onLoadReviews} = this.props;
 
     if (id) {
-      loadReviews(id);
+      onLoadReviews(id);
     }
   }
 }
 
 const mapDispatchToProps = (dispatch): object => ({
-  loadReviews: (id): Promise<void> => dispatch(Operation.loadReviews(id))
+  onLoadReviews: (id): Promise<void> => dispatch(Operation.loadReviews(id))
 });
 
 const mapStateToProps = (state, ownProps): void => {

@@ -75,13 +75,13 @@ class PlayerPopup extends React.PureComponent<IProps, null> {
     return (
       <>
         <Sprite />
-        <div className="player">
+        <div className="player" style={{zIndex: 5}}>
           <VideoPlayer
             ref={this.videoRef}
             film={film}
             className={`player__video`}
             isAutoPlay
-            changeRemainingTime={this.handleRemainingTimeChange}
+            onChangeRemainingTime={this.handleRemainingTimeChange}
           />
           <button onClick={this.handleButtonExitClick} type="button" className="player__exit">Exit</button>
           <div className="player__controls">

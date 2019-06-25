@@ -10,17 +10,17 @@ Enzyme.configure({adapter: new Adapter()});
 
 const MockComponent = ({
   onMoreButtonClick,
-  resetCurrentLength
+  onResetCurrentLength
 }) => (
   <div>
     <button className="button-showmore" onClick={onMoreButtonClick} />
-    <button className="button-showmore-reset" onClick={resetCurrentLength} />
+    <button className="button-showmore-reset" onClick={onResetCurrentLength} />
   </div>
 );
 
 MockComponent.propTypes = {
   onMoreButtonClick: PropTypes.func.isRequired,
-  resetCurrentLength: PropTypes.func.isRequired
+  onResetCurrentLength: PropTypes.func.isRequired
 };
 
 const MockComponentWrapped = withPagination(MockComponent);

@@ -3,13 +3,14 @@ import {connect} from "react-redux";
 import {Switch, Redirect, Route} from "react-router-dom";
 
 import AddReviewPage from "../add-review-page/add-review-page";
-import MyListPage from "../my-list-page/my-list-page";
 import FilmPage from "../film-page/film-page";
 import MainPage from "../main-page/main-page";
+import MyListPage from "../my-list-page/my-list-page";
 import SignInPage from "../sign-in-page/sign-in-page";
 
 import composedWithPrivateRoute from "../../hocs/with-private-route";
 import withAuthorizationState from "../../hocs/with-authorization-state";
+import withCommentLimitation from "../../hocs/with-comment-limitation";
 import withDisableState from "../../hocs/with-disable-state";
 
 import history from "../../history";
@@ -19,19 +20,19 @@ import {Operation, ActionCreator} from "../../reducer/authorization/authorizatio
 
 
 interface IProps {
+  allFilms: IFilm[];
   avatarLink: string;
   errorMessage: string;
   genresList: string[];
-  reseteNeedAuth: () => void;
-  signIn: (email: string, pass: string) => Promise<void>;
-  userId: string;
-  allFilms: IFilm[];
   promotedFilm: IFilm;
+  onResetNeedAuth: () => void;
+  onSignIn: (email: string, pass: string) => Promise<void>;
+  userId: string;
 }
 
 const SignInPageWrapped = withAuthorizationState(SignInPage);
 const MyListPageWrapped = composedWithPrivateRoute(MyListPage);
-const AddReviewPageWrapped = composedWithPrivateRoute(withDisableState(AddReviewPage));
+const AddReviewPageWrapped = composedWithPrivateRoute(withCommentLimitation(withDisableState(AddReviewPage)));
 
 class App extends React.PureComponent<IProps, null> {
   public constructor(props) {
@@ -126,14 +127,14 @@ class App extends React.PureComponent<IProps, null> {
   }
 
   private renderSignInPage(): React.ReactElement {
-    const {errorMessage, signIn, reseteNeedAuth, userId} = this.props;
+    const {errorMessage, onSignIn, onResetNeedAuth, userId} = this.props;
 
     return userId ? (
       <Redirect to="/" />
     ) : (
       <SignInPageWrapped
-        onSignInButtonClick={signIn}
-        onMount={reseteNeedAuth}
+        onSignInButtonClick={onSignIn}
+        onMount={onResetNeedAuth}
         errorMessage={errorMessage}
       />
     );
@@ -146,8 +147,8 @@ class App extends React.PureComponent<IProps, null> {
 }
 
 const mapDispatchToProps = (dispatch): object => ({
-  signIn: (email, pass): Promise<void> => dispatch(Operation.requestAuthorization(email, pass)),
-  resetNeedAuth: (): void => dispatch(ActionCreator.setNeedAuth(false))
+  onSignIn: (email, pass): Promise<void> => dispatch(Operation.requestAuthorization(email, pass)),
+  onResetNeedAuth: (): void => dispatch(ActionCreator.setNeedAuth(false))
 });
 
 const mapStateToProps = (state, ownProps): void => ({

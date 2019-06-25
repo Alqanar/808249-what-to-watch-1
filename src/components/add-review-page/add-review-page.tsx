@@ -15,12 +15,12 @@ import {IFilm} from "../../types";
 
 interface IProps {
   avatarLink: string;
-  isAuth: boolean;
   film: IFilm;
+  isAuth: boolean;
   isDisable: boolean;
   isDisableButton: boolean;
-  sendReview: (id: string, {rating: number, comment: string}) => Promise<void>;
-  onFormSubmit: (event) => void;
+  onDisableChange: () => void;
+  onSendReview: (id: string, {rating: number, comment: string}) => Promise<void>;
   onTextareaChange: () => void;
 }
 
@@ -32,11 +32,11 @@ const getStar = (i: number, isDisable: boolean): React.ReactElement => (
 );
 
 const getStarList = (isDisable: boolean): React.ReactElement[] =>{
-  const list = [];
+  const stars = [];
   for (let i = 1; i < 6; i++) {
-    list.push(getStar(i, isDisable));
+    stars.push(getStar(i, isDisable));
   }
-  return list;
+  return stars;
 };
 
 class AddReviewPage extends React.PureComponent<IProps, null> {
@@ -130,25 +130,23 @@ class AddReviewPage extends React.PureComponent<IProps, null> {
       comment: String(formData.get(`review-text`))
     };
     const reviewLength = reviewData.comment.length;
-    const {film: {id}, sendReview, onFormSubmit} = this.props;
+    const {film: {id}, onSendReview, onDisableChange} = this.props;
 
     event.preventDefault();
 
     if (id && reviewLength >= 50 && reviewLength <= 400) {
-      onFormSubmit(event);
-      sendReview(id, reviewData)
+      onDisableChange();
+      onSendReview(id, reviewData)
         .then((): void => {
           history.push(`/film/${id}`);
         })
-        .catch((): void => {
-          onFormSubmit(event);
-        });
+        .catch((): void => onDisableChange());
     }
   }
 }
 
 const mapDispatchToProps = (dispatch): object => ({
-  sendReview: (id, object): Promise<void> => dispatch(Operation.sendReview(id, object))
+  onSendReview: (id, object): Promise<void> => dispatch(Operation.sendReview(id, object))
 });
 
 export {AddReviewPage};

@@ -3,6 +3,10 @@ import {Link} from "react-router-dom";
 
 import PlayButton from "../play-button/play-button";
 import MyListButton from "../my-list-button/my-list-button";
+import withDisableState from "../../hocs/with-disable-state";
+
+
+const MyListButtonWrapped = withDisableState(MyListButton);
 
 interface IProps {
   favorite: boolean;
@@ -19,7 +23,7 @@ const MovieCardButtons: React.FC<IProps> = (props): React.ReactElement => {
       <PlayButton
         onPlayButtonClick={onPlayButtonClick}
       />
-      <MyListButton
+      <MyListButtonWrapped
         favorite={favorite}
         id={id}
       />

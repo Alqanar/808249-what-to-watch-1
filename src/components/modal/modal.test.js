@@ -1,4 +1,5 @@
 import React from "react";
+import renderer from "react-test-renderer";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
@@ -19,4 +20,8 @@ it(`should render all the styled components and the children`, () => {
       <Child />
     </Modal>,
   );
+  const tree = renderer
+    .create(component).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });

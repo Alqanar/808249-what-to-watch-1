@@ -42,7 +42,7 @@ const promotedFilm = {
   rating: 8.9,
   scoresCount: 240,
   director: `Wes Andreson`,
-  starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+  famousActors: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
   duration: 99,
   genre: [`Comedy`],
   released: 2014,

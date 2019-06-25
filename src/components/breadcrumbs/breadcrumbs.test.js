@@ -21,7 +21,7 @@ const filmMockData = {
   released: 2019,
   duration: 108,
   scoresCount: 2726,
-  starring: [`Keira Knightley`, `Ned Wills`, `Pandora Colin`],
+  famousActors: [`Keira Knightley`, `Ned Wills`, `Pandora Colin`],
   videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
 };
 

@@ -12,46 +12,16 @@ interface IProps {
   excludeFilmId?: string;
   favoriteFilms: IFilm[];
   films: IFilm[];
-  fiteredGenre?: string[];
+  fiteredGenres?: string[];
   limit?: number;
-  loadFavoriteFilms: () => Promise<void>;
+  onLoadFavoriteFilms: () => Promise<void>;
   onClick: (films: IFilm) => void;
   onMoreButtonClick: () => void;
-  resetCurrentLength: () => void;
+  onResetCurrentLength: () => void;
   useAllFilms: boolean;
 }
 
 class MoviesList extends React.PureComponent<IProps, null> {
-  public constructor(props) {
-    super(props);
-  }
-
-  public componentDidMount(): void {
-    const {useAllFilms, loadFavoriteFilms} = this.props;
-    if (!useAllFilms) {
-      loadFavoriteFilms();
-    }
-  }
-
-  public componentDidUpdate(oldProps: IProps): void {
-    const {films, resetCurrentLength} = this.props;
-
-    if (films.length !== oldProps.films.length) {
-      resetCurrentLength();
-    }
-  }
-
-  public render(): React.ReactElement {
-    return (
-      <>
-        <div className="catalog__movies-list">
-          {this.filmsList}
-        </div>
-        {this.buttonShowMore}
-      </>
-    );
-  }
-
   private get buttonShowMore(): React.ReactElement {
     const {
       films,
@@ -76,7 +46,7 @@ class MoviesList extends React.PureComponent<IProps, null> {
       excludeFilmId,
       favoriteFilms,
       films,
-      fiteredGenre,
+      fiteredGenres,
       limit,
       onClick,
       useAllFilms,
@@ -91,11 +61,11 @@ class MoviesList extends React.PureComponent<IProps, null> {
         if (id === excludeFilmId) {
           return false;
         }
-        if (!fiteredGenre) {
+        if (!fiteredGenres) {
           return true;
         }
         return genre
-          .some((item): boolean => fiteredGenre
+          .some((item): boolean => fiteredGenres
             .some((filtereGenreItem): boolean => item === filtereGenreItem));
       })
       .splice(0, filmsLimit)
@@ -107,10 +77,40 @@ class MoviesList extends React.PureComponent<IProps, null> {
         />
       ));
   }
+
+  public constructor(props) {
+    super(props);
+  }
+
+  public render(): React.ReactElement {
+    return (
+      <>
+        <div className="catalog__movies-list">
+          {this.filmsList}
+        </div>
+        {this.buttonShowMore}
+      </>
+    );
+  }
+
+  public componentDidMount(): void {
+    const {useAllFilms, onLoadFavoriteFilms} = this.props;
+    if (!useAllFilms) {
+      onLoadFavoriteFilms();
+    }
+  }
+
+  public componentDidUpdate(oldProps: IProps): void {
+    const {films, onResetCurrentLength} = this.props;
+
+    if (films.length !== oldProps.films.length) {
+      onResetCurrentLength();
+    }
+  }
 }
 
 const mapDispatchToProps = (dispatch): object => ({
-  loadFavoriteFilms: (): Promise<void> => dispatch(Operation.loadFavoriteFilms())
+  onLoadFavoriteFilms: (): Promise<void> => dispatch(Operation.loadFavoriteFilms())
 });
 
 const mapStateToProps = (state, ownProps): void => ({
