@@ -20,6 +20,7 @@ import {Operation, ActionCreator} from "../../reducer/authorization/authorizatio
 
 interface IProps {
   avatarLink: string;
+  errorMessage: string;
   genresList: string[];
   reseteNeedAuth: () => void;
   signIn: (email: string, pass: string) => Promise<void>;
@@ -125,12 +126,13 @@ class App extends React.PureComponent<IProps, null> {
   }
 
   private renderSignInPage(): React.ReactElement {
-    const {signIn, reseteNeedAuth} = this.props;
+    const {errorMessage, signIn, reseteNeedAuth} = this.props;
 
     return (
       <SignInPageWrapped
         onSignInButtonClick={signIn}
         onMount={reseteNeedAuth}
+        errorMessage={errorMessage}
       />
     );
   }
@@ -149,9 +151,10 @@ const mapDispatchToProps = (dispatch): object => ({
 const mapStateToProps = (state, ownProps): void => ({
   ...ownProps,
   avatarLink: state.authorization.user.avatarUrl,
+  errorMessage: state.authorization.errorMessage,
   userId: state.authorization.user.id,
-  genresList: getGenresList(state),
   allFilms: state.movie.films,
+  genresList: getGenresList(state),
   promotedFilm: state.movie.promotedFilm
 });
 
