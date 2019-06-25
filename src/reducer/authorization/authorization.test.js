@@ -124,14 +124,19 @@ describe(`Reducer works correctly`, () => {
 
     return requestAuthorization(dispatch, undefined, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_ERROR_MESSAGE,
+          payload: ``
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.SET_USER,
           payload: {
             id: userData.id,
             email: userData.email,
             name: userData.name,
-            avatarUrl: `https://es31-server.appspot.com${userData.avatar_url}`},
+            avatarUrl: `https://es31-server.appspot.com${userData.avatar_url}`
+          }
         });
       });
   });

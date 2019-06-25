@@ -26,16 +26,34 @@ const movieMock = {
   videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
 };
 
-it(`Film card navigation correctly renders`, () => {
-  const tree = renderer
-    .create(
-      <Router history={history}>
-        <FilmCardNavigation
-          film={movieMock}
-        />
-      </Router>
-    )
-    .toJSON();
+describe(`Film card navigation correctly renders`, () => {
+  it(`tab overview correctly renders`, () => {
+    history.push(`/film/0/`);
+    const tree = renderer
+      .create(
+        <Router history={history}>
+          <FilmCardNavigation
+            film={movieMock}
+          />
+        </Router>
+      )
+      .toJSON();
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`tab details correctly renders`, () => {
+    history.push(`/film/0/details`);
+    const tree = renderer
+      .create(
+        <Router history={history}>
+          <FilmCardNavigation
+            film={movieMock}
+          />
+        </Router>
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });

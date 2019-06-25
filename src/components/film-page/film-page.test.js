@@ -84,6 +84,7 @@ const testInitialState = {
 
 
 it(`Film page correctly renders`, () => {
+  history.push(`/film/0`);
   global.scrollTo = jest.fn();
   const tree = renderer
     .create(

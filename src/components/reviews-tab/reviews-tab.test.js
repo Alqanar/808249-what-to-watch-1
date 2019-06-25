@@ -53,7 +53,7 @@ it(`Reviews tab list correctly renders`, () => {
       <ReviewsTab
         film={movieMock}
         reviews={reviewsMockData}
-        loadReviews={() => {}}
+        onLoadReviews={() => {}}
       />
     )
     .toJSON();
