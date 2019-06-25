@@ -1,6 +1,6 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import {Switch, Route} from "react-router-dom";
+import {Switch, Redirect, Route} from "react-router-dom";
 
 import AddReviewPage from "../add-review-page/add-review-page";
 import MyListPage from "../my-list-page/my-list-page";
@@ -126,9 +126,11 @@ class App extends React.PureComponent<IProps, null> {
   }
 
   private renderSignInPage(): React.ReactElement {
-    const {errorMessage, signIn, reseteNeedAuth} = this.props;
+    const {errorMessage, signIn, reseteNeedAuth, userId} = this.props;
 
-    return (
+    return userId ? (
+      <Redirect to="/" />
+    ) : (
       <SignInPageWrapped
         onSignInButtonClick={signIn}
         onMount={reseteNeedAuth}
