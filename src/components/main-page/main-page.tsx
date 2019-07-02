@@ -12,7 +12,7 @@ interface IProps {
   avatarLink: string;
   featuredFilm: IFilm;
   genres: string[];
-  onClick: (movie: IFilm) => void;
+  onFilmCardClick: (movie: IFilm) => void;
   isAuth: boolean;
 }
 
@@ -23,7 +23,7 @@ const MainPage: React.FC<IProps> = (props): React.ReactElement => {
     avatarLink,
     featuredFilm,
     genres,
-    onClick,
+    onFilmCardClick,
     isAuth
   } = props;
 
@@ -43,7 +43,7 @@ const MainPage: React.FC<IProps> = (props): React.ReactElement => {
             genres={genres}
           />
           <MoviesListWrapped
-            onClick={onClick}
+            onFilmCardClick={onFilmCardClick}
             useAllFilms
           />
         </section>

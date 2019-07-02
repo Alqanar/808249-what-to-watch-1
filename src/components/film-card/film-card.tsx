@@ -10,7 +10,7 @@ const IMG_HEIGHT = `175`;
 
 interface IProps {
   film: IFilm;
-  onClick: (film: IFilm) => void;
+  onFilmCardClick: (film: IFilm) => void;
 }
 
 class FilmCard extends React.PureComponent<IProps, null> {
@@ -54,9 +54,9 @@ class FilmCard extends React.PureComponent<IProps, null> {
   }
 
   private handleCardClick(): void {
-    const {film, onClick} = this.props;
+    const {film, onFilmCardClick} = this.props;
 
-    onClick(film);
+    onFilmCardClick(film);
   }
 
   private handleCardMouseEnter(): void {

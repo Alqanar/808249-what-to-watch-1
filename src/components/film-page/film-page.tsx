@@ -15,7 +15,7 @@ interface IProps {
   avatarLink: string;
   isAuth: boolean;
   film: IFilm;
-  onClick: (film: IFilm) => void;
+  onFilmCardClick: (film: IFilm) => void;
 }
 
 class FilmPage extends React.PureComponent<IProps, null> {
@@ -28,7 +28,7 @@ class FilmPage extends React.PureComponent<IProps, null> {
       avatarLink,
       isAuth,
       film,
-      onClick
+      onFilmCardClick
     } = this.props;
 
     if (!film) {
@@ -48,7 +48,7 @@ class FilmPage extends React.PureComponent<IProps, null> {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <MoviesList
-            onClick={onClick}
+            onFilmCardClick={onFilmCardClick}
             useAllFilms
             fiteredGenres={film.genre}
             limit={LIMIT_SIMILAR_FILMS}
