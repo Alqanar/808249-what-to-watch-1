@@ -36,7 +36,7 @@ it(`Clicking on the card will trigger a callback`, () => {
       <FilmCard
         film={film}
         key={0}
-        onClick={clickHandler}
+        onFilmCardClick={clickHandler}
       />
     </Router>
   );

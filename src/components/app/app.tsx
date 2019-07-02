@@ -86,7 +86,7 @@ class App extends React.PureComponent<IProps, null> {
       <MyListPageWrapped
         avatarLink={avatarLink}
         isAuth={Boolean(userId)}
-        onClick={this.goToFilmPage}
+        onFilmCardClick={this.goToFilmPage}
       />
     );
   }
@@ -102,7 +102,7 @@ class App extends React.PureComponent<IProps, null> {
         avatarLink={avatarLink}
         film={this.getChosenFilm(id)}
         isAuth={Boolean(userId)}
-        onClick={this.goToFilmPage}
+        onFilmCardClick={this.goToFilmPage}
       />
     );
   }
@@ -120,7 +120,7 @@ class App extends React.PureComponent<IProps, null> {
         avatarLink={avatarLink}
         featuredFilm={promotedFilm}
         genres={genresList}
-        onClick={this.goToFilmPage}
+        onFilmCardClick={this.goToFilmPage}
         isAuth={Boolean(userId)}
       />
     );

@@ -14,14 +14,14 @@ const MoviesListWrapped = withPagination(MoviesList);
 interface IProps {
   avatarLink: string;
   isAuth: boolean;
-  onClick: (film: IFilm) => void;
+  onFilmCardClick: (film: IFilm) => void;
 }
 
 const MyListPage: React.FC<IProps> = (props): React.ReactElement => {
   const {
     avatarLink,
     isAuth,
-    onClick
+    onFilmCardClick
   } = props;
 
   return (
@@ -42,7 +42,7 @@ const MyListPage: React.FC<IProps> = (props): React.ReactElement => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <MoviesListWrapped
-            onClick={onClick}
+            onFilmCardClick={onFilmCardClick}
             useAllFilms={false}
           />
         </section>

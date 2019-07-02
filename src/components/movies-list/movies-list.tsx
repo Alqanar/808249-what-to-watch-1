@@ -15,7 +15,7 @@ interface IProps {
   fiteredGenres?: string[];
   limit?: number;
   onLoadFavoriteFilms: () => Promise<void>;
-  onClick: (films: IFilm) => void;
+  onFilmCardClick: (films: IFilm) => void;
   onMoreButtonClick: () => void;
   onResetCurrentLength: () => void;
   useAllFilms: boolean;
@@ -48,7 +48,7 @@ class MoviesList extends React.PureComponent<IProps, null> {
       films,
       fiteredGenres,
       limit,
-      onClick,
+      onFilmCardClick,
       useAllFilms,
       currentLength = films.length
     } = this.props;
@@ -73,7 +73,7 @@ class MoviesList extends React.PureComponent<IProps, null> {
         <FilmCard
           film={film}
           key={film.id}
-          onClick={onClick}
+          onFilmCardClick={onFilmCardClick}
         />
       ));
   }

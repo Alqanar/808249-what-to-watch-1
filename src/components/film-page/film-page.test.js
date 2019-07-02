@@ -94,7 +94,7 @@ it(`Film page correctly renders`, () => {
             avatarLink={avatarLink}
             film={moviesListMock[0]}
             isAuth={true}
-            onClick={() => {}}
+            onFilmCardClick={() => {}}
           />
         </Router>
       </Provider>
