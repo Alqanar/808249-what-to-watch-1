@@ -17,22 +17,33 @@ interface IProps {
   pass: string;
 }
 
+const inputProperties = [
+  {
+    error: `isErrorEmail`,
+    onChange: `onEmailInputChange`,
+    type: `email`,
+    placeholder: `Email address`,
+    name: `user-email`,
+    value: `email`
+  },
+  {
+    error: `isErrorPass`,
+    onChange: `onPassInputChange`,
+    type: `password`,
+    placeholder: `Password`,
+    name: `user-password`,
+    value: `pass`
+  }
+];
+
 class SignInPage extends React.PureComponent<IProps, null> {
   public constructor(props) {
     super(props);
-
-    this.renderErrorMessage = this.renderErrorMessage.bind(this);
   }
 
   public render(): React.ReactElement {
     const {
-      email,
       errorMessage,
-      isErrorEmail,
-      isErrorPass,
-      pass,
-      onEmailInputChange,
-      onPassInputChange,
       onSignInButtonClick
     } = this.props;
 
@@ -49,32 +60,7 @@ class SignInPage extends React.PureComponent<IProps, null> {
           <div className="sign-in user-page__content">
             <form action="#" className="sign-in__form">
               {errorMessage ? this.renderErrorMessage() : ``}
-              <div className="sign-in__fields">
-                <div className={`sign-in__field ${isErrorEmail ? `sign-in__field--error` : ``}`}>
-                  <input
-                    onChange={onEmailInputChange}
-                    className="sign-in__input"
-                    type="email"
-                    placeholder="Email address"
-                    name="user-email"
-                    id="user-email"
-                    value={email}
-                  />
-                  <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
-                </div>
-                <div className={`sign-in__field ${isErrorPass ? `sign-in__field--error` : ``}`}>
-                  <input
-                    onChange={onPassInputChange}
-                    className="sign-in__input"
-                    type="password"
-                    placeholder="Password"
-                    name="user-password"
-                    id="user-password"
-                    value={pass}
-                  />
-                  <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
-                </div>
-              </div>
+              {this.renderFieldsForm()}
               <div className="sign-in__submit">
                 <button
                   onClick={onSignInButtonClick}
@@ -100,6 +86,31 @@ class SignInPage extends React.PureComponent<IProps, null> {
     if (onMount) {
       onMount();
     }
+  }
+
+  private renderFieldsForm(): React.ReactElement {
+    const props = this.props;
+
+    const fieldsForm = inputProperties.map((field): React.ReactElement => (
+      <div key={field.name} className={`sign-in__field ${props[field.error] ? `sign-in__field--error` : ``}`}>
+        <input
+          onChange={props[field.onChange]}
+          className="sign-in__input"
+          type={field.type}
+          placeholder={field.placeholder}
+          name={field.name}
+          id={field.name}
+          value={props[field.value]}
+        />
+        <label className="sign-in__label visually-hidden" htmlFor={field.name}>{field.placeholder}</label>
+      </div>
+    ));
+
+    return (
+      <div className="sign-in__fields">
+        {fieldsForm}
+      </div>
+    );
   }
 
   private renderErrorMessage(): React.ReactElement {
