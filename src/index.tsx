@@ -19,18 +19,18 @@ import history from "./history";
 
 
 let store;
-declare const process: {
-  env: {
-    NODE_ENV: string;
-  };
-};
+// declare const process: {
+//   env: {
+//     NODE_ENV: string;
+//   };
+// };
 
 const api = createAPI((): void => store.dispatch(AuthOperation.invalidateUser()));
 
 const returnArg = <T extends any>(a: T): T => a;
 const createReturnArg = (): typeof returnArg => returnArg;
 const reduxDevToolsMiddleware = window[`__REDUX_DEVTOOLS_EXTENSION__`] || createReturnArg;
-const baseName = process.env.NODE_ENV === `production` ? `/what-to-watch` : `/`;
+// const baseName = process.env.NODE_ENV === `production` ? `/what-to-watch` : `/`;
 
 store = createStore(
   reducer,
@@ -49,7 +49,7 @@ store.dispatch(ActionCreator.restoreUser());
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router basename={baseName} history={history}>
+    <Router history={history}>
       <App />
     </Router>
   </Provider>,
