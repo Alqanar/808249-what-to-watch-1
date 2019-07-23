@@ -19,18 +19,12 @@ import history from "./history";
 
 
 let store;
-// declare const process: {
-//   env: {
-//     NODE_ENV: string;
-//   };
-// };
 
 const api = createAPI((): void => store.dispatch(AuthOperation.invalidateUser()));
 
 const returnArg = <T extends any>(a: T): T => a;
 const createReturnArg = (): typeof returnArg => returnArg;
 const reduxDevToolsMiddleware = window[`__REDUX_DEVTOOLS_EXTENSION__`] || createReturnArg;
-// const baseName = process.env.NODE_ENV === `production` ? `/what-to-watch` : `/`;
 
 store = createStore(
   reducer,
